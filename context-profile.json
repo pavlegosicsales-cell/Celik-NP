@@ -1,0 +1,334 @@
+{
+  "_uputstvo": "Kontekst profil projekta NP Čelik. Zalepi ovo na početak novog chata da bi asistent imao istu ekspertizu. Poslednje ažuriranje: 2026-08-26.",
+
+  "projekat": {
+    "naziv": "NP Čelik — sajt",
+    "folder": "c:\\Users\\pavle\\Downloads\\Claude Code\\NP Celik",
+    "repo": "https://github.com/pavlegosicsales-cell/Celik-NP",
+    "grana": "main",
+    "deploy": "vercel.json sa outputDirectory: site. Još nije zakačen na Vercel.",
+    "lokalni_server": "cd site && python -m http.server 8080",
+    "status": "Probna početna strana, NIJE potpisan projekat.",
+    "stack": "Statični HTML/CSS/JS. Bez frameworka, bez biblioteka. Kod 1:1 prekopiran sa B-Steela."
+  },
+
+  "klijent": {
+    "naziv": "NP Čelik / npcelik construction",
+    "delatnost": "Bravarska radionica",
+    "adresa": "Avalska 11, 34000 Kragujevac",
+    "telefon": "060 41 45 466",
+    "mejl": "npcelik85@gmail.com",
+    "instagram": "https://www.instagram.com/celiknp/",
+    "facebook": "https://www.facebook.com/npcelikconstruction",
+    "trziste": "Kragujevac i Šumadija kao baza, izlasci širom centralne Srbije (Grivac, Kutlovo, Sušica, Kosmaj)",
+    "tip_kupca": "Ugostitelji, investitori i izvođači, firme, privatna lica",
+
+    "potvrdjeni_podaci_26_08_2026": {
+      "godina_osnivanja": 2018,
+      "godina_iskustva": 8,
+      "broj_zaposlenih": 4,
+      "broj_objekata": "preko 20",
+      "garancija": "2 godine na antikorozivnu zaštitu",
+      "dokumentacija": "SAMO RAČUN. Ne izdaje atest ni izjavu izvođača.",
+      "radno_vreme": "Ponedeljak do petak, 07-16h"
+    },
+
+    "neodgovoreno": [
+      "AVANS — klijent je preskočio pitanje 6; 'od 7 do 16h' je bio odgovor na pitanje 7. Ne pominje se na sajtu.",
+      "Prosečan rok po tipu posla. Klijent kaže da zavisi od projekta. Ne pominje se brojkom.",
+      "Imena i portreti četvoro ljudi iz ekipe."
+    ],
+
+    "nepotvrdjene_tvrdnje_na_sajtu": [
+      "'Izlazak i procena su besplatni' — moja pretpostavka iz context.md, stoji na više mesta.",
+      "Godine na karticama u sekciji Radovi na početnoj — prenesene iz B-Steela, neproverene."
+    ]
+  },
+
+  "korisnik_pavle": {
+    "ko_je": "Pavle Gosić, vlasnik web agencije PATO. Pravi sajtove za lokalne firme u Srbiji.",
+    "jezik": "Srpski, latinica. Odgovarati na srpskom.",
+    "stil_rada": "Brz, praktičan, često u vremenskoj stisci. Ne voli rasprave o pristupu kad je doneo odluku."
+  },
+
+  "direktive_koje_gaze_default_ponasanje": [
+    {
+      "pravilo": "B-Steel, AXEL i NP Čelik su PROBNE početne strane, ne projekti.",
+      "kako_primeniti": "Za novu takvu stranu: cp -r B-Steel/site <Novi>/site, pa menjaj SAMO boje, tekst i slike. Struktura, sekcije, animacije i JS ostaju identični. Ne predlagati originalan dizajn, ne upozoravati da će sajtovi ličiti.",
+      "citat": "Tvoje je da ne kenjas i da radis sta ti se kaze... ako dobijem oba klijenta sajtovi nece biti isti, naravno da cu da promenim pristup, ali sad zelim da ustedim vreme jer sam u skripcu"
+    },
+    {
+      "pravilo": "Desktop-first. Mobilnu adaptaciju radim sam, bez pitanja.",
+      "kako_primeniti": "Svi zahtevi se podrazumevaju za desktop. Mobilnu verziju uraditi i proveriti sam, ne pitati."
+    },
+    {
+      "pravilo": "Nigde na sajtu ne sme da piše [DOPUNITI].",
+      "kako_primeniti": "Gde nema podatka, izostaviti rečenicu. HTML komentari u kodu su OK jer nisu vidljivi."
+    },
+    {
+      "pravilo": "Logo: crn gde treba crn, beo gde treba beo.",
+      "citat": "kraj price"
+    },
+    {
+      "pravilo": "Za Konstra stranice: prvo kopiraj Konstru, pa posle menjaj.",
+      "kako_primeniti": "Ne izmišljati layout. Uraditi teardown i preneti tačne mere."
+    },
+    {
+      "pravilo": "Ne izmišljati činjenice o klijentu.",
+      "kako_primeniti": "Timeline, reference i brojke samo iz context.md ili potvrđenih odgovora."
+    }
+  ],
+
+  "brend": {
+    "logo_izvor": "np celik logo.pdf — PRAVI VEKTOR (18 crteža, 0 rastera, slova u krivama)",
+    "logo_boja": "CRN (#1A1A18 u fajlu). Na tamnom se CSS filterom invertuje u belo.",
+    "napomena_logo": "Plavi 3D logo sa Instagrama je bio SAMO profilna slika, ne brend asset.",
+    "brend_boja": "#1B44D3 — izmerena iz logo fajla brojanjem piksela (PIL Counter), ne procenjena.",
+    "varijante": "brand_assets/: lockup-horizontalni, mark-np-celik, lockup-mali (SVG + PNG 400dpi)",
+
+    "paleta_5_boja": {
+      "brend_plava": "#1B44D3",
+      "mastilo": "#0A0F1F",
+      "hladno_bela": "#F4F6FB",
+      "celicno_plava": "#5B6784",
+      "cisto_belo": "#FFFFFF"
+    },
+    "nijanse": {
+      "#060A14": "najtamnija podloga sekcija (--pure-black)",
+      "#A8BEFF": "svetli akcenat, traka Kako radimo (--sand-300)",
+      "#6E8CF5": "sitni akcenti",
+      "#2B3652": "telo teksta (--brown-800)",
+      "#E8ECF7": "naizmenična traka",
+      "#D4DAE9": "linije na svetlom",
+      "#9AA6C2": "prigušen tekst na tamnom"
+    },
+    "kontrasti": "Sve prolazi AA, većina AAA. Detalji u PALETA.md.",
+    "tipografija": "Geist (Google Fonts, SIL OFL) na svemu. Fallback 'Geist Placeholder' = lokalni Arial sa size-adjust."
+  },
+
+  "brend_glas": {
+    "ton": "Radnički, direktan, miran. Kratke rečenice. Brojke, lokacije i imena objekata umesto prideva.",
+    "koristi": ["izrada i montaža", "metalna konstrukcija", "bravarija", "kapija", "ograda", "3D panel", "gelender", "gazište", "protivpožarno stepenište", "letnja bašta", "deking", "modularni kontejner", "pocinkovano", "plastificirano", "po meri", "izlazak na teren", "rok"],
+    "zabranjeno": ["povoljno", "jeftino", "najbolji u Srbiji", "broj 1", "kvalitet tradicija i poverenje", "premium solutions", "custom made", "full service", "probaćemo", "videćemo"],
+    "pismo": "Latinica"
+  },
+
+  "stranice": {
+    "site/index.html": "Početna. Klon B-Steela.",
+    "site/usluge.html": "Lista svih 6 usluga. STICKY kartice kao na početnoj (.svcs/.svc).",
+    "site/usluga-metalne-konstrukcije.html": "Pod-stranica",
+    "site/usluga-kapije-i-ograde.html": "Pod-stranica",
+    "site/usluga-stepenista.html": "Pod-stranica",
+    "site/usluga-letnje-baste.html": "Pod-stranica",
+    "site/usluga-deking-i-enterijer.html": "Pod-stranica",
+    "site/kontakt.html": "Konstrina šema + WIZARD forma iz skilla website-build-rules",
+    "site/o-nama.html": "Hero, Mission, Core Value, History, Ekipa, Reference",
+    "napomena": "Modularni kontejneri NEMAJU pod-stranicu — postoji samo jedna fotografija."
+  },
+
+  "kriticne_kvake_otkrivene_kroz_rad": [
+    {
+      "problem": "--pure-black u tokens.css piše da je 'isključivo punjenje primarnog dugmeta'. TO JE LAŽ.",
+      "istina": "To je pozadina SVIH tamnih sekcija na 18 mesta. Kad sam ga obojio u brend plavu, cela 'O nama' sekcija je postala kobalt plav zid.",
+      "resenje": "--pure-black ostaje tamna (#060A14). Brend boja je izdvojena u --brand-blue samo za dugme i punu strelicu."
+    },
+    {
+      "problem": "Hex mapa u recolor.py ne hvata rgba() vrednosti.",
+      "resenje": "Posle recolora OBAVEZNO skenirati 'rgba(' za zaostale boje stare palete. Prvi put je ostalo 10 peščanih rgba."
+    },
+    {
+      "problem": ".hero__image img ima height:150% i object-position center top.",
+      "istina": "Taj rig zumira ~1.7x i traži USPRAVNU sliku. Pejzažna se seče na pola motiva.",
+      "resenje": "Hero početne = uspravna fotka. Hero unutrašnjih stranica koristi drugi rig (100vh + tamni overlay)."
+    },
+    {
+      "problem": "Chrome headless na Windowsu NE POŠTUJE --window-size ispod ~485px.",
+      "posledica": "Svi 'mobilni' snimci su zapravo 485px isečeni na 390. Burger je bio na x=409, van kadra, pa je izgledalo kao da ga nema.",
+      "resenje": "iframe trik: stranica 500px široka sa <iframe width=390 height=844 src='/'>. To pravi pravi 390px viewport sa ispravnim media query-jima."
+    },
+    {
+      "problem": "Chrome headless ne skroluje; hash-skrol i window.scrollTo ne rade sa --screenshot.",
+      "posledica": "Sticky rigovi i 100vh sekcije se rastežu na visinu prozora, full-page snimak ne valja.",
+      "resenje": "Praviti privremenu _shot.html kopiju sa fiksiranom visinom hera i ugašenim reveal animacijama."
+    },
+    {
+      "problem": "Bash heredoc u ovom okruženju ume da pojede escape sekvence (\\n postane pravi newline, apostrof nestane).",
+      "resenje": "Za Python skripte sa složenim stringovima koristiti Write alat, ne heredoc. Ako fajl pukne, proveriti bajtove: read_bytes() i tražiti '\\r\\n' unutar stringova."
+    }
+  ],
+
+  "konstra_teardown": {
+    "sta_je_konstra": "Framer template za građevinske firme. https://konstra.framer.website/ — vizuelna referenca za ceo sajt od 09.08.2026.",
+    "izvor_lokalno": "B-Steel/research/konstra-source/konstra-{index,about,contact,service,service-design-build}.html",
+    "metod": "Framer u eksportu ČUVA imena slojeva iz editora u data-framer-name. Mere stoje u ugrađenom <style data-framer-css-ssr-minified>. Struktura se čita odatle, ne procenjuje sa snimka.",
+    "alati": {
+      "tools/teardown.py": "Vadi stablo sekcija iz data-framer-name",
+      "tools/mere.py": "Spaja ime sloja -> klasa -> CSS pravilo. Poziv: python tools/mere.py <fajl> 'Ime1,Ime2'"
+    },
+    "vazno": "Framer renderuje TRI kopije svake sekcije (Desktop/Tablet/Phone) i skriva dve preko .hidden-* klasa. Zato se sve ponavlja po tri puta u sekvenci.",
+
+    "strukture": {
+      "/service": {
+        "sekcije": ["Service Hero", "Service Index"],
+        "nema": "CTA na kraju — ide pravo u podnožje",
+        "hero": "height 100vh, padding 216px 72px 64px, Hero Image absolute inset 0, Overlay #1a1711b3 (TAMAN, ne svetli preliv), tekst BEO, Heading max-width 556px gap 20px, Breadcrumbs IZNAD naslova",
+        "zaglavlje": "Desktop White (beo tekst) jer je hero taman",
+        "stavka": "flex ROW, gap 48px, width 1296px, padding 16px 32px 16px 16px. Slika UVEK levo, nema naizmeničnog. List Inner gap 16px max-width 344px. Project scope flex row gap 8px."
+      },
+      "/contact": {
+        "sekcije": ["Contact", "What happens next", "FAQ"],
+        "contact": "bg #FFF7E5, padding 200px 72px 112px. Contact details container gap 32px max-width 236px. Email container gap 8px.",
+        "what_happens_next": "bg #030000 (crna), padding 112px 72px, Number padding 12px 14px gap 10px, tri koraka",
+        "zaglavlje": "Desktop Black"
+      },
+      "/about": {
+        "sekcije": ["Hero", "Mission", "Core Value", "History", "Team Member", "Awards", "CTA"],
+        "podloge": {
+          "Hero": "#FFF7E5, padding 216px 0 0, gap 72px",
+          "Mission": "padding 0, gap 0, 2 bloka naizmenično (Image Stack 2 slike + Text Stack)",
+          "Core Value": "#FFF7E5, padding 112px 72px, gap 72px, position sticky na naslovu",
+          "History": "#FAE1A6 peščana, padding 112px 72px",
+          "Team Member": "#030000, padding 78px 72px, 6 članova",
+          "Awards": "#FFF7E5, padding 112px 72px"
+        },
+        "awards_lista_VAZNO": "Red: flex row align center, padding 32px 0, width 1296px, border-bottom 1px solid #D2CCBC. Broj 01..05 širine 42px. gap 178px broj->naziv. Naziv preset 1qcdpqr. Godina na desnom kraju."
+      }
+    },
+
+    "tipografski_preseti": {
+      "1qcdpqr": "H4 — 32px/40px desktop, 30/38 tablet, 28/34 telefon, weight 500, tracking -0.02em. KORISTI SE ZA SVE NASLOVE KARTICA na about stranici. Naš ekvivalent: --text-3xl."
+    },
+
+    "greske_koje_sam_napravio_pa_ispravio": [
+      "Prva verzija stranice Usluge je bila IZMIŠLJENA: svetli plavi veo umesto tamnog overlaya, hero 520px umesto 100vh, naizmenično slika levo-desno umesto uvek levo, kvačice umesto ikona, CTA sekcija koju Konstra nema, crno zaglavlje umesto belog.",
+      "History i Reference liste su imale godinu u koloni 120px levo, naslov 22px i nijedan broj. Konstra ima broj levo, naziv 32px, godinu desno.",
+      "Naslovi kartica su stajali na --text-2xl (22-24px) umesto na --text-3xl.",
+      "Hero O nama: max-width 1320 i padding 72 na istom elementu su se sabirali, tekst je počinjao na 132px umesto 72px."
+    ]
+  },
+
+  "alati_u_projektu": {
+    "tools/recolor.py": "Hex mapa stara paleta -> nova, kroz tokens.css + styles.css + index.html",
+    "tools/tekst.py + tekst2.py": "Parovi zamena copy-ja. tekst2 hvata ono što je prelomljeno <br>-om",
+    "tools/slike.py": "Mapira izvorne fotografije na slotove, čuva odnos stranica, ne naduvava preko izvorne rezolucije",
+    "tools/dims.py": "Sinhronizuje width/height u markupu sa stvarnim dimenzijama fajlova (CLS = 0)",
+    "tools/odgovori.py": "Ubacuje odgovore klijenta, briše vidljive [DOPUNITI]",
+    "tools/logo_svg.py": "Vadi varijante logotipa iz PDF-a",
+    "tools/teardown.py + mere.py": "Konstra teardown",
+    "tools/stranice.py": "Vadi zajedničke delove (sprite, zaglavlje, meni, podnožje) iz index.html",
+    "tools/usluge_sadrzaj.py": "SAV copy usluga živi ovde",
+    "tools/gradi_stranice.py": "Generiše usluge.html, usluga-*.html, kontakt.html, o-nama.html",
+    "komanda": "python tools/gradi_stranice.py — pa vratiti header--light na stranice sa tamnim heroom i preusmeriti nav linkove"
+  },
+
+  "css_organizacija": {
+    "site/css/tokens.css": "Sve boje i mere. OVERRIDE blok na vrhu objašnjava paletu. JEDINI fajl za recolor.",
+    "site/css/styles.css": "5250 linija, prekopiran sa B-Steela. NE DIRATI bez razloga.",
+    "site/css/stranice.css": "Komponente unutrašnjih stranica. Sve nove stvari idu ovde.",
+    "site/js/main.js": "Prekopiran sa B-Steela",
+    "site/js/wizard.js": "Wizard forma",
+    "UPOZORENJE_imena_tokena": "Imena su zadržana iz B-Steel verzije i NE ČITAJU SE DOSLOVNO. --sand-300 je sada svetla plava, --cream-100 je hladno bela, --brown-800 je telo teksta. Uloga svake piše u komentaru uz nju."
+  },
+
+  "wizard_forma": {
+    "izvor_specifikacije": "skill website-build-rules (Step 2 of 3), korak 8",
+    "struktura": "5 koraka. Koraci 1-4 su kartice izbora (dodir sam vodi dalje). Korak 5 su tekstualna polja.",
+    "koraci": ["Šta vam treba?", "Kakav je objekat?", "Gde je posao?", "Za kada vam treba?", "Vaši podaci"],
+    "ponasanje": "Traka napretka, Nazad na svakom koraku osim prvog, dugme se gasi dok traje slanje, potvrda u mestu bez preusmeravanja",
+    "ENDPOINT": "PRAZAN. Čeka skill 03 (form-backend-setup). Dok je prazan, forma pokaže potvrdu ali upit ne ide nigde i piše upozorenje u konzolu.",
+    "sledeci_korak": "Pokrenuti skill form-backend-setup da se generiše Apps Script i zakači"
+  },
+
+  "slike": {
+    "izvor": "images/ — Instagram eksporti, 1170px široki, plus hero np celik.jpg (1424x1774) i uslugeherocelik.jpg (1620x1216) koje je klijent poslao zasebno",
+    "problem": "Rezolucija je niska za full-bleed hero. Treba tražiti originale sa telefona.",
+    "mapa_ime_fajla_nije_sadrzaj": {
+      "hero-radnici-zalazak.jpg": "PP stepeništa, Ženeva Lux",
+      "hero-usluge.jpg": "nova hero fotka za stranicu Usluge",
+      "rad-01-celicna-hala.jpg": "Kapija DOSTOJNA, Kutlovo",
+      "rad-02-nadstresnica-odozdo.jpg": "Deking uz bazen, Kosmaj",
+      "rad-04-detalj-spoja.jpg": "Krovne rešetke, Caffe Porta",
+      "rad-05-montaza-na-terenu.jpg": "Zatvorena bašta, Mileva Koncept",
+      "rad-06-nadstresnica-garaza.jpg": "Spoljno stepenište",
+      "proces-skelet-hale.jpg": "Platforma, MATIS New Point",
+      "zavarivanje-panorama.jpg": "Bašta sa dekingom u gradu",
+      "rad-skelet-industrijske-hale.jpg": "Mileva Koncept spolja",
+      "rad-nadstresnica-terasa.jpg": "Stara Srbija",
+      "rad-nadstresnica-solarni-jesenice.jpg": "Ograda, Blazeks MV",
+      "rad-hala-kopaonik.jpg": "Modularni kontejner",
+      "rad-poslovna-hala.jpg": "Lokal Čudesa"
+    },
+    "napomena": "Imena su ostala B-Steelova da markup ne pukne. NE čitati doslovno."
+  },
+
+  "reference_klijenta": [
+    "Mileva Koncept, Grivac — zatvorena bašta (najimpresivniji vizual)",
+    "Ženeva Lux — protivpožarna stepeništa",
+    "Caffe Porta — krovna konstrukcija",
+    "Kafana Paligorić — letnja bašta",
+    "Stara Srbija — zastakljena bašta",
+    "Lokal Čudesa — enterijer i šank",
+    "Blazeks MV, Aerodrom — ograda obložena kompaktom",
+    "BLAŽEKS nameštaj, Sušica — stepenište",
+    "MATIS New Point — platforma",
+    "Kapija DOSTOJNA, Kutlovo — sa Simetra d.o.o.",
+    "Ford salon — klizne kapije i 3D paneli"
+  ],
+
+  "otvoreno_sledeci_prioriteti": [
+    {
+      "prioritet": 1,
+      "stavka": "Vizuelna provera u pravom browseru",
+      "detalj": "Sekcije Radovi, Pitanja, Kontakt i podnožje NA POČETNOJ nisu vizuelno proverene — headless ne skroluje. Strukturno su čiste."
+    },
+    {
+      "prioritet": 2,
+      "stavka": "Skill 03 — form-backend-setup",
+      "detalj": "Generisati Apps Script i upisati URL u ENDPOINT u site/js/wizard.js"
+    },
+    {
+      "prioritet": 3,
+      "stavka": "Tražiti od klijenta",
+      "detalj": "Imena i portrete četvoro ljudi, odgovor o avansu, originalne fotografije sa telefona"
+    },
+    {
+      "prioritet": 4,
+      "stavka": "Nav linkovi koji nikuda ne vode",
+      "detalj": "'Blog' i 'Galerija' su nasleđeni iz B-Steela. Galerija vodi na #radovi na početnoj, Blog nigde."
+    },
+    {
+      "prioritet": 5,
+      "stavka": "Vercel deploy",
+      "detalj": "Zakačiti repo, vercel.json je već spreman"
+    },
+    {
+      "prioritet": 6,
+      "stavka": "privacy/politika privatnosti stranica",
+      "detalj": "Skill website-build-rules je traži. Još ne postoji."
+    }
+  ],
+
+  "skills_u_projektu": {
+    "skills/ui-ux-pro-max": "Baza dizajn pravila. NAPOMENA: njegov --design-system generator je za NP Čelik vratio violet/indigo fintech paletu koja se sudarala sa sopstvenim anti-patternom 'AI purple gradients'. Ne uzimati njegovu paletu zdravo za gotovo.",
+    "skills/site-teardown-skill.md": "Metod za reverse engineering sajtova",
+    "globalni_skills_koji_se_koriste": {
+      "website-build-rules": "Skill 2 — wizard forma, copy pravila, SEO pravila",
+      "form-backend-setup": "Skill 3 — Apps Script backend, JOŠ NIJE POKRENUT"
+    }
+  },
+
+  "git_istorija": [
+    "3aad839 — NP Čelik: početna strana, klon B-Steel koda",
+    "587cb66 — Stranica Usluge, pravi logo i odgovori klijenta",
+    "8868ec3 — Kontakt sa wizard formom, O nama, i Usluge prepravljene po Konstri",
+    "bc591b3 — Usluge na sticky kartice, liste po Konstrinoj Awards šemi"
+  ],
+
+  "dokumentacija_u_projektu": {
+    "README.md": "Mapa slika, stranice, poznate rupe",
+    "PALETA.md": "5 boja sa kontrastima",
+    "context.md": "Popunjen upitnik klijenta — karakteristike, USP, brend glas, 13 prigovora sa odgovorima",
+    "research/konstra-stranice-teardown.md": "Teardown /service, /contact, /about sa merama",
+    "WAT.md": "Workflows-Agents-Tools framework uputstvo"
+  }
+}
