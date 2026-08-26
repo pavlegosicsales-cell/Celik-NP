@@ -555,9 +555,11 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
   gap: var(--space-6);
 }
 
+/* Prelom je rucni, kroz <br> u markupu: "Radionica sa adresom," u prvom
+   redu, "ekipa sa imenom." u drugom. Zato ovdje nema max-width; 18ch je
+   sjeklo prvi dio na pola pa je naslov ispadao u tri reda. */
 .ahero__title {
   margin: 0;
-  max-width: 18ch;
   font-family: var(--font-display);
   font-size: var(--text-5xl);
   line-height: var(--leading-h1);
