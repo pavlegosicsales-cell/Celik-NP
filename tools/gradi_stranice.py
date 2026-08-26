@@ -31,7 +31,7 @@ def hero(title, lede, img, alt, crumbs):
     return f'''
   <section class="phero" aria-labelledby="phero-naslov">
     <figure class="phero__image">
-      <img src="{img}" alt="{alt}" width="1424" height="1774" fetchpriority="high" decoding="async">
+      <img src="{img}" alt="{alt}" fetchpriority="high" decoding="async">
     </figure>
     <div class="phero__overlay" aria-hidden="true"></div>
 
@@ -50,44 +50,79 @@ def hero(title, lede, img, alt, crumbs):
 
 # ====================================================================== USLUGE
 def gradi_usluge():
-    stavke = []
-    for u in USLUGE:
-        scope = '\n'.join(f'              <li>{CHECK}<span>{x}</span></li>' for x in u['obim'])
+    """Spisak usluga koristi ISTI sticky rig kao pocetna (.svcs / .svc).
+
+    Konstra na /service ima obicnu listu bez preklapanja. Ovdje se namjerno
+    odstupa, na zahtjev: kartice se lijepe i preklapaju kao u sekciji Usluge
+    na pocetnoj, da dvije stranice ne izgledaju kao dva razlicita sajta.
+    Markup i klase su doslovno iste kao u index.html, mijenja se samo broj
+    kartica: sest umjesto cetiri.
+    """
+    NL = chr(10)
+    kartice = []
+
+    for n, u in enumerate(USLUGE, 1):
+        stavke = []
+        for x in u['obim']:
+            stavke.append(
+                '                  <li class="scope__item">' + NL
+                + '                    <span class="scope__icon" aria-hidden="true">'
+                  '<svg><use href="#i-check"></use></svg></span>' + NL
+                + '                    <span>' + x + '</span>' + NL
+                + '                  </li>')
+        scope = NL.join(stavke)
+
         if u['stranica']:
-            dugme = (f'\n          <a class="btn btn--solid" href="usluga-{u["slug"]}.html">'
-                     f'<span class="btn__label" data-roll>Pogledajte detaljno</span>{ARROW}</a>')
+            cta = ('<a class="btn btn--outline-light svc__cta" href="usluga-'
+                   + u['slug'] + '.html">'
+                   '<span class="btn__label" data-roll>Pogledajte detaljno</span>'
+                   + ARROW + '</a>')
         else:
-            dugme = ('\n          <a class="btn btn--bare" href="kontakt.html">'
-                     f'<span class="btn__label" data-roll>Pitajte za kontejner</span>{ARROW}</a>')
-        stavke.append(f'''
-      <article class="sitem" data-reveal>
-        <figure class="sitem__media">
-          <img src="{u['slika']}" alt="{u['alt']}" width="1169" height="878" loading="lazy" decoding="async">
-        </figure>
-        <div class="sitem__body">
-          <h2 class="sitem__title">{u['naslov']}</h2>
-          <p class="sitem__desc">{u['kratko']}</p>
-          <p class="sitem__scope-title">Obim posla:</p>
-          <ul class="sitem__scope">
+            cta = ('<a class="btn btn--outline-light svc__cta" href="kontakt.html">'
+                   '<span class="btn__label" data-roll>Pitajte za kontejner</span>'
+                   + ARROW + '</a>')
+
+        kartice.append(f'''
+        <article class="svc" data-reveal style="--z: {n}">
+
+          <div class="svc__media">
+            <img src="{u['slika']}" alt="{u['alt']}" width="1169" height="878" loading="lazy" decoding="async">
+          </div>
+
+          <div class="svc__content">
+            <div class="svc__info">
+              <h2 class="svc__title">{u['naslov']}</h2>
+              <p class="svc__desc">{u['kratko']}</p>
+            </div>
+
+            <div class="svc__foot">
+              <div class="scope">
+                <p class="scope__label">Obim posla:</p>
+                <ul class="scope__list">
 {scope}
-          </ul>{dugme}
-        </div>
-      </article>''')
+                </ul>
+              </div>
+              {cta}
+            </div>
+          </div>
+
+        </article>''')
 
     body = (hero('Usluge',
                  'Nađite posao koji odgovara vašem objektu, roku i budžetu. Sve radimo '
                  'istom ekipom: mera na licu mesta, izrada u radionici na Avalskoj, '
                  'zaštita i montaža.',
-                 'assets/img/hero-radnici-zalazak.jpg',
-                 'Spoljna protivpožarna metalna stepeništa na fasadi objekta Ženeva Lux',
+                 'assets/img/hero-usluge.jpg',
+                 'Metalna konstrukcija u izradi, radovi NP Čelika',
                  [('Početna', 'index.html'), ('Usluge', None)])
-            + '\n  <section class="sindex" aria-label="Spisak usluga">\n    <div class="sindex__inner">'
-            + '\n'.join(stavke) + '\n    </div>\n  </section>\n')
+            + NL + '  <section class="svcs" aria-label="Spisak usluga">'
+            + NL.join(kartice)
+            + NL + '  </section>' + NL)
 
     html = css(page(title='Usluge | NP Čelik Kragujevac',
                     desc='Metalne konstrukcije, kapije i ograde, stepeništa i protivpožarna '
                          'stepeništa, letnje bašte, enterijer i modularni kontejneri u Kragujevcu.',
-                    ogimg='assets/img/hero-radnici-zalazak.jpg', body=body))
+                    ogimg='assets/img/hero-usluge.jpg', body=body))
     (SITE / 'usluge.html').write_text(html, encoding='utf-8')
     return len(html)
 
@@ -388,43 +423,47 @@ def gradi_o_nama():
       <h2 class="hist__title" id="istorija-naslov">Kako je radionica rasla</h2>
 
       <article class="hrow" data-reveal>
-        <span class="hrow__year">2018</span>
-        <div>
+        <span class="hrow__num">01</span>
+        <div class="hrow__body">
           <span class="hrow__tag">Početak</span>
           <h3 class="hrow__title">Radionica na Avalskoj</h3>
           <p>NP Čelik počinje sa radom u Kragujevcu. Bravarski radovi, kapije i ograde
             za dvorišta i firme u gradu.</p>
         </div>
+        <span class="hrow__year">2018</span>
       </article>
 
       <article class="hrow" data-reveal>
-        <span class="hrow__year">2021</span>
-        <div>
+        <span class="hrow__num">02</span>
+        <div class="hrow__body">
           <span class="hrow__tag">Ugostiteljstvo</span>
           <h3 class="hrow__title">Prve letnje bašte</h3>
           <p>Rad na ugostiteljskim objektima u Kragujevcu i okolini. Kafana Paligorić,
             „Stara Srbija", Caffe Porta.</p>
         </div>
+        <span class="hrow__year">2021</span>
       </article>
 
       <article class="hrow" data-reveal>
-        <span class="hrow__year">2023</span>
-        <div>
+        <span class="hrow__num">03</span>
+        <div class="hrow__body">
           <span class="hrow__tag">Sopstveni proizvod</span>
           <h3 class="hrow__title">Modularni kontejneri</h3>
           <p>Serija NP Čelik kontejnera: stambeni, magacinski, građevinski i sanitarni.
             Za razliku od svega ostalog što radimo po meri, ovo je proizvod sa poznatim rokom.</p>
         </div>
+        <span class="hrow__year">2023</span>
       </article>
 
       <article class="hrow" data-reveal>
-        <span class="hrow__year">2026</span>
-        <div>
+        <span class="hrow__num">04</span>
+        <div class="hrow__body">
           <span class="hrow__tag">Danas</span>
           <h3 class="hrow__title">Preko dvadeset objekata</h3>
           <p>Ekipa od četvoro ljudi, sopstvena radionica i montaža. Protivpožarna stepeništa,
             zatvorene bašte i konstrukcije po projektu.</p>
         </div>
+        <span class="hrow__year">2026</span>
       </article>
     </div>
   </section>
@@ -466,17 +505,17 @@ def gradi_o_nama():
       <p class="slabel"><span class="dot" aria-hidden="true"></span>Reference</p>
       <h2 class="arefs__title" id="reference-naslov">Radovi koje možete da obiđete</h2>
 
-      <div class="rrow"><span class="rrow__name">Mileva Koncept</span><span class="rrow__meta">Zatvorena bašta · Grivac</span></div>
-      <div class="rrow"><span class="rrow__name">Ženeva Lux</span><span class="rrow__meta">Protivpožarna stepeništa · Kragujevac</span></div>
-      <div class="rrow"><span class="rrow__name">Caffe Porta</span><span class="rrow__meta">Krovna konstrukcija · Kragujevac</span></div>
-      <div class="rrow"><span class="rrow__name">Kafana Paligorić</span><span class="rrow__meta">Letnja bašta · Kragujevac</span></div>
-      <div class="rrow"><span class="rrow__name">Stara Srbija</span><span class="rrow__meta">Zastakljena bašta · Kragujevac</span></div>
-      <div class="rrow"><span class="rrow__name">Lokal „Čudesa"</span><span class="rrow__meta">Enterijer i šank · Kragujevac</span></div>
-      <div class="rrow"><span class="rrow__name">Blazeks MV</span><span class="rrow__meta">Ograda i gelenderi · Aerodrom</span></div>
-      <div class="rrow"><span class="rrow__name">BLAŽEKS nameštaj</span><span class="rrow__meta">Stepenište · Sušica</span></div>
-      <div class="rrow"><span class="rrow__name">MATIS New Point</span><span class="rrow__meta">Platforma · Kragujevac</span></div>
-      <div class="rrow"><span class="rrow__name">Kapija „DOSTOJNA"</span><span class="rrow__meta">Sa Simetra d.o.o. · Kutlovo</span></div>
-      <div class="rrow"><span class="rrow__name">Ford salon</span><span class="rrow__meta">Klizne kapije i 3D paneli</span></div>
+      <div class="rrow"><span class="rrow__num">01</span><span class="rrow__name">Mileva Koncept</span><span class="rrow__meta">Zatvorena bašta · Grivac</span></div>
+      <div class="rrow"><span class="rrow__num">02</span><span class="rrow__name">Ženeva Lux</span><span class="rrow__meta">Protivpožarna stepeništa · Kragujevac</span></div>
+      <div class="rrow"><span class="rrow__num">03</span><span class="rrow__name">Caffe Porta</span><span class="rrow__meta">Krovna konstrukcija · Kragujevac</span></div>
+      <div class="rrow"><span class="rrow__num">04</span><span class="rrow__name">Kafana Paligorić</span><span class="rrow__meta">Letnja bašta · Kragujevac</span></div>
+      <div class="rrow"><span class="rrow__num">05</span><span class="rrow__name">Stara Srbija</span><span class="rrow__meta">Zastakljena bašta · Kragujevac</span></div>
+      <div class="rrow"><span class="rrow__num">06</span><span class="rrow__name">Lokal „Čudesa"</span><span class="rrow__meta">Enterijer i šank · Kragujevac</span></div>
+      <div class="rrow"><span class="rrow__num">07</span><span class="rrow__name">Blazeks MV</span><span class="rrow__meta">Ograda i gelenderi · Aerodrom</span></div>
+      <div class="rrow"><span class="rrow__num">08</span><span class="rrow__name">BLAŽEKS nameštaj</span><span class="rrow__meta">Stepenište · Sušica</span></div>
+      <div class="rrow"><span class="rrow__num">09</span><span class="rrow__name">MATIS New Point</span><span class="rrow__meta">Platforma · Kragujevac</span></div>
+      <div class="rrow"><span class="rrow__num">10</span><span class="rrow__name">Kapija „DOSTOJNA"</span><span class="rrow__meta">Sa Simetra d.o.o. · Kutlovo</span></div>
+      <div class="rrow"><span class="rrow__num">11</span><span class="rrow__name">Ford salon</span><span class="rrow__meta">Klizne kapije i 3D paneli</span></div>
     </div>
   </section>
 '''

@@ -507,8 +507,8 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
 .nstep__title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: var(--text-2xl);
-  line-height: var(--leading-h5);
+  font-size: var(--text-3xl);
+  line-height: var(--leading-h4);
   font-weight: var(--weight-medium);
   color: var(--color-dark-heading);
 }
@@ -527,15 +527,17 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
   flex-direction: column;
   gap: 72px;
   width: 100%;
-  padding: 216px 0 0;
+  padding: 216px var(--container-pad) 0;
   background-color: var(--cream-50);
 }
 
+/* Padding ide na sekciju, ne na unutrasnji okvir. Dok su oba stajala na
+   __inner, max-width 1320 i padding 72 su se sabirali pa je tekst pocinjao
+   na 132px, dvostruko uvucenije nego na ostalim stranicama. */
 .ahero__inner {
   width: 100%;
   max-width: var(--container-content);
   margin-inline: auto;
-  padding-inline: var(--container-pad);
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
@@ -563,7 +565,12 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
 .ahero__actions { display: flex; flex-wrap: wrap; gap: var(--space-4); }
 
 /* --- Mission: naizmjenicno slika i tekst, puna sirina --- */
-.mission { width: 100%; background-color: var(--color-bg); }
+/* Mission ide preko pune sirine, pa ponistava bocni padding roditelja. */
+.mission {
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  background-color: var(--color-bg);
+}
 
 .mblock { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 0; }
 .mblock:nth-child(even) .mblock__media { order: 2; }
@@ -642,8 +649,8 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
 .cval__title {
   margin: 0 0 var(--space-2);
   font-family: var(--font-display);
-  font-size: var(--text-2xl);
-  line-height: var(--leading-h5);
+  font-size: var(--text-3xl);
+  line-height: var(--leading-h4);
   font-weight: var(--weight-medium);
   color: var(--color-heading);
 }
@@ -672,26 +679,46 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
   color: var(--ink-900);
 }
 
+/* Konstrina Awards lista, mjereno iz izvora:
+     red        flex row, align center, padding 32px 0, width 1296
+     ivica      border-bottom 1px solid #D2CCBC
+     broj       width 42px, preset 1qcdpqr
+     razmak     gap 178px izmedju broja i naziva
+     naziv      preset 1qcdpqr = 32/40, weight 500, tracking -0.02em
+     godina     na desnom kraju reda
+
+   Prva verzija ove liste je imala 120px kolonu za godinu lijevo, naslov na
+   22px i nijedan broj. Zamijenjeno u cjelini. */
 .hrow {
-  display: grid;
-  grid-template-columns: 120px 1fr;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   gap: var(--space-6);
-  padding: var(--space-6) 0;
-  border-top: var(--border-width) solid rgba(10, 15, 31, 0.16);
+  width: 100%;
+  padding: 32px 0;
+  border-bottom: var(--border-width) solid rgba(10, 15, 31, 0.16);
 }
 
-.hrow:last-child { border-bottom: var(--border-width) solid rgba(10, 15, 31, 0.16); }
+.hrow:first-of-type { border-top: var(--border-width) solid rgba(10, 15, 31, 0.16); }
 
-.hrow__year {
+.hrow__num {
+  flex: none;
+  width: 42px;
   font-family: var(--font-display);
-  font-size: var(--text-2xl);
+  font-size: var(--text-3xl);
+  line-height: var(--leading-h4);
+  letter-spacing: var(--tracking-tighter);
   font-weight: var(--weight-medium);
-  color: var(--ink-900);
+  color: var(--brown-800);
 }
+
+/* Konstrin razmak izmedju broja i naziva je 178px. Ovdje je clamp, jer nas
+   naziv zna da bude duzi od njihovog pa bi na fiksnih 178 gurao godinu van. */
+.hrow__body { flex: 1 1 auto; min-width: 0; margin-left: clamp(24px, 9vw, 178px); }
 
 .hrow__tag {
-  display: inline-block;
-  margin-bottom: var(--space-2);
+  display: block;
+  margin-bottom: 6px;
   font-size: var(--text-sm);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
@@ -699,15 +726,28 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
 }
 
 .hrow__title {
-  margin: 0 0 var(--space-2);
+  margin: 0;
   font-family: var(--font-display);
-  font-size: var(--text-2xl);
-  line-height: var(--leading-h5);
+  font-size: var(--text-3xl);
+  line-height: var(--leading-h4);
+  letter-spacing: var(--tracking-tighter);
   font-weight: var(--weight-medium);
   color: var(--ink-900);
 }
 
-.hrow p { margin: 0; max-width: 54ch; color: var(--brown-800); }
+.hrow p { margin: 8px 0 0; max-width: 54ch; color: var(--brown-800); }
+
+.hrow__year {
+  flex: none;
+  margin-left: auto;
+  padding-left: var(--space-5);
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  line-height: var(--leading-h4);
+  letter-spacing: var(--tracking-tighter);
+  font-weight: var(--weight-medium);
+  color: var(--ink-900);
+}
 
 /* --- Ekipa: crna sekcija --- */
 .team {
@@ -746,7 +786,9 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
 .tmember__name {
   margin: 0 0 4px;
   font-family: var(--font-display);
-  font-size: var(--text-xl);
+  font-size: var(--text-3xl);
+  line-height: var(--leading-h4);
+  letter-spacing: var(--tracking-tighter);
   font-weight: var(--weight-medium);
   color: var(--color-dark-heading);
 }
@@ -776,24 +818,48 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
 }
 
 .rrow {
-  display: grid;
-  grid-template-columns: 1fr auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   gap: var(--space-5);
-  align-items: baseline;
-  padding: var(--space-5) 0;
-  border-top: var(--border-width) solid var(--color-border);
+  width: 100%;
+  padding: 32px 0;
+  border-bottom: var(--border-width) solid var(--color-border);
 }
 
-.rrow:last-child { border-bottom: var(--border-width) solid var(--color-border); }
+.rrow:first-of-type { border-top: var(--border-width) solid var(--color-border); }
+
+.rrow__num {
+  flex: none;
+  width: 42px;
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  line-height: var(--leading-h4);
+  letter-spacing: var(--tracking-tighter);
+  font-weight: var(--weight-medium);
+  color: var(--stone-600);
+}
 
 .rrow__name {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin-left: clamp(24px, 9vw, 178px);
   font-family: var(--font-display);
-  font-size: var(--text-2xl);
+  font-size: var(--text-3xl);
+  line-height: var(--leading-h4);
+  letter-spacing: var(--tracking-tighter);
   font-weight: var(--weight-medium);
   color: var(--color-heading);
 }
 
-.rrow__meta { font-size: var(--text-base); color: var(--stone-600); }
+.rrow__meta {
+  flex: none;
+  margin-left: auto;
+  padding-left: var(--space-5);
+  font-size: var(--text-base);
+  color: var(--stone-600);
+  text-align: right;
+}
 
 /* --- Oznaka sekcije, ista svuda --- */
 .slabel {
@@ -870,9 +936,13 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
   .mblock__media img { aspect-ratio: 1 / 1; }
 
   .cval { grid-template-columns: 1fr; gap: var(--space-2); }
-  .hrow { grid-template-columns: 1fr; gap: var(--space-2); }
+
+  /* Na telefonu red ne staje u jedan red: broj i godina idu iznad naziva. */
+  .hrow, .rrow { flex-wrap: wrap; gap: var(--space-2); padding: 24px 0; }
+  .hrow__body { flex: 1 1 100%; margin-left: 0; order: 3; }
+  .hrow__year, .rrow__meta { margin-left: auto; padding-left: 0; }
+  .rrow__name { flex: 1 1 100%; margin-left: 0; order: 3; }
   .team__grid { grid-template-columns: 1fr 1fr; gap: var(--space-4); }
-  .rrow { grid-template-columns: 1fr; gap: 4px; }
 }
 
 
