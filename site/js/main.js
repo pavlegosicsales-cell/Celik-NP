@@ -915,6 +915,148 @@
   }
 
   /* ------------------------------------------------------------------------
+     MISSION: POZADINA SE ZAMUCUJE, KARTICE SE SMJENJUJU
+     ------------------------------------------------------------------------
+     Po Konstrinoj /about. Tamo je to Framerov "controlled timeline" vezan
+     za skrol; ovdje isti odnos kroz obican scroll listener.
+
+     Slika je sticky i stoji dok prodje .msn__rail (1478px, koliko i na
+     originalu). Kroz tu duzinu:
+       zamucenje  0 -> 10px, izmedju 5% i 45% puta
+       kartice    prva izlazi na 28-42%, druga ulazi na 32-46%
+
+     Zamucenje se zaokruzuje na cetvrtinu piksela i preskace ako se nije
+     promijenilo, jer je filter na slici preko cijelog ekrana skup.
+     ------------------------------------------------------------------------ */
+  var MSN_BLUR_MAX = 10;
+
+  function initMission() {
+    var sec = document.querySelector('.msn');
+    if (!sec) { return; }
+
+    var stage = sec.querySelector('.msn__stage');
+    var bg = sec.querySelector('.msn__bg');
+    var cards = Array.prototype.slice.call(sec.querySelectorAll('[data-msn-card]'));
+    if (!stage || !bg || cards.length < 2) { return; }
+
+    var ticking = false;
+    var zadnjiBlur = -1;
+
+    function odsjecak(t, od, do_) {
+      return Math.max(0, Math.min(1, (t - od) / (do_ - od)));
+    }
+
+    function paint() {
+      ticking = false;
+
+      // Ispod 1024px je sekcija obicna kolona, bez lijepljenja i smjene.
+      if (getComputedStyle(stage).position !== 'sticky') {
+        if (zadnjiBlur !== null) {
+          bg.style.filter = '';
+          cards.forEach(function (c) { c.style.opacity = ''; c.style.transform = ''; c.style.pointerEvents = ''; });
+          zadnjiBlur = null;
+        }
+        return;
+      }
+
+      var top = 0, node = sec;
+      while (node) { top += node.offsetTop; node = node.offsetParent; }
+
+      var span = sec.offsetHeight - stage.offsetHeight;
+      if (span <= 0) { return; }
+
+      var t = Math.max(0, Math.min(1, (window.scrollY - top) / span));
+
+      var blur = Math.round(MSN_BLUR_MAX * odsjecak(t, 0.05, 0.45) * 4) / 4;
+      if (blur !== zadnjiBlur) {
+        zadnjiBlur = blur;
+        bg.style.filter = blur ? 'blur(' + blur + 'px)' : '';
+      }
+
+      var izlaz = odsjecak(t, 0.28, 0.42);
+      var ulaz = odsjecak(t, 0.32, 0.46);
+
+      cards[0].style.opacity = String(1 - izlaz);
+      cards[0].style.transform = 'translate(-50%, calc(-50% - ' + (izlaz * 24).toFixed(1) + 'px))';
+      cards[0].style.pointerEvents = izlaz > 0.5 ? 'none' : '';
+
+      cards[1].style.opacity = String(ulaz);
+      cards[1].style.transform = 'translate(-50%, calc(-50% + ' + ((1 - ulaz) * 24).toFixed(1) + 'px))';
+      cards[1].style.pointerEvents = ulaz > 0.5 ? '' : 'none';
+    }
+
+    window.addEventListener('scroll', function () {
+      if (ticking) { return; }
+      ticking = true;
+      requestAnimationFrame(paint);
+    }, { passive: true });
+
+    window.addEventListener('resize', function () { zadnjiBlur = -1; paint(); });
+    paint();
+  }
+
+  /* ------------------------------------------------------------------------
+     CORE VALUE: LENJIRI SE SKUPLJAJU, TEKST SE PODIZE
+     ------------------------------------------------------------------------
+     Konstra drzi naslov i cetiri kolone zalijepljene, pa kroz cetiri
+     odsjecka od po 496px skuplja lenjir svake kolone sa 254 na 133px.
+     Tekst ispod nije animiran zasebno; on se podigne sam, jer je lenjir
+     u istom stubu i nosi visinu.
+
+     Kolona i dobija svoj cetvrtinski dio puta: t = clamp(p*4 - i, 0, 1).
+     ------------------------------------------------------------------------ */
+  var CVAL_RULE_MAX = 254;
+  var CVAL_RULE_MIN = 133;
+
+  function initCoreValues() {
+    var sec = document.querySelector('.cvals');
+    if (!sec) { return; }
+
+    var stage = sec.querySelector('.cvals__sticky');
+    var rules = Array.prototype.slice.call(sec.querySelectorAll('.cval__rule'));
+    if (!stage || !rules.length) { return; }
+
+    var ticking = false;
+    var applied = [];
+
+    function paint() {
+      ticking = false;
+
+      if (getComputedStyle(stage).position !== 'sticky') {
+        rules.forEach(function (r, i) {
+          if (applied[i] !== null) { r.style.height = ''; applied[i] = null; }
+        });
+        return;
+      }
+
+      var top = 0, node = sec;
+      while (node) { top += node.offsetTop; node = node.offsetParent; }
+
+      var span = sec.offsetHeight - stage.offsetHeight;
+      if (span <= 0) { return; }
+
+      var p = Math.max(0, Math.min(1, (window.scrollY - top) / span));
+
+      rules.forEach(function (r, i) {
+        var t = Math.max(0, Math.min(1, p * rules.length - i));
+        var h = Math.round(CVAL_RULE_MAX - (CVAL_RULE_MAX - CVAL_RULE_MIN) * t);
+        if (applied[i] === h) { return; }
+        applied[i] = h;
+        r.style.height = h + 'px';
+      });
+    }
+
+    window.addEventListener('scroll', function () {
+      if (ticking) { return; }
+      ticking = true;
+      requestAnimationFrame(paint);
+    }, { passive: true });
+
+    window.addEventListener('resize', function () { applied = []; paint(); });
+    paint();
+  }
+
+  /* ------------------------------------------------------------------------
      6. BROJANJE OD NULE DO VRIJEDNOSTI
      ------------------------------------------------------------------------
      Pali se SAMO na elementima koji imaju stvaran broj u data-count-to.
@@ -1478,6 +1620,8 @@
     initCardStack();
     initProcessRail();
     initTilt();
+    initMission();
+    initCoreValues();
   }
 
   var finePointer = window.matchMedia('(pointer: fine)');

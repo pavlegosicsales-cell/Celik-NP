@@ -578,34 +578,244 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
 
 .ahero__actions { display: flex; flex-wrap: wrap; gap: var(--space-4); }
 
-/* --- Mission: naizmjenicno slika i tekst, puna sirina --- */
-/* Mission ide preko pune sirine, pa ponistava bocni padding roditelja. */
-.mission {
+/* --- Mission: lijepljena slika koja se zamucuje, dvije kartice preko nje ---
+   Po Konstrinoj /about. Mjere su iz njenog izvora, ne sa snimka:
+     Bg Image  sticky top 0, odnos 1.49817 (961px na 1440)
+     Kartica   886 sirine, padding 32, radius 12, razmak 40
+     Slika     266 x 315
+   Sekcija ide preko pune sirine, pa ponistava bocni padding roditelja. */
+.msn {
+  position: relative;
   width: 100vw;
   margin-inline: calc(50% - 50vw);
+  overflow: clip;
   background-color: var(--color-bg);
 }
 
-.mblock { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 0; }
-.mblock:nth-child(even) .mblock__media { order: 2; }
-.mblock__media { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.msn__stage {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  /* 100 / 1.49817 = 66.75vw. Isti odnos kao na originalu. */
+  height: 66.75vw;
+  max-height: 100vh;
+}
 
-.mblock__media img {
+.msn__bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  will-change: filter;
+}
+
+/* Uvecanje od 4% je zbog zamucenja: bez njega bi se kroz meke ivice
+   vidjela podloga sekcije po obodu kadra. */
+.msn__bg img {
   display: block;
   width: 100%;
   height: 100%;
-  aspect-ratio: 3 / 4;
   object-fit: cover;
+  transform: scale(1.04);
 }
 
-.mblock__body {
+.msn__card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  width: min(886px, calc(100% - 2 * var(--container-pad)));
+  padding: 32px;
+  border-radius: var(--radius-xl);
+  background-color: var(--cream-100);
+  box-shadow:
+    0 5px 10px rgba(6, 10, 20, 0.06),
+    0 19px 19px rgba(6, 10, 20, 0.05),
+    0 43px 26px rgba(6, 10, 20, 0.03),
+    0 76px 30px rgba(6, 10, 20, 0.01);
+  transform: translate(-50%, -50%);
+}
+
+/* Druga kartica ceka svoj red. Skripta prepisuje oba svojstva. */
+.msn__card + .msn__card { opacity: 0; }
+
+.msn__media {
+  flex: none;
+  width: 266px;
+  height: 315px;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+}
+
+.msn__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.msn__body {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
-  padding: var(--space-10) var(--space-9);
+  align-items: flex-start;
+  gap: 20px;
+  min-width: 0;
 }
 
-.mblock__title {
+.msn__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  /* 40/46 kao na originalu. --leading-h1 je za hero i daje 88px, pa bi
+     naslov od dva reda bio razvucen preko cijele kartice. */
+  line-height: 46px;
+  letter-spacing: var(--tracking-tighter);
+  font-weight: var(--weight-medium);
+  color: var(--color-heading);
+}
+
+.msn__body p { margin: 0; max-width: 46ch; color: var(--color-text); }
+
+/* 1478px je duzina skrola na originalu: ukupna visina sekcije 2439 minus
+   961 koliko je visoka slika. Kroz nju traje i zamucenje i smjena. */
+.msn__rail { height: 1478px; }
+
+/* --- Core Value: cetiri kolone sa lenjirima koji se skupljaju pri skrolu ---
+   Po Konstrinoj /about. Iz njenog izvora:
+     Sekcija  padding 112px 72px, razmak 72
+     Sticky   sticky top 0, visina 100vh, min-height 820
+     Kolona   300px, cetiri u redu sa razmakom 32
+     Lenjir   14px sirok, 254 -> 133px visok, tacke 12px, linija 2px
+     Plocica  padding 4px 12px, radius 4px
+     Odsjecak skrola  496px po koloni */
+.cvals {
+  position: relative;
+  width: 100%;
+  padding: 112px var(--container-pad);
+  background-color: var(--cream-50);
+}
+
+.cvals__sticky {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 72px;
+  width: 100%;
+  max-width: var(--container-content);
+  min-height: 820px;
+  height: 100vh;
+  margin-inline: auto;
+}
+
+.cvals__head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+}
+
+.cvals__title {
+  margin: 0;
+  max-width: 633px;
+  /* Naslov se pali pri skrolu, ali na bijeloj podlozi, pa efekat ide ka
+     mastilu umjesto ka hladno bijeloj. */
+  --fill-on: var(--color-heading);
+  --fill-off: var(--stone-600);
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  line-height: 50px;
+  letter-spacing: var(--tracking-tighter);
+  font-weight: var(--weight-medium);
+  color: var(--color-heading);
+}
+
+.cvals__row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: start;
+  gap: 32px;
+  width: 100%;
+}
+
+.cval {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  min-width: 0;
+}
+
+/* Broj i lenjir dijele istu osu, pa je lenjir centriran ispod broja. */
+.cval__mark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: min-content;
+}
+
+.cval__num {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  line-height: 46px;
+  letter-spacing: var(--tracking-tighter);
+  font-weight: var(--weight-medium);
+  color: var(--stone-600);
+}
+
+/* Tacka gore, tacka dolje, linija izmedju. Visinu mijenja skripta. */
+.cval__rule {
+  position: relative;
+  flex: none;
+  width: 14px;
+  height: 254px;
+  /* Linija je pozadina, ne treci element: ::before i ::after vec drze
+     tacke. Sirina 2px, centrirana, kao na originalu. */
+  background: linear-gradient(var(--brown-800), var(--brown-800)) center / 2px 100% no-repeat;
+}
+
+.cval__rule::before,
+.cval__rule::after {
+  content: "";
+  position: absolute;
+  left: 1px;
+  right: 1px;
+  height: 12px;
+  border-radius: var(--radius-pill);
+  background-color: var(--brown-800);
+}
+
+.cval__rule::before { top: 0; }
+.cval__rule::after  { bottom: 0; }
+
+.cval__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  width: 100%;
+}
+
+.cval__tag {
+  margin: 0;
+  padding: 4px 12px;
+  border-radius: 4px;
+  background-color: var(--sand-300);
+  font-size: var(--text-lg);
+  line-height: var(--leading-lead);
+  color: var(--color-on-accent);
+}
+
+.cval__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+}
+
+.cval__title {
   margin: 0;
   font-family: var(--font-display);
   font-size: var(--text-3xl);
@@ -615,61 +825,36 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
   color: var(--color-heading);
 }
 
-.mblock__body p { margin: 0; max-width: 46ch; color: var(--color-text); }
+.cval__text p { margin: 0; color: var(--color-text); }
 
-/* --- Core Value: naslov se lijepi dok vrijednosti prolaze pored njega --- */
-.cvals {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: 112px var(--container-pad);
-  background-color: var(--cream-50);
+/* Cetiri odsjecka skrola, jedan po koloni. */
+.cvals__rail { height: 496px; }
+
+/* Kad je animacija iskljucena, obje sekcije se ponasaju kao na uzem ekranu:
+   nema lijepljenja, nema praznog skrola, obje kartice se vide odjednom.
+   Skripta u tom slucaju i ne krece, pa niko ne prepisuje ove vrijednosti. */
+@media (prefers-reduced-motion: reduce) {
+  .msn__stage { position: static; height: auto; max-height: none; }
+  .msn__bg { position: relative; height: 66.75vw; }
+  .msn__bg img { transform: none; }
+  .msn__card {
+    position: static;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: var(--space-6);
+    transform: none;
+    opacity: 1;
+    box-shadow: none;
+  }
+  .msn__media { width: 100%; height: 243px; }
+  .msn__rail { display: none; }
+  .msn { padding-bottom: var(--space-9); }
+
+  .cvals__sticky { position: static; height: auto; min-height: 0; justify-content: flex-start; gap: var(--space-8); }
+  .cvals__rail { display: none; }
+  .cval__rule { height: 133px; }
 }
-
-.cvals__inner {
-  width: 100%;
-  max-width: var(--container-content);
-  margin-inline: auto;
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: var(--space-9);
-  align-items: start;
-}
-
-.cvals__sticky { position: sticky; top: 140px; }
-
-.cvals__title {
-  margin: var(--space-4) 0 0;
-  max-width: 14ch;
-  font-family: var(--font-display);
-  font-size: var(--text-3xl);
-  line-height: var(--leading-h4);
-  letter-spacing: var(--tracking-tighter);
-  font-weight: var(--weight-medium);
-  color: var(--color-heading);
-}
-
-.cval {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--space-5);
-  padding: var(--space-6) 0;
-  border-top: var(--border-width) solid var(--color-border);
-}
-
-.cval:last-child { border-bottom: var(--border-width) solid var(--color-border); }
-.cval__num { font-family: var(--font-display); font-size: var(--text-xl); color: var(--stone-600); }
-
-.cval__title {
-  margin: 0 0 var(--space-2);
-  font-family: var(--font-display);
-  font-size: var(--text-3xl);
-  line-height: var(--leading-h4);
-  font-weight: var(--weight-medium);
-  color: var(--color-heading);
-}
-
-.cval p { margin: 0; color: var(--color-text); }
 
 /* --- History: peščana kod Konstre, kod nas svijetla plava --- */
 .hist {
@@ -903,7 +1088,6 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
   .next, .cvals, .hist, .arefs { padding: 96px var(--container-pad); }
   .ahero { padding-top: 180px; }
   .team__grid { gap: var(--space-4); }
-  .mblock__body { padding: var(--space-8) var(--space-7); }
 }
 
 @media (max-width: 1024px) {
@@ -911,11 +1095,22 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
   .kontakt__form, .kontakt__intro { grid-column: 1; }
   .kontakt__details { max-width: none; flex-direction: row; flex-wrap: wrap; gap: var(--space-6); }
   .next__grid { grid-template-columns: 1fr; gap: var(--space-6); }
-  .cvals__inner { grid-template-columns: 1fr; }
-  .cvals__sticky { position: static; }
   .team__grid { grid-template-columns: repeat(2, 1fr); }
-  .mblock { grid-template-columns: 1fr; }
-  .mblock:nth-child(even) .mblock__media { order: 0; }
+
+  /* Cetiri kolone ne staju: idu dva po dva, lijepljenje i lenjiri se gase,
+     lenjir ostaje na kratkoj mjeri. */
+  .cvals__sticky { position: static; height: auto; min-height: 0; justify-content: flex-start; gap: var(--space-8); }
+  .cvals__row { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--space-8); }
+  .cvals__rail { display: none; }
+  .cval__rule { height: 133px; }
+
+  /* Kartica se slaze u kolonu i slika ide preko pune sirine. */
+  .msn__stage { height: auto; max-height: none; position: static; }
+  .msn__bg { position: relative; height: 66.75vw; }
+  .msn__card { position: static; flex-direction: column; align-items: flex-start; width: 100%; transform: none; opacity: 1 !important; margin-top: var(--space-6); box-shadow: none; }
+  .msn__media { width: 100%; height: 243px; }
+  .msn__rail { display: none; }
+  .msn { padding-bottom: var(--space-9); }
 }
 
 @media (max-width: 809.98px) {
@@ -947,10 +1142,8 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
   .ahero { padding-top: 132px; gap: var(--space-7); }
   .ahero__actions .btn { width: 100%; justify-content: center; }
 
-  .mblock__body { padding: var(--space-7) var(--container-pad); }
-  .mblock__media img { aspect-ratio: 1 / 1; }
-
-  .cval { grid-template-columns: 1fr; gap: var(--space-2); }
+  .cvals__row { grid-template-columns: 1fr; }
+  .msn__card { padding: 20px; }
 
   /* Na telefonu red ne staje u jedan red: broj i godina idu iznad naziva. */
   .hrow, .rrow { flex-wrap: wrap; gap: var(--space-2); padding: 24px 0; }

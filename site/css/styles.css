@@ -2040,9 +2040,13 @@ a.contact-item__value:hover { color: var(--orange-500); }
    ne podrzava color-mix, slovo ostane u zavrsnoj boji, sto je i dalje
    citljivo.
    -------------------------------------------------------------------------- */
+/* Boje su podesive, jer efekat od 26.08.2026. stoji i na svijetloj
+   podlozi (sekcija "Pravila" na O nama). Podrazumijevano je za tamnu:
+   slova se pale u hladno bijelu. Na svijetlom se --fill-on prebacuje na
+   mastilo, inace bi popunjen naslov bio bijel na bijelom. */
 .fill-char {
   display: inline-block;
-  color: var(--cream-100);
+  color: var(--fill-on, var(--cream-100));
 }
 
 .js-scroll-fill .fill-char {
@@ -2051,7 +2055,9 @@ a.contact-item__value:hover { color: var(--orange-500); }
 
 @supports (color: color-mix(in srgb, red 50%, blue)) {
   .js-scroll-fill .fill-char {
-    color: color-mix(in srgb, var(--cream-100) calc(var(--t, 0) * 100%), var(--stone-500));
+    color: color-mix(in srgb,
+      var(--fill-on, var(--cream-100)) calc(var(--t, 0) * 100%),
+      var(--fill-off, var(--stone-500)));
   }
 }
 

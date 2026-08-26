@@ -344,79 +344,148 @@ def gradi_o_nama():
       </div>
     </div>
 
-    <section class="mission" aria-label="Kako radimo">
-      <div class="mblock">
-        <div class="mblock__media">
-          <img src="assets/img/rad-04-detalj-spoja.jpg" alt="Krovna metalna konstrukcija sa rešetkastim nosačima, Caffe Porta" width="768" height="1024" loading="lazy" decoding="async">
-          <img src="assets/img/proces-skelet-hale.jpg" alt="Metalna konstrukcija platforme sa daskom 50 mm, MATIS New Point" width="768" height="1024" loading="lazy" decoding="async">
+    <!-- ====================================================================
+         Po Konstrinoj /about sekciji "Mission". Mjere su citane iz izvora
+         (B-Steel/research/konstra-source/konstra-about.html), ne procijenjene:
+
+           Bg Image   position: sticky, top 0, sirina 100%, odnos 1.49817
+                      (961px visine na ekranu od 1440), will-change: filter
+           Kartica    886 x auto, padding 32, radius 12, unutrasnji razmak 40,
+                      apsolutno centrirana preko slike, meka visestruka sjenka
+           Slika u kartici  266 x 315
+           Tekst      naslov + dva pasusa, razmak 20
+
+         Original ima ukupnu visinu 2439 pri slici od 961, dakle 1478px
+         skrola. Toliko je i ovdje: .msn__rail. Kroz taj skrol se pozadina
+         zamucuje, a prva kartica smjenjuje drugom.
+         ==================================================================== -->
+    <section class="msn" aria-label="Šta radimo i za koga radimo">
+      <div class="msn__stage">
+        <div class="msn__bg">
+          <!-- [SLIKA] Lokal Čudesa, enterijer. Jedina pejzažna fotka u odnosu
+               3:2, koliko traži Konstrin rig. Do sada je stajala samo kao
+               og:image. -->
+          <img src="assets/img/hero-celicna-konstrukcija.jpg" alt="" width="1170" height="780" loading="lazy" decoding="async">
         </div>
-        <div class="mblock__body">
-          <p class="slabel"><span class="dot" aria-hidden="true"></span>Šta radimo</p>
-          <h2 class="mblock__title">Od maske za klimu do noseće konstrukcije</h2>
-          <p>Radimo i tehnički zahtevne poslove sa projektom i odgovornošću, i sitne dorade
-            u dvorištu. Protivpožarna stepeništa, platforme i krovne konstrukcije su posao
-            koji nas odvaja od radionica koje rade samo tipske ograde.</p>
-        </div>
+
+        <article class="msn__card" data-msn-card>
+          <div class="msn__media">
+            <img src="assets/img/proces-skelet-hale.jpg" alt="Metalna konstrukcija platforme sa daskom 50 mm, MATIS New Point" width="988" height="1170" loading="lazy" decoding="async">
+          </div>
+          <div class="msn__body">
+            <p class="slabel"><span class="dot" aria-hidden="true"></span>Šta radimo</p>
+            <h2 class="msn__title">Od maske za klimu do noseće konstrukcije</h2>
+            <p>Radimo i tehnički zahtevne poslove sa projektom i odgovornošću,
+              i sitne dorade u dvorištu.</p>
+            <p>Protivpožarna stepeništa, platforme i krovne konstrukcije su posao
+              koji nas odvaja od radionica koje rade samo tipske ograde.</p>
+          </div>
+        </article>
+
+        <article class="msn__card" data-msn-card>
+          <div class="msn__media">
+            <img src="assets/img/rad-05-montaza-na-terenu.jpg" alt="Zatvorena bašta sa drvenom tavanicom, Mileva Koncept, Grivac" width="1169" height="1558" loading="lazy" decoding="async">
+          </div>
+          <div class="msn__body">
+            <p class="slabel"><span class="dot" aria-hidden="true"></span>Za koga radimo</p>
+            <h2 class="msn__title">Ugostitelji, firme i ljudi iz komšiluka</h2>
+            <p>Znamo šta znači „mora da bude gotovo pre sezone" i planiramo posao
+              oko tog datuma. Zato se bašte ugovaraju zimi.</p>
+            <p>Isto tako izlazimo i za jednu masku za klima uređaj, jer je mala
+              stvar danas često prvi posao od nekoliko.</p>
+          </div>
+        </article>
       </div>
 
-      <div class="mblock">
-        <div class="mblock__media">
-          <img src="assets/img/rad-05-montaza-na-terenu.jpg" alt="Zatvorena bašta sa drvenom tavanicom, Mileva Koncept, Grivac" width="768" height="1024" loading="lazy" decoding="async">
-          <img src="assets/img/rad-nadstresnica-terasa.jpg" alt="Zastakljena letnja bašta, kafana Stara Srbija" width="768" height="1024" loading="lazy" decoding="async">
-        </div>
-        <div class="mblock__body">
-          <p class="slabel"><span class="dot" aria-hidden="true"></span>Za koga radimo</p>
-          <h2 class="mblock__title">Ugostitelji, firme i ljudi iz komšiluka</h2>
-          <p>Znamo šta znači „mora da bude gotovo pre sezone" i planiramo posao oko tog datuma.
-            Zato se bašte ugovaraju zimi. Isto tako izlazimo i za jednu masku za klima uređaj,
-            jer je mala stvar danas često prvi posao od nekoliko.</p>
-        </div>
-      </div>
+      <!-- Duzina skrola kroz koju traje smjena. Na telefonu se gasi. -->
+      <div class="msn__rail" aria-hidden="true"></div>
     </section>
   </section>
 
+  <!-- ==========================================================================
+       Po Konstrinoj /about sekciji "Core Value". Mjere iz izvora:
+
+         Sekcija  padding 112px 72px, razmak 72px
+         Sticky   position sticky, top 0, visina 100vh, min-height 820px
+         Kolona   300px, cetiri u redu sa razmakom 32 (1296 ukupno)
+         Lenjir   14px sirok, 254px visok, dvije tacke od 12px na krajevima,
+                  linija 2px na sredini. Pri skrolu se skuplja na 133px i
+                  tekst ispod se podigne.
+         Plocica  padding 4px 12px, radius 4px
+         Razmaci  broj->lenjir 16, plocica->tekst 40, naslov->opis 12
+         Skrol    cetiri odsjecka po 496px, jedan po koloni
+       ========================================================================== -->
   <section class="cvals" aria-labelledby="pravila-naslov">
-    <div class="cvals__inner">
-      <div class="cvals__sticky">
+    <div class="cvals__sticky">
+      <div class="cvals__head">
         <p class="slabel"><span class="dot" aria-hidden="true"></span>Kako radimo</p>
-        <h2 class="cvals__title" id="pravila-naslov">Pravila koja se vide posle pet godina</h2>
+        <h2 class="cvals__title" id="pravila-naslov" data-scroll-fill>Pravila koja se vide posle pet godina</h2>
       </div>
-      <div>
-        <article class="cval" data-reveal>
-          <span class="cval__num">01</span>
-          <div>
-            <h3 class="cval__title">Ceo posao pod jednim krovom</h3>
-            <p>Mera, izrada, zaštita i montaža su naša ekipa. Nema prebacivanja odgovornosti
-              između bravara, farbara i montera, jer su to isti ljudi.</p>
+
+      <div class="cvals__row">
+        <article class="cval" data-cval>
+          <div class="cval__mark">
+            <span class="cval__num">01</span>
+            <span class="cval__rule" aria-hidden="true"></span>
+          </div>
+          <div class="cval__body">
+            <p class="cval__tag">Bez prebacivanja odgovornosti</p>
+            <div class="cval__text">
+              <h3 class="cval__title">Ceo posao pod jednim krovom</h3>
+              <p>Mera, izrada, zaštita i montaža su naša ekipa. Nema prebacivanja odgovornosti
+                između bravara, farbara i montera, jer su to isti ljudi.</p>
+            </div>
           </div>
         </article>
-        <article class="cval" data-reveal>
-          <span class="cval__num">02</span>
-          <div>
-            <h3 class="cval__title">Zaštita je deo posla, ne dodatak</h3>
-            <p>Priprema površine, pocinkovanje ili plastifikacija i svi nanosi boje. Ograda bez
-              pripreme i cinka počne da rđa kroz dve zime i onda se plaća dvaput. Na zaštitu
-              dajemo garanciju od dve godine.</p>
+        <article class="cval" data-cval>
+          <div class="cval__mark">
+            <span class="cval__num">02</span>
+            <span class="cval__rule" aria-hidden="true"></span>
+          </div>
+          <div class="cval__body">
+            <p class="cval__tag">Garancija dve godine</p>
+            <div class="cval__text">
+              <h3 class="cval__title">Zaštita je deo posla, ne dodatak</h3>
+              <p>Priprema površine, pocinkovanje ili plastifikacija i svi nanosi boje. Ograda bez
+                pripreme i cinka počne da rđa kroz dve zime i onda se plaća dvaput.</p>
+            </div>
           </div>
         </article>
-        <article class="cval" data-reveal>
-          <span class="cval__num">03</span>
-          <div>
-            <h3 class="cval__title">Rok stoji u ponudi</h3>
-            <p>Ne dogovara se usput. Ako nešto ne stižemo, kažemo unapred, jer je bolje čuti
-              istinu na početku nego datum koji ne možemo da ispunimo.</p>
+        <article class="cval" data-cval>
+          <div class="cval__mark">
+            <span class="cval__num">03</span>
+            <span class="cval__rule" aria-hidden="true"></span>
+          </div>
+          <div class="cval__body">
+            <p class="cval__tag">Ne dogovara se usput</p>
+            <div class="cval__text">
+              <h3 class="cval__title">Rok stoji u ponudi</h3>
+              <p>Ako nešto ne stižemo, kažemo unapred, jer je bolje čuti istinu na početku nego
+                datum koji ne možemo da ispunimo.</p>
+            </div>
           </div>
         </article>
-        <article class="cval" data-reveal>
-          <span class="cval__num">04</span>
-          <div>
-            <h3 class="cval__title">Vraćamo se na svoj rad</h3>
-            <p>Radionica je na Avalskoj 11. Kad kroz godinu dana zapne kapija ili treba dorada,
-              ne tražite firmu iz Beograda.</p>
+        <article class="cval" data-cval>
+          <div class="cval__mark">
+            <span class="cval__num">04</span>
+            <span class="cval__rule" aria-hidden="true"></span>
+          </div>
+          <div class="cval__body">
+            <p class="cval__tag">Radionica na Avalskoj 11</p>
+            <div class="cval__text">
+              <h3 class="cval__title">Vraćamo se na svoj rad</h3>
+              <p>Kad kroz godinu dana zapne kapija ili treba dorada, ne tražite firmu iz Beograda.
+                Tu smo gde smo i bili.</p>
+            </div>
           </div>
         </article>
       </div>
     </div>
+
+    <div class="cvals__rail" aria-hidden="true"></div>
+    <div class="cvals__rail" aria-hidden="true"></div>
+    <div class="cvals__rail" aria-hidden="true"></div>
+    <div class="cvals__rail" aria-hidden="true"></div>
   </section>
 
   <section class="hist" aria-labelledby="istorija-naslov">
