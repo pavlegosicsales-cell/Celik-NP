@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="sr-Latn-RS">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enterijer i završna obrada | NP Čelik Kragujevac</title>
+<meta name="description" content="Metal nosi, a drvo, staklo i kompakt ploče daju izgled. Lokal dobija prepoznatljiv karakter, sve po meri prostora, ne iz kataloga.">
+<meta name="geo.placename" content="Kragujevac">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Enterijer i završna obrada | NP Čelik Kragujevac">
+<meta property="og:description" content="Metal nosi, a drvo, staklo i kompakt ploče daju izgled. Lokal dobija prepoznatljiv karakter, sve po meri prostora, ne iz kataloga.">
+<meta property="og:image" content="assets/img/rad-poslovna-hala.jpg">
+<link rel="icon" href="assets/img/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/stranice.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Preskoči na sadržaj</a>
+
+<!-- ==========================================================================
+     SVG SPRITE  /  sve ikone na jednom mestu
+     Lucide stil, stroke 2, currentColor. Bez emodzija.
+     ========================================================================== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-factory" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/>
+  </symbol>
+  <symbol id="i-hardhat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2z"/><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M4 15v-3a6 6 0 0 1 6-6"/><path d="M14 6a6 6 0 0 1 6 6v3"/>
+  </symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+  </symbol>
+  <symbol id="i-warehouse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 8.35V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8.35A2 2 0 0 1 3.26 6.5l8-3.2a2 2 0 0 1 1.48 0l8 3.2A2 2 0 0 1 22 8.35Z"/><path d="M6 18h12"/><path d="M6 14h12"/><path d="M6 10h12v12H6z"/>
+  </symbol>
+  <!-- Gola kvacica. Konstra je koristi u krugu, ispred svake stavke
+       obima posla. Stroke 2.5 kao na originalu. -->
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m4 12 6 6L20 6"/>
+  </symbol>
+  <symbol id="i-badge-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/>
+  </symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+  </symbol>
+  <symbol id="i-cog" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>
+  </symbol>
+  <symbol id="i-ruler" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/>
+  </symbol>
+  <symbol id="i-calendar-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/>
+  </symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+  </symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+  </symbol>
+  <!-- Dodato 10.08.2026. za polja u obrascu. Isti crtez kao lucide user
+       i message-square, da se poklapa sa ostalima u ovom spisku. -->
+  <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+  </symbol>
+  <symbol id="i-message" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+  </symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
+  </symbol>
+  <symbol id="i-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/>
+  </symbol>
+  <symbol id="i-facebook" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  </symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/>
+  </symbol>
+  <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+  </symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+  </symbol>
+  <symbol id="i-arrow-up-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+  </symbol>
+  <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+    <path d="m12 2 2.9 6.26 6.85.7-5.1 4.6 1.44 6.72L12 16.9l-6.09 3.38 1.44-6.72-5.1-4.6 6.85-.7z"/>
+  </symbol>
+</svg>
+
+
+
+<header class="header" id="header">
+  <div class="header__inner">
+
+    <div class="header__brand-wrap">
+      <a class="brand" href="index.html#hero" aria-label="NP Čelik, početna strana">
+        <!-- [SLIKA: logo NP Čelik] Badge iz brand asseta. Puni lockup je hromiran
+             i nestaje na svijetloj podlozi, pa ide badge + tekstualni wordmark. -->
+        <img class="brand__badge" src="assets/img/logo-np-celik.png" alt="" width="470" height="139" aria-hidden="true">
+      </a>
+
+      <!-- Hamburger stoji uz logo samo na mobilnom, kao na originalu. -->
+      <button class="menu-toggle" id="menu-toggle" type="button"
+              aria-controls="nav" aria-expanded="false" aria-label="Otvorite meni">
+        <svg class="menu-toggle__open"  aria-hidden="true" focusable="false"><use href="#i-menu"></use></svg>
+        <svg class="menu-toggle__close" aria-hidden="true" focusable="false"><use href="#i-close"></use></svg>
+      </button>
+    </div>
+
+    <nav class="nav" id="nav" data-open="false" aria-label="Glavna navigacija">
+      <!-- Svaki link nosi tacku koja na hover ulazi s lijeva i gura natpis. -->
+      <a class="nav__link" href="index.html#hero"><span class="nav__dot" aria-hidden="true"></span><span>Početna</span></a>
+      <a class="nav__link" href="index.html#o-nama"><span class="nav__dot" aria-hidden="true"></span><span>O nama</span></a>
+      <a class="nav__link" href="usluge.html"><span class="nav__dot" aria-hidden="true"></span><span>Usluge</span></a>
+      <a class="nav__link" href="index.html#radovi"><span class="nav__dot" aria-hidden="true"></span><span>Galerija</span></a>
+      <!-- [DOPUNITI: stranica bloga] Bloga jos nema, pa link stoji na #.
+           Kad se napravi, ovdje i u podnozju ide prava putanja. -->
+      <a class="nav__link is-soon" aria-disabled="true"><span class="nav__dot" aria-hidden="true"></span><span>Blog</span></a>
+      <a class="nav__link" href="index.html#kontakt"><span class="nav__dot" aria-hidden="true"></span><span>Kontakt</span></a>
+    </nav>
+
+    <div class="header__actions">
+      <!-- Broj telefona je uklonjen iz zaglavlja na zahtjev, kao i na
+           Konstri. Klik-na-poziv ostaje u CTA traci, kontaktu i podnozju.
+           Napomena: ICP kaze da je prvi kontakt poziv i da broj treba
+           iznad prevoja, pa ovo vrijedi pratiti kad sajt bude uzivo. -->
+      <!-- Dugme vodi pravo na poziv, ne na kontakt sekciju. ICP kaze da
+           prvi kontakt ide preko telefona i da broj mora iznad prevoja;
+           ovim se to vraca, a da broj ne zauzima mjesto u traci. -->
+      <a class="btn btn--bare header__cta" href="tel:0604145466" aria-label="Pozovite nas na 060 41 45 466">
+        <span class="btn__label" data-roll>Pozovi</span>
+        <span class="btn__icons" aria-hidden="true">
+          <svg class="btn__icon"><use href="#i-phone"></use></svg>
+          <svg class="btn__icon"><use href="#i-phone"></use></svg>
+        </span>
+      </a>
+    </div>
+
+  </div>
+</header>
+
+<div class="smenu" id="smenu" aria-hidden="true">
+  <div class="smenu__layer smenu__layer--1" aria-hidden="true"></div>
+  <div class="smenu__layer smenu__layer--2" aria-hidden="true"></div>
+
+  <nav class="smenu__panel" aria-label="Glavna navigacija, mobilna">
+    <ul class="smenu__list">
+      <li class="smenu__row" style="--i: 0"><a class="smenu__item" href="index.html#hero"><span class="smenu__label">Početna</span><span class="smenu__num" aria-hidden="true">01</span></a></li>
+      <li class="smenu__row" style="--i: 1"><a class="smenu__item" href="index.html#o-nama"><span class="smenu__label">O nama</span><span class="smenu__num" aria-hidden="true">02</span></a></li>
+      <li class="smenu__row" style="--i: 2"><a class="smenu__item" href="usluge.html"><span class="smenu__label">Usluge</span><span class="smenu__num" aria-hidden="true">03</span></a></li>
+      <li class="smenu__row" style="--i: 3"><a class="smenu__item" href="index.html#radovi"><span class="smenu__label">Galerija</span><span class="smenu__num" aria-hidden="true">04</span></a></li>
+      <li class="smenu__row" style="--i: 4"><a class="smenu__item is-soon" aria-disabled="true"><span class="smenu__label">Blog</span><span class="smenu__num" aria-hidden="true">05</span></a></li>
+      <li class="smenu__row" style="--i: 5"><a class="smenu__item" href="index.html#kontakt"><span class="smenu__label">Kontakt</span><span class="smenu__num" aria-hidden="true">06</span></a></li>
+    </ul>
+
+    <a class="btn btn--sand smenu__cta" href="tel:0604145466">
+      <span class="btn__label">Pozovite 060 41 45 466</span>
+      <span class="btn__icons" aria-hidden="true">
+        <svg class="btn__icon"><use href="#i-phone"></use></svg>
+      </span>
+    </a>
+
+    <div class="smenu__social">
+      <p class="smenu__social-title">Mreže</p>
+      <ul class="smenu__social-list">
+        <li style="--i: 0"><a class="smenu__social-link" href="https://www.instagram.com/celiknp/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        <li style="--i: 1"><a class="smenu__social-link" href="https://www.facebook.com/npcelikconstruction" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+
+
+<main id="main">
+
+  <section class="phero" aria-labelledby="phero-naslov">
+    <figure class="phero__image" data-appear="image">
+      <img src="assets/img/rad-poslovna-hala.jpg" alt="Enterijer lokala Čudesa u Kragujevcu, šank i metalna konstrukcija po meri prostora" width="1424" height="1774" fetchpriority="high" decoding="async">
+      <div class="phero__overlay" aria-hidden="true"></div>
+    </figure>
+
+    <div class="phero__inner">
+      <nav class="crumbs" aria-label="Putanja">
+        <ol class="crumbs__list"><li class="crumbs__item"><a href="index.html">Početna</a></li><li class="crumbs__item"><a href="usluge.html">Usluge</a></li><li class="crumbs__item" aria-current="page">Enterijer i završna obrada</li></ol>
+      </nav>
+      <p class="phero__eyebrow" data-appear="text"><span class="dot" aria-hidden="true"></span>Usluga</p>
+      <h1 class="phero__title" id="phero-naslov" data-appear="text">Enterijer i<br>završna obrada</h1>
+      <p class="phero__lead" data-appear="text">Metal nosi, a drvo, staklo i kompakt ploče daju izgled. Lokal dobija prepoznatljiv karakter, sve po meri prostora, ne iz kataloga.</p>
+    </div>
+  </section>
+
+  <section class="sblocks" aria-labelledby="uvod-naslov">
+    <div class="sblocks__inner">
+      <div class="sblocks__head" data-reveal>
+        <h2 class="sblocks__title" id="uvod-naslov">Detalj po kome se lokal pamti</h2>
+          <p class="sblocks__lead">Enterijer je jedini deo posla koji gost stvarno gleda izbliza. Šank, pregrada i polica po meri prostora rade ono što nameštaj iz kataloga ne može.</p>
+          <p class="sblocks__lead">Retko radimo samo metal. Metal nosi, a drvo, staklo i kompakt daju izgled, i kombinacija je i jača i lepša od bilo čega samostalno.</p>
+      </div>
+
+      <div class="sblocks__grid">
+        <article class="sblock" data-reveal>
+          <h3 class="sblock__title">Šankovi i enterijerske konstrukcije</h3>
+          <p class="sblock__desc">Nosive i vidljive konstrukcije za ugostiteljske lokale, izrađene prema merama prostora.</p>
+          <p class="sblock__note">Lokal „Čudesa", Kragujevac.</p>
+        </article>
+
+        <article class="sblock" data-reveal>
+          <h3 class="sblock__title">Staklene pregrade</h3>
+          <p class="sblock__desc">Podela prostora bez zidanja, sa metalnim okvirom koji ostaje vidljiv kao deo enterijera.</p>
+          <p class="sblock__note">Radi se uz enterijerske konstrukcije.</p>
+        </article>
+
+        <article class="sblock" data-reveal>
+          <h3 class="sblock__title">Maske za klima uređaje</h3>
+          <p class="sblock__desc">Instalacije nestaju sa fasade i objekat izgleda dovršeno.</p>
+          <p class="sblock__note">Ukrasne maske, objekat „Orbita života".</p>
+        </article>
+
+        <article class="sblock" data-reveal>
+          <h3 class="sblock__title">Oblaganje kompaktom</h3>
+          <p class="sblock__desc">Završna obloga na ogradama i konstrukcijama, kad fasada traži ravnu površinu bez vidljivog profila.</p>
+          <p class="sblock__note">Ograda Blazeks MV, Aerodrom.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="slist" aria-labelledby="obim-naslov">
+    <div class="slist__inner">
+      <article class="sitem" data-reveal>
+        <figure class="sitem__media">
+          <img src="assets/img/rad-poslovna-hala.jpg" alt="Enterijer lokala Čudesa u Kragujevcu, šank i metalna konstrukcija po meri prostora" width="1169" height="878" loading="lazy" decoding="async">
+        </figure>
+        <div class="sitem__body">
+          <h2 class="sitem__title" id="obim-naslov">Obim posla</h2>
+          <p class="sitem__desc">Šta ulazi u ponudu kad se dogovorimo. Tačan
+            spisak i rok stoje u pisanoj ponudi, ne dogovaraju se usput.</p>
+          <ul class="sitem__scope">
+            <li><svg aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Šankovi, stolovi i police</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Staklene pregrade</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Ukrasne maske za klima uređaje</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Oblaganje kompakt pločama</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Dekorativni metalni detalji</span></li>
+          </ul>
+          <a class="btn btn--solid" href="usluge.html">
+            <span class="btn__label" data-roll>Sve usluge</span>
+            <span class="btn__icons" aria-hidden="true">
+              <svg class="btn__icon"><use href="#i-arrow-right"></use></svg>
+              <svg class="btn__icon"><use href="#i-arrow-right"></use></svg>
+            </span>
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="pcta" aria-labelledby="pcta-naslov">
+    <div class="pcta__inner" data-reveal>
+      <h2 class="pcta__title" id="pcta-naslov">Treba vam enterijer i završna obrada?</h2>
+      <p class="pcta__lead">Recite šta, gde i za kada. Izlazimo na teren, merimo na licu mesta i dobijate raspisanu ponudu. Izlazak i procena su besplatni.</p>
+      <div class="pcta__actions">
+        <a class="btn btn--solid" href="index.html#kontakt">
+          <span class="btn__label" data-roll>Zatražite ponudu</span>
+          <span class="btn__icons" aria-hidden="true">
+            <svg class="btn__icon"><use href="#i-arrow-right"></use></svg>
+            <svg class="btn__icon"><use href="#i-arrow-right"></use></svg>
+          </span>
+        </a>
+        <a class="btn btn--bare" href="tel:0604145466">
+          <span class="btn__label" data-roll>060 41 45 466</span>
+          <span class="btn__icons" aria-hidden="true">
+            <svg class="btn__icon"><use href="#i-phone"></use></svg>
+            <svg class="btn__icon"><use href="#i-phone"></use></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer" id="footer">
+  <div class="footer__container">
+
+    <!-- Gornji blok (naslov, podnaslov i dugme Zatrazite ponudu) je
+         sklonjen 09.08.2026. na zahtjev. Isti poziv na akciju vec stoji
+         u sekciji Kontakt neposredno iznad, pa je ovdje bio dupliran. -->
+
+    <div class="footer__cols">
+
+      <nav class="footer__col" aria-label="Navigacija u podnožju">
+        <p class="footer__heading">Navigacija</p>
+        <div class="footer__nav">
+          <a class="footer__link" href="index.html#hero">Početna</a>
+          <a class="footer__link" href="index.html#o-nama">O nama</a>
+          <a class="footer__link" href="usluge.html">Usluge</a>
+          <a class="footer__link" href="index.html#radovi">Galerija</a>
+          <!-- [DOPUNITI: stranica bloga] -->
+          <a class="footer__link is-soon" aria-disabled="true">Blog</a>
+          <a class="footer__link" href="index.html#kontakt">Kontakt</a>
+        </div>
+      </nav>
+
+      <div class="footer__col">
+        <p class="footer__heading">Kontakt</p>
+        <div class="footer__nav">
+          <a class="footer__link" href="tel:0604145466">060 41 45 466</a>
+          <a class="footer__link" href="mailto:npcelik85@gmail.com">npcelik85@gmail.com</a>
+          <p class="footer__link">Pon–pet, 07–16h</p>
+          <address class="footer__link footer__link--plain">Avalska 11, Kragujevac</address>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <p class="footer__heading">Mreže</p>
+        <div class="social">
+          <a class="social__link" href="https://www.instagram.com/celiknp/"
+             target="_blank" rel="noopener noreferrer" aria-label="NP Čelik na Instagramu">
+            <svg aria-hidden="true" focusable="false"><use href="#i-instagram"></use></svg>
+          </a>
+          <a class="social__link" href="https://www.facebook.com/npcelikconstruction"
+             target="_blank" rel="noopener noreferrer" aria-label="NP Čelik na Facebooku">
+            <svg aria-hidden="true" focusable="false"><use href="#i-facebook"></use></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer__legal">
+      <p>NP ČELIK &copy; 2026. Sva prava zadržana.</p>
+      <p>Kragujevac, Šumadija i centralna Srbija</p>
+    </div>
+
+  </div>
+
+  <!-- Ogroman wordmark preko cijele sirine, kao na originalu.
+       aria-hidden jer je ukras: ime firme vec stoji u zaglavlju. -->
+  <div class="footer__wordmark" aria-hidden="true">NP ČELIK</div>
+</footer>
+<script src="js/main.js" defer></script>
+
+</body>
+</html>

@@ -41,16 +41,61 @@ Imena fajlova su ostala B-Steelova da markup ne pukne. **Ne čitati ih doslovno:
 Izvori su u [images/](images/). Alati se puštaju iz korena projekta:
 `python tools/slike.py` pa `python tools/dims.py`.
 
+## Stranice
+
+| Fajl | Šta je |
+|---|---|
+| `site/index.html` | Početna |
+| `site/usluge.html` | Lista svih šest usluga |
+| `site/usluga-metalne-konstrukcije.html` | Nosive konstrukcije |
+| `site/usluga-kapije-i-ograde.html` | Kapije i ograde |
+| `site/usluga-stepenista.html` | Stepeništa i PP stepeništa |
+| `site/usluga-letnje-baste.html` | Letnje i zatvorene bašte |
+| `site/usluga-deking-i-enterijer.html` | Enterijer i završna obrada |
+
+Modularni kontejneri nemaju pod-stranicu: postoji samo jedna fotografija.
+Stoje kao stavka u listi sa dugmetom pravo na upit.
+
+Sve unutrašnje stranice se **generišu**, ne uređuju ručno. Zajednički delovi
+(sprite, zaglavlje, mobilni meni, podnožje) se vade iz `index.html`, pa jedna
+izmena u zaglavlju ostaje tačna svuda:
+
+```
+python tools/gradi_usluge.py
+```
+
+Copy živi u [tools/usluge_sadrzaj.py](tools/usluge_sadrzaj.py), a nove CSS
+komponente u [site/css/stranice.css](site/css/stranice.css) — ništa u
+`styles.css` nije dirano.
+
+## Logo
+
+Klijentov PDF je pravi vektor: 18 crteža, nula rastera, slova u krivama.
+Varijante su izvučene u [brand_assets/](brand_assets/) kao SVG i PNG na 400dpi
+([tools/logo_svg.py](tools/logo_svg.py)). Logo je **crn** u fajlu; na tamnom
+zaglavlju ga CSS invertuje u belo. Plavi 3D logo sa Instagrama je bio samo
+profilna slika, ne brend asset.
+
+## Odgovori klijenta (26.08.2026)
+
+Osnovan 2018 (8 godina) · četvoro zaposlenih · preko 20 objekata · garancija na
+antikorozivnu zaštitu 2 godine · dokumentacija: **samo račun, bez atesta** ·
+radno vreme 07–16h.
+
+Avans i rok po tipu posla klijent nije dao i kaže da zavise od projekta, pa se
+na sajtu ne pominju. Nema nijedne vidljive `[DOPUNITI]` oznake.
+
 ## Zna se, a nije rešeno
 
-- **Rezolucija.** Svi izvori su Instagram eksporti, 1170 px široki. Hero na 1440 px ekranu radi
-  interno zumiranje 1.5x pa je vidljivo mekan. Treba tražiti originale sa telefona.
-- **`[DOPUNITI]` oznake** stoje u markupu na 5 mesta i vidljive su na sajtu dok se ne potvrde:
-  broj završenih objekata, godina osnivanja, prosečan rok po tipu posla, rok garancije, koje ateste izdaje.
-- **Tvrdnja „izlazak i procena su besplatni"** je pretpostavka iz context.md, stoji na dva mesta.
-  Potvrditi sa klijentom pre lansiranja.
-- **Godine na karticama u „Radovi"** su prenesene iz B-Steela i nisu proverene.
-- **Nav ima stavku „Blog"** koja nikuda ne vodi, nasleđena iz B-Steela.
-- **Sekcije Radovi, Pitanja, Kontakt i podnožje nisu vizuelno provereno** — headless Chrome ne
-  skroluje, a sticky rig se rasteže na visinu prozora. Strukturno su čiste (svi resursi postoje,
-  ARIA veze u FAQ-u se poklapaju, nema B-Steel tragova u tekstu), ali treba ih pogledati u browseru.
+- **Rezolucija fotografija.** Instagram eksporti, 1170 px široki, osim hero slike
+  koju je klijent poslao zasebno (1424 px). Hero rig radi interno zumiranje, pa su
+  slike na velikim ekranima vidljivo mekane. Treba tražiti originale sa telefona.
+- **Kontejneri imaju jednu jedinu fotografiju.** Zato nemaju pod-stranicu. Čim
+  stigne još par, dodaje se `usluga-kontejneri.html` u `tools/usluge_sadrzaj.py`.
+- **Tvrdnja „izlazak i procena su besplatni"** je pretpostavka iz `context.md`,
+  stoji na više mesta. Nije potvrđena.
+- **Godine na karticama u „Radovi"** prenesene su iz B-Steela i nisu proverene.
+- **Nav ima „Blog" i „Galerija"** koji nikuda ne vode, nasleđeni iz B-Steela.
+- **Sekcije Radovi, Pitanja, Kontakt i podnožje na početnoj** nisu vizuelno
+  proverene: headless Chrome ne skroluje, a sticky rig se rasteže na visinu
+  prozora. Strukturno su čiste. Stranice usluga jesu proverene.

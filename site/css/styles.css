@@ -1068,7 +1068,7 @@ a.contact-item__value:hover { color: var(--orange-500); }
 
 .header[data-scrolled="true"] .brand__name { color: var(--cream-50); }
 
-/* Badge je hromiran. Na svijetlom se svodi na crno, na crnom na bijelo. */
+/* Logo je crn u fajlu. Na tamnom zaglavlju se invertuje u bijelo. */
 .header[data-scrolled="true"] .brand__badge {
   filter: brightness(0) invert(1);
   opacity: 0.95;
@@ -1127,20 +1127,23 @@ a.contact-item__value:hover { color: var(--orange-500); }
   text-decoration: none;
 }
 
-/* Badge je hromiran i na pjescanoj podlozi se gubi. Zato je propusten
-   kroz filter koji ga svede na jednu tamnu vrijednost, da stoji uz
-   tekstualni wordmark umjesto da se muti. */
 .brand__badge {
-  width: 76px;
+  /* Pravi logo iz klijentovog PDF-a: crn vektor, odnos 3.38:1, i vec
+     sadrzi "celik" i "KRAGUJEVAC". Zato je tekstualni wordmark uklonjen
+     iz markupa, a sirina je 150 umjesto 76 da podnaslov ostane citljiv.
+     Crn je u samom fajlu, pa na svijetlom nema filtera; na tamnom
+     zaglavlju ga postojece pravilo invertuje u bijelo. */
+  width: 150px;
   height: auto;
-  /* B-Steelov badge je bio hromiran pa se filtrirao u crno. Logo NP Celika
-     je plav i citljiv sam po sebi, pa filtera nema. Na tamnom zaglavlju
-     invert ostaje, jer plava #1B44D3 na #060A14 daje 1.6:1. */
   opacity: 1;
   transition: filter 600ms var(--ease-hover);
 }
 
-@media (max-width: 809.98px) { .brand__badge { width: 56px; } }
+/* 56px je bilo za kvadratni badge koji je stajao uz tekstualni wordmark.
+   Sada je logo sirok 3.38:1 i sam nosi "celik" i "KRAGUJEVAC", pa na
+   56px podnaslov postane mrlja. 132px je najvise sto staje pored
+   hamburgera na 360px ekranu (132 + 10 gap + 44 dugme + 32 padding = 218).*/
+@media (max-width: 809.98px) { .brand__badge { width: 132px; } }
 
 /* Wordmark ide po H4 presetu Konstre: Geist 500, 32/40, tracking -0.02em.
    Original je cist tekst bez znaka, pa je i ovdje tekst nosilac. */
