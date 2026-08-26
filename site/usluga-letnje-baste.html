@@ -99,7 +99,7 @@
 
 
 
-<header class="header" id="header">
+<header class="header header--light" id="header">
   <div class="header__inner">
 
     <div class="header__brand-wrap">
@@ -120,13 +120,13 @@
     <nav class="nav" id="nav" data-open="false" aria-label="Glavna navigacija">
       <!-- Svaki link nosi tacku koja na hover ulazi s lijeva i gura natpis. -->
       <a class="nav__link" href="index.html#hero"><span class="nav__dot" aria-hidden="true"></span><span>Početna</span></a>
-      <a class="nav__link" href="index.html#o-nama"><span class="nav__dot" aria-hidden="true"></span><span>O nama</span></a>
+      <a class="nav__link" href="o-nama.html"><span class="nav__dot" aria-hidden="true"></span><span>O nama</span></a>
       <a class="nav__link" href="usluge.html"><span class="nav__dot" aria-hidden="true"></span><span>Usluge</span></a>
       <a class="nav__link" href="index.html#radovi"><span class="nav__dot" aria-hidden="true"></span><span>Galerija</span></a>
       <!-- [DOPUNITI: stranica bloga] Bloga jos nema, pa link stoji na #.
            Kad se napravi, ovdje i u podnozju ide prava putanja. -->
       <a class="nav__link is-soon" aria-disabled="true"><span class="nav__dot" aria-hidden="true"></span><span>Blog</span></a>
-      <a class="nav__link" href="index.html#kontakt"><span class="nav__dot" aria-hidden="true"></span><span>Kontakt</span></a>
+      <a class="nav__link" href="kontakt.html"><span class="nav__dot" aria-hidden="true"></span><span>Kontakt</span></a>
     </nav>
 
     <div class="header__actions">
@@ -156,11 +156,11 @@
   <nav class="smenu__panel" aria-label="Glavna navigacija, mobilna">
     <ul class="smenu__list">
       <li class="smenu__row" style="--i: 0"><a class="smenu__item" href="index.html#hero"><span class="smenu__label">Početna</span><span class="smenu__num" aria-hidden="true">01</span></a></li>
-      <li class="smenu__row" style="--i: 1"><a class="smenu__item" href="index.html#o-nama"><span class="smenu__label">O nama</span><span class="smenu__num" aria-hidden="true">02</span></a></li>
+      <li class="smenu__row" style="--i: 1"><a class="smenu__item" href="o-nama.html"><span class="smenu__label">O nama</span><span class="smenu__num" aria-hidden="true">02</span></a></li>
       <li class="smenu__row" style="--i: 2"><a class="smenu__item" href="usluge.html"><span class="smenu__label">Usluge</span><span class="smenu__num" aria-hidden="true">03</span></a></li>
       <li class="smenu__row" style="--i: 3"><a class="smenu__item" href="index.html#radovi"><span class="smenu__label">Galerija</span><span class="smenu__num" aria-hidden="true">04</span></a></li>
       <li class="smenu__row" style="--i: 4"><a class="smenu__item is-soon" aria-disabled="true"><span class="smenu__label">Blog</span><span class="smenu__num" aria-hidden="true">05</span></a></li>
-      <li class="smenu__row" style="--i: 5"><a class="smenu__item" href="index.html#kontakt"><span class="smenu__label">Kontakt</span><span class="smenu__num" aria-hidden="true">06</span></a></li>
+      <li class="smenu__row" style="--i: 5"><a class="smenu__item" href="kontakt.html"><span class="smenu__label">Kontakt</span><span class="smenu__num" aria-hidden="true">06</span></a></li>
     </ul>
 
     <a class="btn btn--sand smenu__cta" href="tel:0604145466">
@@ -186,106 +186,77 @@
 <main id="main">
 
   <section class="phero" aria-labelledby="phero-naslov">
-    <figure class="phero__image" data-appear="image">
+    <figure class="phero__image">
       <img src="assets/img/rad-05-montaza-na-terenu.jpg" alt="Zatvorena bašta sa drvenom tavanicom na metalnoj konstrukciji, Mileva Koncept, Grivac" width="1424" height="1774" fetchpriority="high" decoding="async">
-      <div class="phero__overlay" aria-hidden="true"></div>
     </figure>
+    <div class="phero__overlay" aria-hidden="true"></div>
 
     <div class="phero__inner">
       <nav class="crumbs" aria-label="Putanja">
         <ol class="crumbs__list"><li class="crumbs__item"><a href="index.html">Početna</a></li><li class="crumbs__item"><a href="usluge.html">Usluge</a></li><li class="crumbs__item" aria-current="page">Letnje i zatvorene bašte</li></ol>
       </nav>
-      <p class="phero__eyebrow" data-appear="text"><span class="dot" aria-hidden="true"></span>Usluga</p>
-      <h1 class="phero__title" id="phero-naslov" data-appear="text">Letnje i zatvorene<br>bašte</h1>
-      <p class="phero__lead" data-appear="text">Više stolova i gost koji sedi po kiši i zimi. Bašta se vraća kroz jednu sezonu, ne kroz godine.</p>
-    </div>
-  </section>
-
-  <section class="sblocks" aria-labelledby="uvod-naslov">
-    <div class="sblocks__inner">
-      <div class="sblocks__head" data-reveal>
-        <h2 class="sblocks__title" id="uvod-naslov">Prostor koji radi dvanaest meseci</h2>
-          <p class="sblocks__lead">Ugostitelju bašta nije ukras nego stolovi. Otvorena radi četiri meseca, zastakljena i pokrivena radi celu godinu, a razlika se vidi na prvom kišnom vikendu.</p>
-          <p class="sblocks__lead">Znamo šta znači „mora da bude gotovo pre sezone" i planiramo posao oko tog datuma. Zato se bašte ugovaraju zimi. Ako je kasno, reći ćemo iskreno šta stižemo, a šta ne.</p>
-      </div>
-
-      <div class="sblocks__grid">
-        <article class="sblock" data-reveal>
-          <h3 class="sblock__title">Zatvorene bašte</h3>
-          <p class="sblock__desc">Metalna konstrukcija, zastakljenje i drvena tavanica, za rad tokom cele godine.</p>
-          <p class="sblock__note">Zatvorena bašta, restoran Mileva Koncept, Grivac.</p>
-        </article>
-
-        <article class="sblock" data-reveal>
-          <h3 class="sblock__title">Letnje bašte i pergole</h3>
-          <p class="sblock__desc">Konstrukcija, krov i drvena obloga za terase i ulične bašte.</p>
-          <p class="sblock__note">Kafana Paligorić i „Stara Srbija", Kragujevac.</p>
-        </article>
-
-        <article class="sblock" data-reveal>
-          <h3 class="sblock__title">Deking</h3>
-          <p class="sblock__desc">Drvena terasa na metalnoj podkonstrukciji. Ostaje ravna i posle zima, ne uleže i ne krivi se kao na drvenoj podlozi.</p>
-          <p class="sblock__note">Deking uz bazen, Kosmaj.</p>
-        </article>
-
-        <article class="sblock" data-reveal>
-          <h3 class="sblock__title">Rad bez zatvaranja lokala</h3>
-          <p class="sblock__desc">Većina posla se odradi u radionici. Na objekat izlazimo sa gotovim elementima, radimo van radnog vremena kad je moguće i za sobom čistimo.</p>
-          <p class="sblock__note">Dogovara se pre početka.</p>
-        </article>
+      <div class="phero__heading">
+        <h1 class="phero__title" id="phero-naslov">Letnje i zatvorene bašte</h1>
+        <p class="phero__lead">Više stolova i gost koji sedi po kiši i zimi. Bašta se vraća kroz jednu sezonu, ne kroz godine.</p>
       </div>
     </div>
   </section>
 
-  <section class="slist" aria-labelledby="obim-naslov">
-    <div class="slist__inner">
+  <section class="sindex" aria-labelledby="uvod-naslov">
+    <div class="sindex__inner">
+
       <article class="sitem" data-reveal>
         <figure class="sitem__media">
           <img src="assets/img/rad-05-montaza-na-terenu.jpg" alt="Zatvorena bašta sa drvenom tavanicom na metalnoj konstrukciji, Mileva Koncept, Grivac" width="1169" height="878" loading="lazy" decoding="async">
         </figure>
         <div class="sitem__body">
-          <h2 class="sitem__title" id="obim-naslov">Obim posla</h2>
-          <p class="sitem__desc">Šta ulazi u ponudu kad se dogovorimo. Tačan
-            spisak i rok stoje u pisanoj ponudi, ne dogovaraju se usput.</p>
+          <h2 class="sitem__title" id="uvod-naslov">Prostor koji radi dvanaest meseci</h2>
+          <p class="sitem__desc">Ugostitelju bašta nije ukras nego stolovi. Otvorena radi četiri meseca, zastakljena i pokrivena radi celu godinu, a razlika se vidi na prvom kišnom vikendu.</p>
+          <p class="sitem__desc">Znamo šta znači „mora da bude gotovo pre sezone" i planiramo posao oko tog datuma. Zato se bašte ugovaraju zimi. Ako je kasno, reći ćemo iskreno šta stižemo, a šta ne.</p>
+          <p class="sitem__scope-title">Obim posla:</p>
           <ul class="sitem__scope">
-            <li><svg aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Letnje i zatvorene bašte</span></li>
-            <li><svg aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Pergole, krov i zastakljenje</span></li>
-            <li><svg aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Drvena obloga i tavanica</span></li>
-            <li><svg aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Deking na metalnoj podkonstrukciji</span></li>
-            <li><svg aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Gotovo pre sezone</span></li>
+              <li><svg aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Letnje i zatvorene bašte</span></li>
+              <li><svg aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Pergole, krov i zastakljenje</span></li>
+              <li><svg aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Drvena obloga i tavanica</span></li>
+              <li><svg aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Deking na metalnoj podkonstrukciji</span></li>
+              <li><svg aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Gotovo pre sezone</span></li>
           </ul>
-          <a class="btn btn--solid" href="usluge.html">
-            <span class="btn__label" data-roll>Sve usluge</span>
-            <span class="btn__icons" aria-hidden="true">
-              <svg class="btn__icon"><use href="#i-arrow-right"></use></svg>
-              <svg class="btn__icon"><use href="#i-arrow-right"></use></svg>
-            </span>
-          </a>
+          <a class="btn btn--solid" href="kontakt.html"><span class="btn__label" data-roll>Zatražite ponudu</span><span class="btn__icons" aria-hidden="true"><svg class="btn__icon"><use href="#i-arrow-right"></use></svg><svg class="btn__icon"><use href="#i-arrow-right"></use></svg></span></a>
         </div>
       </article>
-    </div>
-  </section>
 
-  <section class="pcta" aria-labelledby="pcta-naslov">
-    <div class="pcta__inner" data-reveal>
-      <h2 class="pcta__title" id="pcta-naslov">Treba vam letnje i zatvorene bašte?</h2>
-      <p class="pcta__lead">Recite šta, gde i za kada. Izlazimo na teren, merimo na licu mesta i dobijate raspisanu ponudu. Izlazak i procena su besplatni.</p>
-      <div class="pcta__actions">
-        <a class="btn btn--solid" href="index.html#kontakt">
-          <span class="btn__label" data-roll>Zatražite ponudu</span>
-          <span class="btn__icons" aria-hidden="true">
-            <svg class="btn__icon"><use href="#i-arrow-right"></use></svg>
-            <svg class="btn__icon"><use href="#i-arrow-right"></use></svg>
-          </span>
-        </a>
-        <a class="btn btn--bare" href="tel:0604145466">
-          <span class="btn__label" data-roll>060 41 45 466</span>
-          <span class="btn__icons" aria-hidden="true">
-            <svg class="btn__icon"><use href="#i-phone"></use></svg>
-            <svg class="btn__icon"><use href="#i-phone"></use></svg>
-          </span>
-        </a>
-      </div>
+      <article class="sitem" data-reveal>
+        <div class="sitem__body">
+          <h2 class="sitem__title">Zatvorene bašte</h2>
+          <p class="sitem__desc">Metalna konstrukcija, zastakljenje i drvena tavanica, za rad tokom cele godine.</p>
+          <p class="sitem__scope-title">Zatvorena bašta, restoran Mileva Koncept, Grivac.</p>
+        </div>
+      </article>
+
+      <article class="sitem" data-reveal>
+        <div class="sitem__body">
+          <h2 class="sitem__title">Letnje bašte i pergole</h2>
+          <p class="sitem__desc">Konstrukcija, krov i drvena obloga za terase i ulične bašte.</p>
+          <p class="sitem__scope-title">Kafana Paligorić i „Stara Srbija", Kragujevac.</p>
+        </div>
+      </article>
+
+      <article class="sitem" data-reveal>
+        <div class="sitem__body">
+          <h2 class="sitem__title">Deking</h2>
+          <p class="sitem__desc">Drvena terasa na metalnoj podkonstrukciji. Ostaje ravna i posle zima, ne uleže i ne krivi se kao na drvenoj podlozi.</p>
+          <p class="sitem__scope-title">Deking uz bazen, Kosmaj.</p>
+        </div>
+      </article>
+
+      <article class="sitem" data-reveal>
+        <div class="sitem__body">
+          <h2 class="sitem__title">Rad bez zatvaranja lokala</h2>
+          <p class="sitem__desc">Većina posla se odradi u radionici. Na objekat izlazimo sa gotovim elementima, radimo van radnog vremena kad je moguće i za sobom čistimo.</p>
+          <p class="sitem__scope-title">Dogovara se pre početka.</p>
+        </div>
+      </article>
+
     </div>
   </section>
 
@@ -304,12 +275,12 @@
         <p class="footer__heading">Navigacija</p>
         <div class="footer__nav">
           <a class="footer__link" href="index.html#hero">Početna</a>
-          <a class="footer__link" href="index.html#o-nama">O nama</a>
+          <a class="footer__link" href="o-nama.html">O nama</a>
           <a class="footer__link" href="usluge.html">Usluge</a>
           <a class="footer__link" href="index.html#radovi">Galerija</a>
           <!-- [DOPUNITI: stranica bloga] -->
           <a class="footer__link is-soon" aria-disabled="true">Blog</a>
-          <a class="footer__link" href="index.html#kontakt">Kontakt</a>
+          <a class="footer__link" href="kontakt.html">Kontakt</a>
         </div>
       </nav>
 

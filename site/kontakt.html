@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Stepeništa i protivpožarna stepeništa | NP Čelik Kragujevac</title>
-<meta name="description" content="Bezbedan i miran hod, stepenište koje ne peva i ne klizi. Protivpožarno stepenište je uslov za pregled i upotrebnu dozvolu.">
+<title>Kontakt | NP Čelik Kragujevac</title>
+<meta name="description" content="Pozovite 060 41 45 466 ili pošaljite upit. Bravarska radionica na Avalskoj 11 u Kragujevcu. Izlazak na teren i procena su besplatni.">
 <meta name="geo.placename" content="Kragujevac">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Stepeništa i protivpožarna stepeništa | NP Čelik Kragujevac">
-<meta property="og:description" content="Bezbedan i miran hod, stepenište koje ne peva i ne klizi. Protivpožarno stepenište je uslov za pregled i upotrebnu dozvolu.">
-<meta property="og:image" content="assets/img/hero-radnici-zalazak.jpg">
+<meta property="og:title" content="Kontakt | NP Čelik Kragujevac">
+<meta property="og:description" content="Pozovite 060 41 45 466 ili pošaljite upit. Bravarska radionica na Avalskoj 11 u Kragujevcu. Izlazak na teren i procena su besplatni.">
+<meta property="og:image" content="assets/img/rad-01-celicna-hala.jpg">
 <link rel="icon" href="assets/img/favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -99,7 +99,7 @@
 
 
 
-<header class="header header--light" id="header">
+<header class="header" id="header">
   <div class="header__inner">
 
     <div class="header__brand-wrap">
@@ -185,78 +185,203 @@
 
 <main id="main">
 
-  <section class="phero" aria-labelledby="phero-naslov">
-    <figure class="phero__image">
-      <img src="assets/img/hero-radnici-zalazak.jpg" alt="Spoljna protivpožarna metalna stepeništa na fasadi objekta Ženeva Lux" width="1424" height="1774" fetchpriority="high" decoding="async">
-    </figure>
-    <div class="phero__overlay" aria-hidden="true"></div>
+  <section class="kontakt" aria-labelledby="kontakt-naslov">
+    <div class="kontakt__inner">
 
-    <div class="phero__inner">
-      <nav class="crumbs" aria-label="Putanja">
-        <ol class="crumbs__list"><li class="crumbs__item"><a href="index.html">Početna</a></li><li class="crumbs__item"><a href="usluge.html">Usluge</a></li><li class="crumbs__item" aria-current="page">Stepeništa i protivpožarna stepeništa</li></ol>
-      </nav>
-      <div class="phero__heading">
-        <h1 class="phero__title" id="phero-naslov">Stepeništa i protivpožarna stepeništa</h1>
-        <p class="phero__lead">Bezbedan i miran hod, stepenište koje ne peva i ne klizi. Protivpožarno stepenište je uslov za pregled i upotrebnu dozvolu.</p>
+      <div class="kontakt__intro">
+        <p class="slabel"><span class="dot" aria-hidden="true"></span>Kontakt</p>
+        <h1 class="kontakt__title" id="kontakt-naslov">Recite šta, gde i za kada. Ostalo je na nama.</h1>
+        <p class="kontakt__lead">Čitamo svaki upit lično. Opišite posao, izlazimo na teren
+          i merimo na licu mesta, pa dobijate raspisanu ponudu. Izlazak i procena su besplatni.</p>
+
+        <div class="kontakt__details">
+          <div class="kdetail">
+            <span class="kdetail__label"><svg aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg>Telefon</span>
+            <a class="kdetail__value" href="tel:0604145466">060 41 45 466</a>
+          </div>
+          <div class="kdetail">
+            <span class="kdetail__label"><svg aria-hidden="true" focusable="false"><use href="#i-mail"></use></svg>Mejl</span>
+            <a class="kdetail__value" href="mailto:npcelik85@gmail.com">npcelik85@gmail.com</a>
+          </div>
+          <div class="kdetail">
+            <span class="kdetail__label"><svg aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg>Radionica</span>
+            <a class="kdetail__value" href="https://www.google.com/maps/search/?api=1&amp;query=Avalska%2011%2C%20Kragujevac" target="_blank" rel="noopener noreferrer">Avalska 11, Kragujevac</a>
+          </div>
+          <div class="kdetail">
+            <span class="kdetail__label"><svg aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg>Radno vreme</span>
+            <span class="kdetail__value">Pon–pet, 07–16h</span>
+          </div>
+        </div>
       </div>
+
+      <div>
+        <form class="wizard" id="wizard" novalidate>
+          <div class="wizard__bar" aria-hidden="true">
+          <span class="wizard__tick"></span>
+          <span class="wizard__tick"></span>
+          <span class="wizard__tick"></span>
+          <span class="wizard__tick"></span>
+          <span class="wizard__tick"></span>
+          </div>
+          <p class="wizard__count" role="status">Korak 1 od 5</p>
+
+        <fieldset class="wstep is-active">
+          <legend class="wstep__q">Šta vam treba?</legend>
+          <div class="wopts" data-name="posao">
+            <button class="wopt" type="button" data-value="Kapija ili ograda" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-warehouse"></use></svg>
+              <span>Kapija ili ograda</span>
+            </button>
+            <button class="wopt" type="button" data-value="Letnja ili zatvorena bašta" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-flame"></use></svg>
+              <span>Letnja ili zatvorena bašta</span>
+            </button>
+            <button class="wopt" type="button" data-value="Stepenište ili PP stepenište" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-hardhat"></use></svg>
+              <span>Stepenište ili PP stepenište</span>
+            </button>
+            <button class="wopt" type="button" data-value="Konstrukcija, hala, nadstrešnica" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-factory"></use></svg>
+              <span>Konstrukcija, hala, nadstrešnica</span>
+            </button>
+            <button class="wopt" type="button" data-value="Modularni kontejner" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-warehouse"></use></svg>
+              <span>Modularni kontejner</span>
+            </button>
+            <button class="wopt" type="button" data-value="Nešto drugo" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-cog"></use></svg>
+              <span>Nešto drugo</span>
+            </button>
+          </div>
+        </fieldset>
+        <fieldset class="wstep">
+          <legend class="wstep__q">Kakav je objekat?</legend>
+          <div class="wopts" data-name="objekat">
+            <button class="wopt" type="button" data-value="Ugostiteljski lokal" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-flame"></use></svg>
+              <span>Ugostiteljski lokal</span>
+            </button>
+            <button class="wopt" type="button" data-value="Poslovni objekat ili firma" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-factory"></use></svg>
+              <span>Poslovni objekat ili firma</span>
+            </button>
+            <button class="wopt" type="button" data-value="Kuća ili dvorište" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-hardhat"></use></svg>
+              <span>Kuća ili dvorište</span>
+            </button>
+            <button class="wopt" type="button" data-value="Gradilište u toku" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-cog"></use></svg>
+              <span>Gradilište u toku</span>
+            </button>
+          </div>
+        </fieldset>
+        <fieldset class="wstep">
+          <legend class="wstep__q">Gde je posao?</legend>
+          <div class="wopts" data-name="gde">
+            <button class="wopt" type="button" data-value="Kragujevac" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg>
+              <span>Kragujevac</span>
+            </button>
+            <button class="wopt" type="button" data-value="Šumadija, van Kragujevca" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg>
+              <span>Šumadija, van Kragujevca</span>
+            </button>
+            <button class="wopt" type="button" data-value="Centralna Srbija" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg>
+              <span>Centralna Srbija</span>
+            </button>
+            <button class="wopt" type="button" data-value="Drugde" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg>
+              <span>Drugde</span>
+            </button>
+          </div>
+        </fieldset>
+        <fieldset class="wstep">
+          <legend class="wstep__q">Za kada vam treba?</legend>
+          <div class="wopts" data-name="kada">
+            <button class="wopt" type="button" data-value="Hitno" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg>
+              <span>Hitno</span>
+            </button>
+            <button class="wopt" type="button" data-value="U toku ovog meseca" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg>
+              <span>U toku ovog meseca</span>
+            </button>
+            <button class="wopt" type="button" data-value="Pre sezone" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-calendar-check"></use></svg>
+              <span>Pre sezone</span>
+            </button>
+            <button class="wopt" type="button" data-value="Još planiram" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-calendar-check"></use></svg>
+              <span>Još planiram</span>
+            </button>
+          </div>
+        </fieldset>
+
+          <fieldset class="wstep">
+            <legend class="wstep__q">Vaši podaci</legend>
+            <div class="wfields">
+              <div class="wfield">
+                <label for="w-ime">Ime i prezime</label>
+                <input id="w-ime" name="ime" type="text" autocomplete="name" required>
+              </div>
+              <div class="wfield">
+                <label for="w-tel">Telefon</label>
+                <input id="w-tel" name="telefon" type="tel" autocomplete="tel" required>
+              </div>
+              <div class="wfield wfield--full">
+                <label for="w-mejl">Mejl, ako želite ponudu pismeno</label>
+                <input id="w-mejl" name="mejl" type="email" autocomplete="email">
+              </div>
+              <div class="wfield wfield--full">
+                <label for="w-opis">Dimenzije, rok, sve što znate o poslu</label>
+                <textarea id="w-opis" name="opis" rows="4"></textarea>
+              </div>
+            </div>
+            <p class="wizard__note">Javljamo se isti ili sledeći radni dan. Ako vam se žuri, pozovite 060 41 45 466.</p>
+          </fieldset>
+
+          <p class="wizard__err" role="alert" hidden></p>
+
+          <div class="wnav">
+            <button class="wnav__back" type="button" hidden>Nazad</button>
+            <button class="btn btn--solid wnav__next" type="button"><span class="btn__label">Dalje</span><span class="btn__icons" aria-hidden="true"><svg class="btn__icon"><use href="#i-arrow-right"></use></svg><svg class="btn__icon"><use href="#i-arrow-right"></use></svg></span></button>
+            <button class="btn btn--solid wnav__submit" type="submit" hidden><span class="btn__label">Pošaljite upit</span><span class="btn__icons" aria-hidden="true"><svg class="btn__icon"><use href="#i-arrow-right"></use></svg><svg class="btn__icon"><use href="#i-arrow-right"></use></svg></span></button>
+          </div>
+        </form>
+
+        <div class="wizard__done" role="status">
+          <h3>Upit je stigao</h3>
+          <p>Javljamo se isti ili sledeći radni dan. Ako vam se žuri, pozovite 060 41 45 466.</p>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <section class="sindex" aria-labelledby="uvod-naslov">
-    <div class="sindex__inner">
-
-      <article class="sitem" data-reveal>
-        <figure class="sitem__media">
-          <img src="assets/img/hero-radnici-zalazak.jpg" alt="Spoljna protivpožarna metalna stepeništa na fasadi objekta Ženeva Lux" width="1169" height="878" loading="lazy" decoding="async">
-        </figure>
-        <div class="sitem__body">
-          <h2 class="sitem__title" id="uvod-naslov">Posao sa projektom i sa odgovornošću</h2>
-          <p class="sitem__desc">Stepenište je jedini deo objekta po kome svi hodaju svaki dan. Ako pod nogom radi ili gazište klizi, to se ne popravlja farbanjem.</p>
-          <p class="sitem__desc">Protivpožarna stepeništa su zaseban posao: rade se po projektu, prolaze pregled i bez njih objekat ne dobija upotrebnu dozvolu. To nas odvaja od radionica koje rade samo tipske ograde.</p>
-          <p class="sitem__scope-title">Obim posla:</p>
-          <ul class="sitem__scope">
-              <li><svg aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Unutrašnja i spoljna stepeništa</span></li>
-              <li><svg aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Protivpožarna (evakuaciona) stepeništa</span></li>
-              <li><svg aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Gazišta i gelenderi</span></li>
-              <li><svg aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Izrada po projektu</span></li>
-              <li><svg aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Montaža sopstvenom ekipom</span></li>
-          </ul>
-          <a class="btn btn--solid" href="kontakt.html"><span class="btn__label" data-roll>Zatražite ponudu</span><span class="btn__icons" aria-hidden="true"><svg class="btn__icon"><use href="#i-arrow-right"></use></svg><svg class="btn__icon"><use href="#i-arrow-right"></use></svg></span></a>
-        </div>
-      </article>
-
-      <article class="sitem" data-reveal>
-        <div class="sitem__body">
-          <h2 class="sitem__title">Protivpožarna stepeništa</h2>
-          <p class="sitem__desc">Spoljna evakuaciona stepeništa sa podestima i gelenderima, po projektu i pod pregledom.</p>
-          <p class="sitem__scope-title">Metalna PP stepeništa, objekat Ženeva Lux.</p>
-        </div>
-      </article>
-
-      <article class="sitem" data-reveal>
-        <div class="sitem__body">
-          <h2 class="sitem__title">Unutrašnja stepeništa</h2>
-          <p class="sitem__desc">Nosač, gazišta i gelender uklopljeni u enterijer, sa obradom koja ne odaje da je konstrukcija metalna.</p>
-          <p class="sitem__scope-title">Stepenište za BLAŽEKS nameštaj, Sušica.</p>
-        </div>
-      </article>
-
-      <article class="sitem" data-reveal>
-        <div class="sitem__body">
-          <h2 class="sitem__title">Spoljna stepeništa</h2>
-          <p class="sitem__desc">Prilazi i pomoćni ulazi na stambenim i poslovnim objektima, sa zaštitom računatom na spoljne uslove.</p>
-          <p class="sitem__scope-title">Više objekata u Kragujevcu.</p>
-        </div>
-      </article>
-
-      <article class="sitem" data-reveal>
-        <div class="sitem__body">
-          <h2 class="sitem__title">Gazišta i gelenderi</h2>
-          <p class="sitem__desc">Dorada i zamena na postojećim stepeništima, kad je nosač dobar a hod nije.</p>
-          <p class="sitem__scope-title">Radi se i kao samostalan posao.</p>
-        </div>
-      </article>
-
+  <section class="next" aria-labelledby="sledi-naslov">
+    <div class="next__inner">
+      <div>
+        <p class="slabel slabel--dark"><span class="dot" aria-hidden="true"></span>Šta sledi</p>
+        <h2 class="next__title" id="sledi-naslov">Znate šta se dešava posle upita</h2>
+      </div>
+      <div class="next__grid">
+        <article class="nstep" data-reveal>
+          <span class="nstep__num">01</span>
+          <h3 class="nstep__title">Čitamo upit</h3>
+          <p>Upit stiže direktno nama, ne u zajednički sandučić. Javljamo se isti ili sledeći radni dan.</p>
+        </article>
+        <article class="nstep" data-reveal>
+          <span class="nstep__num">02</span>
+          <h3 class="nstep__title">Izlazak i mera</h3>
+          <p>Dolazimo na lokaciju, merimo na licu mesta i predlažemo rešenje. Izlazak i procena su besplatni.</p>
+        </article>
+        <article class="nstep" data-reveal>
+          <span class="nstep__num">03</span>
+          <h3 class="nstep__title">Raspisana ponuda</h3>
+          <p>Dobijate ponudu stavku po stavku: materijal, zaštita, rok i cena. Rok stoji u ponudi, ne dogovara se usput.</p>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -322,6 +447,7 @@
   <div class="footer__wordmark" aria-hidden="true">NP ČELIK</div>
 </footer>
 <script src="js/main.js" defer></script>
+<script src="js/wizard.js" defer></script>
 
 </body>
 </html>

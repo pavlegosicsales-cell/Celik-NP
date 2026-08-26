@@ -1,177 +1,163 @@
 /* ==========================================================================
-   NP ČELIK / KOMPONENTE UNUTRASNJIH STRANICA
+   NP ČELIK / UNUTRASNJE STRANICE
    --------------------------------------------------------------------------
-   Sve sto pocetna nema: kompaktan hero sa mrvicama, lista usluga, podblokovi
-   obima posla, koraci procesa i zatvarajuci CTA.
+   Prenos Konstrinih /service, /contact i /about stranica. Sve mjere su citane
+   iz izvora, ne procijenjene sa snimka: struktura iz data-framer-name, brojevi
+   iz <style data-framer-css-ssr-minified>. Puni teardown sa dokazima:
+   research/konstra-stranice-teardown.md
 
-   Nista ovdje ne gazi styles.css. Koriste se iskljucivo tokeni iz tokens.css,
-   pa recolor i dalje ide kroz jedan fajl. Imena tokena su zadrzana iz B-Steel
-   verzije i ne citaju se doslovno: --sand-300 je svijetla plava, --cream-100
-   je hladno bijela. Vidi OVERRIDE blok na vrhu tokens.css.
+   Prva verzija ovog fajla je bila izmisljena: naizmjenicno slika lijevo-desno,
+   svijetli preliv u herou, kvacice u listi obima, CTA na kraju. Nista od toga
+   nije na Konstri. Zamijenjeno u cjelini.
+
+   Koriste se iskljucivo tokeni iz tokens.css. Imena tokena su zadrzana iz
+   B-Steel verzije i ne citaju se doslovno: --sand-300 je svijetla plava,
+   --cream-100 hladno bijela. Vidi OVERRIDE blok na vrhu tokens.css.
    ========================================================================== */
 
-/* --------------------------------------------------------------------------
+/* ==========================================================================
    1. HERO UNUTRASNJE STRANICE
    --------------------------------------------------------------------------
-   Pocetna ima hero na punu visinu ekrana. Unutrasnje stranice ga ne smiju
-   imati: korisnik je vec unutra i trazi sadrzaj, pa hero sluzi samo da kaze
-   gdje je. Zato fiksna visina umjesto 100svh.
+   Konstra: height 100vh, padding 216px 72px 64px, Hero Image absolute inset 0,
+   Overlay #1a1711b3 preko cijele slike.
 
-   Fotografija koristi isti rig kao pocetna (height 150%, sidrena na vrh),
-   pa se ponasa isto pri skrolu i trazi uspravnu sliku.
-   -------------------------------------------------------------------------- */
+   Overlay je TAMAN, ne svijetli preliv kao na pocetnoj. Zato je tekst bijel.
+   To je i razlog zasto ovaj hero podnosi bilo koju fotografiju: nema borbe
+   izmedju tamnog teksta i svijetlih dijelova kadra. Prva verzija ove stranice
+   je koristila svijetli preliv i tamni tekst, pa je lede nestajao preko
+   fasade i drvene tavanice.
+
+   #1a1711b3 je nosiva tamna na 70%. Kod nas ista racunica sa nasom tamnom.
+   ========================================================================== */
 .phero {
   position: relative;
   display: flex;
-  align-items: flex-end;
-  min-height: 520px;
-  padding-block: var(--space-12) var(--space-9);
-  padding-inline: var(--container-pad);
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100vh;
+  min-height: 560px;
+  padding: 216px var(--container-pad) 64px;
   overflow: hidden;
-  background-color: var(--color-bg);
 }
 
-.phero__image {
-  position: absolute;
-  inset: 0;
-  margin: 0;
-  overflow: hidden;
-}
+.phero__image { position: absolute; inset: 0; margin: 0; overflow: hidden; }
 
 .phero__image img {
   display: block;
   width: 100%;
-  height: 150%;
+  height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center center;
 }
 
-/* Isti preliv kao na pocetnoj, samo krace: hero je nizi pa se providnost
-   mora postici brze, inace fotografija nema gdje da se vidi. */
 .phero__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    var(--sand-300)              0%,
-    rgba(168, 190, 255, 0.95)   46%,
-    rgba(152, 176, 252, 0.82)   66%,
-    rgba(126, 154, 248, 0.44)   84%,
-    rgba(110, 140, 245, 0)     100%
-  );
+  background-color: rgba(10, 15, 31, 0.70);
 }
 
 .phero__inner {
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
   width: 100%;
   max-width: var(--container-content);
   margin-inline: auto;
 }
 
-.phero__eyebrow {
+/* Konstra: Heading je flex column, gap 20px, max-width 556px. */
+.phero__heading {
   display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  margin: 0 0 var(--space-4);
-  font-size: var(--text-sm);
-  letter-spacing: var(--tracking-widest);
-  text-transform: uppercase;
-  color: var(--brown-800);
-}
-
-.phero__eyebrow .dot {
-  width: 8px;
-  height: 8px;
-  flex: none;
-  background-color: var(--coral-400);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  max-width: 556px;
 }
 
 .phero__title {
   margin: 0;
-  max-width: 16ch;
   font-family: var(--font-display);
   font-size: var(--text-5xl);
   line-height: var(--leading-h1);
   letter-spacing: var(--tracking-normal);
   font-weight: var(--weight-medium);
-  color: var(--ink-900);
+  color: var(--cream-50);
 }
 
 .phero__lead {
-  margin: var(--space-5) 0 0;
-  max-width: 560px;
+  margin: 0;
   font-size: var(--text-lg);
   line-height: var(--leading-lead);
-  font-weight: var(--weight-medium);
-  color: var(--ink-900);
+  color: var(--stone-500);
 }
 
-/* --------------------------------------------------------------------------
-   2. MRVICE
-   -------------------------------------------------------------------------- */
-.crumbs { margin-bottom: var(--space-5); }
-
+/* Mrvice. Konstra ih drzi IZNAD naslova, flex row, width min-content. */
 .crumbs__list {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-2);
+  gap: 8px;
   margin: 0;
   padding: 0;
   list-style: none;
   font-size: var(--text-sm);
-  color: var(--brown-800);
+  color: var(--stone-500);
 }
 
 .crumbs__item + .crumbs__item::before {
   content: "/";
-  margin-right: var(--space-2);
+  margin-right: 8px;
   color: var(--stone-600);
 }
 
 .crumbs__item a {
-  color: var(--brown-800);
+  color: var(--stone-500);
   text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color var(--duration-hover) var(--ease-hover);
+  transition: color var(--duration-hover) var(--ease-hover);
 }
 
-.crumbs__item a:hover { border-bottom-color: var(--ink-900); }
-.crumbs__item[aria-current="page"] { color: var(--ink-900); font-weight: var(--weight-medium); }
+.crumbs__item a:hover { color: var(--cream-50); }
+.crumbs__item[aria-current="page"] { color: var(--cream-50); }
 
-/* --------------------------------------------------------------------------
-   3. LISTA USLUGA
+/* ==========================================================================
+   2. SPISAK USLUGA  (Konstra: Service Index)
    --------------------------------------------------------------------------
-   Naizmjenicno slika lijevo pa desno. Konstra na svojoj /service stranici
-   drzi sve slike lijevo; naizmjenicno je uzeto jer nasa lista ima sest
-   stavki, pa jednostrani ritam postane monoton na duzini.
-   -------------------------------------------------------------------------- */
-.slist {
-  padding-block: var(--section-padding-y);
-  padding-inline: var(--container-pad);
-  background-color: var(--color-bg);
-}
-
-.slist__inner {
-  max-width: var(--container-content);
-  margin-inline: auto;
+   Sekcija: bg #FFF7E5, padding 112px 72px.
+   Stavka:  flex row, gap 48px, width 1296px, padding 16px 32px 16px 16px.
+   Slika je UVIJEK lijevo. Nema naizmjenicnog rasporeda.
+   ========================================================================== */
+.sindex {
   display: flex;
   flex-direction: column;
-  gap: var(--space-11);
+  align-items: center;
+  width: 100%;
+  padding: 112px var(--container-pad);
+  background-color: var(--cream-50);
+}
+
+.sindex__inner {
+  width: 100%;
+  max-width: 1296px;
+  display: flex;
+  flex-direction: column;
 }
 
 .sitem {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-9);
-  align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 48px;
+  width: 100%;
+  padding: 16px 32px 16px 16px;
 }
 
-.sitem:nth-child(even) .sitem__media { order: 2; }
-
 .sitem__media {
-  position: relative;
+  flex: 1 0 0;
   aspect-ratio: 4 / 3;
   overflow: hidden;
   border-radius: var(--radius-md);
@@ -188,16 +174,17 @@
 
 .sitem:hover .sitem__media img { transform: scale(var(--hover-scale)); }
 
-.sitem__num {
-  display: block;
-  margin-bottom: var(--space-3);
-  font-size: var(--text-sm);
-  letter-spacing: var(--tracking-widest);
-  color: var(--stone-600);
+/* Service Info: flex column, gap 20px. */
+.sitem__body {
+  flex: 1 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
 }
 
 .sitem__title {
-  margin: 0 0 var(--space-3);
+  margin: 0;
   font-family: var(--font-display);
   font-size: var(--text-3xl);
   line-height: var(--leading-h4);
@@ -207,94 +194,163 @@
 }
 
 .sitem__desc {
-  margin: 0 0 var(--space-5);
-  max-width: 46ch;
-  font-size: var(--text-lg);
-  line-height: var(--leading-lead);
-  color: var(--color-text);
-}
-
-.sitem__scope-title {
-  margin: 0 0 var(--space-3);
-  font-size: var(--text-sm);
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: var(--stone-600);
-}
-
-.sitem__scope {
-  margin: 0 0 var(--space-6);
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
-.sitem__scope li {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--space-3);
-  align-items: start;
-  font-size: var(--text-base);
-  color: var(--color-text);
-}
-
-.sitem__scope svg {
-  width: 18px;
-  height: 18px;
-  margin-top: 3px;
-  color: var(--ink-900);
-}
-
-/* --------------------------------------------------------------------------
-   4. PODBLOKOVI OBIMA  /  samo na stranici usluge
-   -------------------------------------------------------------------------- */
-.sblocks {
-  padding-block: var(--section-padding-y);
-  padding-inline: var(--container-pad);
-  background-color: var(--color-bg-alt);
-}
-
-.sblocks__inner { max-width: var(--container-content); margin-inline: auto; }
-
-.sblocks__head { max-width: var(--measure); margin-bottom: var(--space-9); }
-
-.sblocks__title {
-  margin: 0 0 var(--space-4);
-  font-family: var(--font-display);
-  font-size: var(--text-3xl);
-  line-height: var(--leading-h4);
-  letter-spacing: var(--tracking-tighter);
-  font-weight: var(--weight-medium);
-  color: var(--color-heading);
-}
-
-.sblocks__lead {
   margin: 0;
   font-size: var(--text-lg);
   line-height: var(--leading-lead);
   color: var(--color-text);
 }
 
-/* Uvod ima dva pasusa. Bez ovoga se slijepe u jedan blok teksta. */
-.sblocks__lead + .sblocks__lead { margin-top: var(--space-4); }
-
-.sblocks__grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-6);
+.sitem__scope-title {
+  margin: 0;
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  color: var(--color-heading);
 }
 
-.sblock {
-  padding: var(--space-7);
+/* List Inner: flex column, gap 16px, max-width 344px. */
+.sitem__scope {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 344px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Project scope: flex row, gap 8px, align center. */
+.sitem__scope li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--text-base);
+  line-height: 1.4;
+  color: var(--color-text);
+}
+
+.sitem__scope svg { width: 16px; height: 16px; flex: none; color: var(--brown-800); }
+
+/* ==========================================================================
+   3. KONTAKT  (Konstra: Contact)
+   --------------------------------------------------------------------------
+   Sekcija: bg #FFF7E5, padding 200px 72px 112px.
+   ========================================================================== */
+.kontakt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 200px var(--container-pad) 112px;
+  background-color: var(--cream-50);
+}
+
+.kontakt__inner {
+  width: 100%;
+  max-width: var(--container-content);
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 72px;
+  align-items: start;
+}
+
+.kontakt__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.kontakt__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tighter);
+  font-weight: var(--weight-medium);
+  color: var(--color-heading);
+}
+
+.kontakt__lead {
+  margin: 0;
+  max-width: 46ch;
+  font-size: var(--text-lg);
+  line-height: var(--leading-lead);
+  color: var(--color-text);
+}
+
+/* Contact details container: gap 32px, max-width 236px.
+   Email container: gap 8px, naslovcic iznad vrijednosti. */
+.kontakt__details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  max-width: 236px;
+  margin-top: var(--space-7);
+}
+
+.kdetail { display: flex; flex-direction: column; gap: 8px; }
+
+.kdetail__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wide);
+  color: var(--stone-600);
+}
+
+.kdetail__label svg { width: 15px; height: 15px; flex: none; }
+
+.kdetail__value {
+  font-size: var(--text-lg);
+  color: var(--color-heading);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--duration-hover) var(--ease-hover);
+}
+
+a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
+
+/* ==========================================================================
+   4. WIZARD FORMA
+   --------------------------------------------------------------------------
+   Nije sa Konstre. Konstra ima obicnu formu u jednom koraku; ovo je wizard
+   iz skilla website-build-rules: koraci sa dugmadima, tekstualna polja tek
+   na kraju, traka napretka, Nazad na svakom koraku osim prvog.
+   ========================================================================== */
+.wizard {
+  padding: var(--space-8);
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-md);
-  background-color: var(--color-surface);
+  background-color: var(--color-bg);
 }
 
-.sblock__title {
-  margin: 0 0 var(--space-3);
+.wizard__bar { display: flex; gap: 6px; margin-bottom: var(--space-3); }
+
+.wizard__tick {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--stone-300);
+  transition: background-color var(--duration-base) var(--ease-hover);
+}
+
+.wizard__tick.is-done { background-color: var(--brand-blue); }
+
+.wizard__count {
+  margin: 0 0 var(--space-6);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wide);
+  color: var(--stone-600);
+}
+
+.wstep { display: none; flex-direction: column; gap: var(--space-5); }
+.wstep.is-active { display: flex; }
+
+.wstep__q {
+  margin: 0;
   font-family: var(--font-display);
   font-size: var(--text-2xl);
   line-height: var(--leading-h5);
@@ -303,102 +359,561 @@
   color: var(--color-heading);
 }
 
-.sblock__desc { margin: 0 0 var(--space-4); color: var(--color-text); }
+/* Kartice izbora. Dodir na karticu sam vodi na sljedeci korak. */
+.wopts { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
 
-.sblock__note {
-  margin: 0;
-  padding-top: var(--space-4);
-  border-top: var(--border-width) solid var(--color-border);
-  font-size: var(--text-sm);
-  color: var(--stone-600);
+.wopt {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 56px;
+  padding: var(--space-4);
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-heading);
+  background-color: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color var(--duration-hover) var(--ease-hover),
+              background-color var(--duration-hover) var(--ease-hover);
 }
 
-/* --------------------------------------------------------------------------
-   5. ZATVARAJUCI CTA
-   -------------------------------------------------------------------------- */
-.pcta {
-  padding-block: var(--section-padding-y);
-  padding-inline: var(--container-pad);
-  background-color: var(--color-dark-bg);
+.wopt:hover { border-color: var(--ink-900); }
+.wopt.is-picked { border-color: var(--brand-blue); background-color: var(--color-bg-alt); }
+.wopt svg { width: 20px; height: 20px; flex: none; color: var(--brown-800); }
+
+/* Polja na zadnjem koraku. */
+.wfields { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+.wfield { display: flex; flex-direction: column; gap: 6px; }
+.wfield--full { grid-column: 1 / -1; }
+.wfield label { font-size: var(--text-sm); color: var(--stone-600); }
+
+.wfield input,
+.wfield textarea {
+  width: 100%;
+  padding: 14px 16px;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-heading);
+  background-color: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
 }
 
-.pcta__inner {
-  max-width: var(--container-content);
-  margin-inline: auto;
+.wfield input:focus-visible,
+.wfield textarea:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.wfield textarea { min-height: 110px; resize: vertical; }
+
+.wnav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.wnav__back {
+  min-height: var(--touch-target-min);
+  padding: 0 var(--space-4);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--brown-800);
+  background: none;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+}
+
+.wnav__back:hover { border-color: var(--ink-900); color: var(--ink-900); }
+.wnav__back[hidden] { display: none; }
+
+.wizard__note { margin: var(--space-4) 0 0; font-size: var(--text-sm); color: var(--stone-600); }
+
+.wizard__done {
+  display: none;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-7);
   text-align: center;
 }
 
-.pcta__title {
-  margin: 0 0 var(--space-4);
+.wizard__done.is-shown { display: flex; }
+
+.wizard__done h3 {
+  margin: 0;
   font-family: var(--font-display);
-  font-size: var(--text-4xl);
-  line-height: var(--leading-tight);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-medium);
+  color: var(--color-heading);
+}
+
+.wizard__done p { margin: 0; color: var(--color-text); }
+.wizard__err { margin: var(--space-3) 0 0; font-size: var(--text-sm); color: var(--color-error); }
+.wizard__err[hidden] { display: none; }
+
+/* ==========================================================================
+   5. STA SLEDI  (Konstra: What happens next)
+   --------------------------------------------------------------------------
+   bg #030000, padding 112px 72px. Jedina tamna sekcija na kontaktu.
+   Number: padding 12px 14px, gap 10px.
+   ========================================================================== */
+.next {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 112px var(--container-pad);
+  background-color: var(--pure-black);
+}
+
+.next__inner {
+  width: 100%;
+  max-width: var(--container-content);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-9);
+}
+
+.next__title {
+  margin: var(--space-4) 0 0;
+  max-width: 20ch;
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  line-height: var(--leading-h4);
   letter-spacing: var(--tracking-tighter);
   font-weight: var(--weight-medium);
   color: var(--color-dark-heading);
 }
 
-.pcta__lead {
-  margin: 0 auto;
-  max-width: 54ch;
+.next__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-7); }
+.nstep { display: flex; flex-direction: column; gap: var(--space-4); align-items: flex-start; }
+
+.nstep__num {
+  padding: 12px 14px;
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink-900);
+  background-color: var(--sand-300);
+  border-radius: var(--radius-sm);
+}
+
+.nstep__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  line-height: var(--leading-h5);
+  font-weight: var(--weight-medium);
+  color: var(--color-dark-heading);
+}
+
+.nstep p { margin: 0; color: var(--color-dark-text); }
+
+/* ==========================================================================
+   6. O NAMA
+   --------------------------------------------------------------------------
+   Ritam podloga sa Konstre, u nasoj paleti:
+   Hero svijetlo · Mission slika · Core Value svijetlo · History plavo ·
+   Ekipa crno · Reference svijetlo
+   ========================================================================== */
+.ahero {
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+  width: 100%;
+  padding: 216px 0 0;
+  background-color: var(--cream-50);
+}
+
+.ahero__inner {
+  width: 100%;
+  max-width: var(--container-content);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.ahero__title {
+  margin: 0;
+  max-width: 18ch;
+  font-family: var(--font-display);
+  font-size: var(--text-5xl);
+  line-height: var(--leading-h1);
+  letter-spacing: var(--tracking-normal);
+  font-weight: var(--weight-medium);
+  color: var(--color-heading);
+}
+
+.ahero__lead {
+  margin: 0;
+  max-width: 60ch;
   font-size: var(--text-lg);
   line-height: var(--leading-lead);
-  color: var(--color-dark-text);
+  color: var(--color-text);
 }
 
-.pcta__actions {
-  margin-top: var(--space-7);
+.ahero__actions { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+
+/* --- Mission: naizmjenicno slika i tekst, puna sirina --- */
+.mission { width: 100%; background-color: var(--color-bg); }
+
+.mblock { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 0; }
+.mblock:nth-child(even) .mblock__media { order: 2; }
+.mblock__media { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+
+.mblock__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
+.mblock__body {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
   gap: var(--space-4);
+  padding: var(--space-10) var(--space-9);
 }
 
-.pcta .btn--bare { color: var(--color-dark-heading); }
+.mblock__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  line-height: var(--leading-h4);
+  letter-spacing: var(--tracking-tighter);
+  font-weight: var(--weight-medium);
+  color: var(--color-heading);
+}
 
-/* --------------------------------------------------------------------------
-   6. PRELOMNE TACKE
-   -------------------------------------------------------------------------- */
+.mblock__body p { margin: 0; max-width: 46ch; color: var(--color-text); }
+
+/* --- Core Value: naslov se lijepi dok vrijednosti prolaze pored njega --- */
+.cvals {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 112px var(--container-pad);
+  background-color: var(--cream-50);
+}
+
+.cvals__inner {
+  width: 100%;
+  max-width: var(--container-content);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: var(--space-9);
+  align-items: start;
+}
+
+.cvals__sticky { position: sticky; top: 140px; }
+
+.cvals__title {
+  margin: var(--space-4) 0 0;
+  max-width: 14ch;
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  line-height: var(--leading-h4);
+  letter-spacing: var(--tracking-tighter);
+  font-weight: var(--weight-medium);
+  color: var(--color-heading);
+}
+
+.cval {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-5);
+  padding: var(--space-6) 0;
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+.cval:last-child { border-bottom: var(--border-width) solid var(--color-border); }
+.cval__num { font-family: var(--font-display); font-size: var(--text-xl); color: var(--stone-600); }
+
+.cval__title {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  line-height: var(--leading-h5);
+  font-weight: var(--weight-medium);
+  color: var(--color-heading);
+}
+
+.cval p { margin: 0; color: var(--color-text); }
+
+/* --- History: peščana kod Konstre, kod nas svijetla plava --- */
+.hist {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 112px var(--container-pad);
+  background-color: var(--sand-300);
+}
+
+.hist__inner { width: 100%; max-width: var(--container-content); margin-inline: auto; }
+
+.hist__title {
+  margin: var(--space-4) 0 var(--space-9);
+  max-width: 16ch;
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  line-height: var(--leading-h4);
+  letter-spacing: var(--tracking-tighter);
+  font-weight: var(--weight-medium);
+  color: var(--ink-900);
+}
+
+.hrow {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: var(--space-6);
+  padding: var(--space-6) 0;
+  border-top: var(--border-width) solid rgba(10, 15, 31, 0.16);
+}
+
+.hrow:last-child { border-bottom: var(--border-width) solid rgba(10, 15, 31, 0.16); }
+
+.hrow__year {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-medium);
+  color: var(--ink-900);
+}
+
+.hrow__tag {
+  display: inline-block;
+  margin-bottom: var(--space-2);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--brown-800);
+}
+
+.hrow__title {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  line-height: var(--leading-h5);
+  font-weight: var(--weight-medium);
+  color: var(--ink-900);
+}
+
+.hrow p { margin: 0; max-width: 54ch; color: var(--brown-800); }
+
+/* --- Ekipa: crna sekcija --- */
+.team {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 78px var(--container-pad);
+  background-color: var(--pure-black);
+}
+
+.team__inner { width: 100%; max-width: var(--container-content); margin-inline: auto; }
+
+.team__title {
+  margin: var(--space-4) 0 var(--space-9);
+  max-width: 16ch;
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  line-height: var(--leading-h4);
+  letter-spacing: var(--tracking-tighter);
+  font-weight: var(--weight-medium);
+  color: var(--color-dark-heading);
+}
+
+.team__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-5); }
+
+.tmember__media {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background-color: var(--steel-600);
+  margin-bottom: var(--space-4);
+}
+
+.tmember__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.tmember__name {
+  margin: 0 0 4px;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-medium);
+  color: var(--color-dark-heading);
+}
+
+.tmember__role { margin: 0; font-size: var(--text-sm); color: var(--color-dark-text); }
+
+/* --- Reference: forma Konstrine Awards liste, lokacija umjesto godine --- */
+.arefs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 112px var(--container-pad);
+  background-color: var(--cream-50);
+}
+
+.arefs__inner { width: 100%; max-width: var(--container-content); margin-inline: auto; }
+
+.arefs__title {
+  margin: var(--space-4) 0 var(--space-9);
+  max-width: 16ch;
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tighter);
+  font-weight: var(--weight-medium);
+  color: var(--color-heading);
+}
+
+.rrow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-5);
+  align-items: baseline;
+  padding: var(--space-5) 0;
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+.rrow:last-child { border-bottom: var(--border-width) solid var(--color-border); }
+
+.rrow__name {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-medium);
+  color: var(--color-heading);
+}
+
+.rrow__meta { font-size: var(--text-base); color: var(--stone-600); }
+
+/* --- Oznaka sekcije, ista svuda --- */
+.slabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--stone-600);
+}
+
+.slabel .dot { width: 8px; height: 8px; flex: none; background-color: var(--coral-400); }
+.slabel--dark { color: var(--stone-500); }
+
+/* ==========================================================================
+   7. PRELOMNE TACKE
+   --------------------------------------------------------------------------
+   Konstrine granice: 1440 desktop, 810 tablet, 809.98 telefon.
+   ========================================================================== */
+@media (max-width: 1439.98px) {
+  .phero { padding: 180px var(--container-pad) 56px; }
+  .sindex { padding: 96px var(--container-pad); }
+  .kontakt { padding: 168px var(--container-pad) 96px; }
+  .kontakt__inner { gap: var(--space-8); }
+  .next, .cvals, .hist, .arefs { padding: 96px var(--container-pad); }
+  .ahero { padding-top: 180px; }
+  .team__grid { gap: var(--space-4); }
+  .mblock__body { padding: var(--space-8) var(--space-7); }
+}
+
 @media (max-width: 1024px) {
-  .sitem { gap: var(--space-6); }
-  .sblocks__grid { gap: var(--space-5); }
-  .sblock { padding: var(--space-6); }
+  .kontakt__inner { grid-template-columns: 1fr; }
+  .kontakt__details { max-width: none; flex-direction: row; flex-wrap: wrap; gap: var(--space-6); }
+  .next__grid { grid-template-columns: 1fr; gap: var(--space-6); }
+  .cvals__inner { grid-template-columns: 1fr; }
+  .cvals__sticky { position: static; }
+  .team__grid { grid-template-columns: repeat(2, 1fr); }
+  .mblock { grid-template-columns: 1fr; }
+  .mblock:nth-child(even) .mblock__media { order: 0; }
 }
 
 @media (max-width: 809.98px) {
+  /* Hero: 100vh na telefonu pojede cijeli ekran prije nego se vidi sadrzaj.
+     76svh, sa svh zbog trake pretrazivaca koja se skuplja pri skrolu. */
   .phero {
-    min-height: 420px;
-    padding-block: var(--space-11) var(--space-7);
+    height: auto;
+    min-height: 76svh;
+    padding: 132px var(--container-pad) 48px;
   }
 
-  /* Isto kao na pocetnoj: preliv drzi gornje dvije trecine, fotografija se
-     vidi u donjoj. Slika je uspravna pa se sidri gore, ne dole. */
-  .phero__image img { height: 100%; object-position: 50% 26%; }
+  .sindex { padding: 64px var(--container-pad); }
 
-  .phero__overlay {
-    background: linear-gradient(
-      180deg,
-      var(--sand-300)              0%,
-      rgba(168, 190, 255, 0.96)   48%,
-      rgba(152, 176, 252, 0.86)   70%,
-      rgba(126, 154, 248, 0.46)   86%,
-      rgba(110, 140, 245, 0)     100%
-    );
-  }
+  /* Konstra na telefonu stavlja sliku iznad teksta i gasi red. */
+  .sitem { flex-direction: column; gap: var(--space-5); padding: var(--space-5) 0; }
+  .sitem__media { width: 100%; flex: none; }
+  .sitem__body { flex: none; width: 100%; }
+  .sitem__scope { max-width: none; }
 
-  .phero__title { max-width: 100%; }
+  .kontakt { padding: 120px var(--container-pad) 64px; }
+  .kontakt__details { flex-direction: column; gap: var(--space-5); margin-top: var(--space-5); }
 
-  .slist__inner { gap: var(--space-9); }
+  .wizard { padding: var(--space-5); }
+  .wopts { grid-template-columns: 1fr; }
+  .wfields { grid-template-columns: 1fr; }
 
-  /* Na jednoj koloni naizmjenicni raspored nema smisla: slika uvijek ide
-     iznad teksta, inace bi na svakoj drugoj stavci tekst dolazio prvi i
-     ritam citanja bi se prekidao. */
-  .sitem { grid-template-columns: 1fr; gap: var(--space-5); }
-  .sitem:nth-child(even) .sitem__media { order: 0; }
+  .next, .cvals, .hist, .arefs { padding: 64px var(--container-pad); }
 
-  .sblocks__grid { grid-template-columns: 1fr; }
-  .sblocks__head { margin-bottom: var(--space-7); }
+  .ahero { padding-top: 132px; gap: var(--space-7); }
+  .ahero__actions .btn { width: 100%; justify-content: center; }
 
-  .pcta__actions { flex-direction: column; align-items: stretch; }
-  .pcta__actions .btn { justify-content: center; }
+  .mblock__body { padding: var(--space-7) var(--container-pad); }
+  .mblock__media img { aspect-ratio: 1 / 1; }
+
+  .cval { grid-template-columns: 1fr; gap: var(--space-2); }
+  .hrow { grid-template-columns: 1fr; gap: var(--space-2); }
+  .team__grid { grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+  .rrow { grid-template-columns: 1fr; gap: 4px; }
 }
+
+
+/* ==========================================================================
+   8. BIJELO ZAGLAVLJE NA TAMNOM HEROU
+   --------------------------------------------------------------------------
+   Konstra ima dvije verzije zaglavlja i bira po stranici: /service nosi
+   "Desktop White" jer je hero taman, /contact i /about nose "Desktop Black"
+   jer im je hero na svijetloj podlozi. Kod nas isto: .header--light se stavlja
+   samo na stranicama sa tamnim heroom.
+
+   Pravila su ista kao za [data-scrolled=true], samo bez pozadine: dok se ne
+   skroluje, zaglavlje pluta preko fotografije.
+   ========================================================================== */
+.header--light:not([data-scrolled="true"]) .brand__badge { filter: brightness(0) invert(1); }
+.header--light:not([data-scrolled="true"]) .brand__name,
+.header--light:not([data-scrolled="true"]) .nav__link,
+.header--light:not([data-scrolled="true"]) .btn--bare { color: var(--cream-50); }
+.header--light:not([data-scrolled="true"]) .nav__dot { background-color: var(--cream-50); }
+
+.header--light:not([data-scrolled="true"]) .menu-toggle {
+  border-color: var(--cream-50);
+  color: var(--cream-50);
+}
+
+.header--light:not([data-scrolled="true"]) .nav__link.is-soon { color: var(--stone-500); }
+
+/* ==========================================================================
+   9. RESET FIELDSETA U WIZARDU
+   --------------------------------------------------------------------------
+   <fieldset> i <legend> nose okvir i uvlaku iz podrazumijevanog stila
+   pretrazivaca. Semantika se zadrzava zbog citaca ekrana, izgled se gasi.
+   ========================================================================== */
+.wstep { margin: 0; padding: 0; border: 0; min-inline-size: 0; }
+.wstep__q { padding: 0; }
+
+/* [hidden] mora da pobijedi .btn { display: inline-flex } */
+.wnav [hidden] { display: none !important; }
+
+/* Wizard programski fokusira naslov koraka da citac ekrana prati promjenu.
+   Naslov nije interaktivan, pa mu vizuelni prsten nije potreban i samo
+   izgleda kao greska u dizajnu. Fokus ostaje, prsten se gasi. */
+.wstep__q:focus,
+.wstep__q:focus-visible { outline: none; }

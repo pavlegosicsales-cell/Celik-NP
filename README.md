@@ -47,6 +47,8 @@ Izvori su u [images/](images/). Alati se puštaju iz korena projekta:
 |---|---|
 | `site/index.html` | Početna |
 | `site/usluge.html` | Lista svih šest usluga |
+| `site/kontakt.html` | Kontakt sa wizard formom |
+| `site/o-nama.html` | O nama |
 | `site/usluga-metalne-konstrukcije.html` | Nosive konstrukcije |
 | `site/usluga-kapije-i-ograde.html` | Kapije i ograde |
 | `site/usluga-stepenista.html` | Stepeništa i PP stepeništa |
@@ -61,8 +63,31 @@ Sve unutrašnje stranice se **generišu**, ne uređuju ručno. Zajednički delov
 izmena u zaglavlju ostaje tačna svuda:
 
 ```
-python tools/gradi_usluge.py
+python tools/gradi_stranice.py
 ```
+
+Posle generisanja treba vratiti `header--light` na stranice sa tamnim heroom
+i preusmeriti nav linkove; oba koraka su na kraju te iste komande.
+
+## Konstra teardown
+
+Struktura unutrašnjih stranica **nije izmišljena**, prenesena je iz Konstre.
+Metod: Framer u eksportu čuva imena slojeva iz editora u `data-framer-name`,
+a mere stoje u ugrađenom `<style>`. [tools/teardown.py](tools/teardown.py) čita
+strukturu, [tools/mere.py](tools/mere.py) spaja ime sloja sa CSS pravilom.
+Rezultat: [research/konstra-stranice-teardown.md](research/konstra-stranice-teardown.md).
+
+Prva verzija stranice Usluge je bila izmišljena i nije ličila na Konstru.
+Šta je bilo pogrešno:
+
+| Bilo | Konstra zapravo ima |
+|---|---|
+| svetli plavi veo, taman tekst | **tamni overlay** `#1a1711b3`, beo tekst |
+| hero 520px | `height: 100vh`, padding `216px 72px 64px` |
+| slika naizmenično levo pa desno | slika **uvek levo**, `gap: 48px` |
+| kvačice u listi obima | ikona + tekst, `gap: 8px`, `max-width: 344px` |
+| CTA sekcija na kraju | **nema je**, ide pravo u podnožje |
+| crno zaglavlje svuda | `/service` nosi **belo** zaglavlje jer je hero taman |
 
 Copy živi u [tools/usluge_sadrzaj.py](tools/usluge_sadrzaj.py), a nove CSS
 komponente u [site/css/stranice.css](site/css/stranice.css) — ništa u
