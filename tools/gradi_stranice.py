@@ -213,33 +213,14 @@ def gradi_kontakt():
   <section class="kontakt" aria-labelledby="kontakt-naslov">
     <div class="kontakt__inner">
 
-      <div class="kontakt__intro">
+      <div class="kontakt__head">
         <p class="slabel"><span class="dot" aria-hidden="true"></span>Kontakt</p>
         <h1 class="kontakt__title" id="kontakt-naslov">Recite šta, gde i za kada. Ostalo je na nama.</h1>
         <p class="kontakt__lead">Čitamo svaki upit lično. Opišite posao, izlazimo na teren
           i merimo na licu mesta, pa dobijate raspisanu ponudu. Izlazak i procena su besplatni.</p>
-
-        <div class="kontakt__details">
-          <div class="kdetail">
-            <span class="kdetail__label"><svg aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg>Telefon</span>
-            <a class="kdetail__value" href="tel:0604145466">060 41 45 466</a>
-          </div>
-          <div class="kdetail">
-            <span class="kdetail__label"><svg aria-hidden="true" focusable="false"><use href="#i-mail"></use></svg>Mejl</span>
-            <a class="kdetail__value" href="mailto:npcelik85@gmail.com">npcelik85@gmail.com</a>
-          </div>
-          <div class="kdetail">
-            <span class="kdetail__label"><svg aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg>Radionica</span>
-            <a class="kdetail__value" href="https://www.google.com/maps/search/?api=1&amp;query=Avalska%2011%2C%20Kragujevac" target="_blank" rel="noopener noreferrer">Avalska 11, Kragujevac</a>
-          </div>
-          <div class="kdetail">
-            <span class="kdetail__label"><svg aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg>Radno vreme</span>
-            <span class="kdetail__value">Pon–pet, 07–16h</span>
-          </div>
-        </div>
       </div>
 
-      <div>
+      <div class="kontakt__form">
         <form class="wizard" id="wizard" novalidate>
           <div class="wizard__bar" aria-hidden="true">
 {ticks}
@@ -284,6 +265,27 @@ def gradi_kontakt():
           <p>Javljamo se isti ili sledeći radni dan. Ako vam se žuri, pozovite 060 41 45 466.</p>
         </div>
       </div>
+
+      <aside class="kontakt__intro">
+        <div class="kontakt__details">
+          <div class="kdetail">
+            <span class="kdetail__label"><svg aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg>Telefon</span>
+            <a class="kdetail__value" href="tel:0604145466">060 41 45 466</a>
+          </div>
+          <div class="kdetail">
+            <span class="kdetail__label"><svg aria-hidden="true" focusable="false"><use href="#i-mail"></use></svg>Mejl</span>
+            <a class="kdetail__value" href="mailto:npcelik85@gmail.com">npcelik85@gmail.com</a>
+          </div>
+          <div class="kdetail">
+            <span class="kdetail__label"><svg aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg>Radionica</span>
+            <a class="kdetail__value" href="https://www.google.com/maps/search/?api=1&amp;query=Avalska%2011%2C%20Kragujevac" target="_blank" rel="noopener noreferrer">Avalska 11, Kragujevac</a>
+          </div>
+          <div class="kdetail">
+            <span class="kdetail__label"><svg aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg>Radno vreme</span>
+            <span class="kdetail__value">Pon–pet, 07–16h</span>
+          </div>
+        </div>
+      </aside>
 
     </div>
   </section>
