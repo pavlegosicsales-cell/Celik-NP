@@ -4855,7 +4855,14 @@ a.contact__value:hover { color: var(--brown-800); }
   gap: var(--space-9);
   width: 100%;
   padding: 112px var(--container-pad) 0;
+  /* Boja ostaje kao rezerva ispod preliva, za slucaj da radial-gradient
+     ne prodje (stari WebKit). */
   background-color: var(--pure-black);
+  /* Preliv trazen 27.08.2026: dole crno, pa se navise otvara u teget koji
+     je podnozje i do sada bilo. Radijalni oblik je uzet iz predloska koji
+     je korisnik poslao, samo je ziza spustena sa vrha na dno, pa je crno
+     tamo gdje stoji ogroman wordmark. */
+  background-image: radial-gradient(125% 125% at 50% 100%, #000000 38%, var(--ink-900) 100%);
   color: var(--stone-500);
   overflow: hidden;
 }
@@ -5028,7 +5035,12 @@ a.contact__value:hover { color: var(--brown-800); }
      na telefonu mu je kraj ispadao iz kadra. */
   font-size: 24.3vw;
   font-weight: var(--weight-medium);
+  /* line-height 0.78 je uzi od samog slova, pa kutija sjece i vrh i dno.
+     Kod "B-STEEL" se to nije vidjelo, ali "NP ČELIK" ima kvacicu iznad C
+     i ona je odlazila pod noz. Padding vraca gornjih 0.22em unutra, a dno
+     ostaje odsjeceno, kako original i trazi. */
   line-height: 0.78;
+  padding-top: 0.28em;
   letter-spacing: -0.04em;
   text-align: center;
   color: var(--ink-900);
@@ -5041,6 +5053,15 @@ a.contact__value:hover { color: var(--brown-800); }
   pointer-events: none;
   overflow: hidden;
 }
+
+/* Boja je bila --ink-900 (#0A0F1F) na podnozju od #060A14, odnos kontrasta
+   1.03, pa se natpis prakticno nije vidio. Konstra svoj drzi na #897F6C
+   preko #030000, dakle oko 5.5:1. Ovdje je to --stone-600 pomjeren ka
+   --stone-500 da se izadje na isti red velicine, a da natpis i dalje ostane
+   pozadinski, tisi od teksta u podnozju. */
+.footer__wordmark { color: var(--stone-600); }
+
+
 
 /* ----- 6.3 CTA traka ------------------------------------------------------ */
 

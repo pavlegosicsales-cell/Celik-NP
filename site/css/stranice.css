@@ -856,143 +856,159 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
   .cval__rule { height: 133px; }
 }
 
-/* --- History: peščana kod Konstre, kod nas svijetla plava --- */
+/* --- Put: koraci lijevo, lijepljena slika desno ---
+   Po Konstrinoj "Build Stages" sa pocetne. Mjere iz njenog izvora:
+     Sekcija    padding 112px 72px, razmak 72
+     Zaglavlje  red, poravnanje po dnu, naslov lijevo, podnaslov desno
+     Sadrzaj    red, razmak 64
+     Korak      red, razmak 24, padding 32px 0 0
+     Broj       56px sirok, padding 12px 16px, radius 50px
+     Tijelo     razmak 12, padding 8px 0 32px, linija po dnu
+     Slika      sticky top 80, max-width 50%, odnos 0.8556, radius 12
+
+   Podloga je kod Konstre pjescana; kod nas ostaje svijetla plava iz palete,
+   pa je i broj u krugu hladno bijel umjesto krem. */
 .hist {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
   padding: 112px var(--container-pad);
   background-color: var(--sand-300);
 }
 
-.hist__inner { width: 100%; max-width: var(--container-content); margin-inline: auto; }
+.hist__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+  width: 100%;
+  max-width: var(--container-content);
+  margin-inline: auto;
+}
+
+.hist__head {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-8);
+  width: 100%;
+}
+
+.hist__title-wrap { display: flex; flex-direction: column; gap: 12px; }
 
 .hist__title {
-  margin: var(--space-4) 0 var(--space-9);
+  margin: 0;
   max-width: 16ch;
   font-family: var(--font-display);
-  font-size: var(--text-3xl);
-  line-height: var(--leading-h4);
+  font-size: var(--text-4xl);
+  line-height: 50px;
   letter-spacing: var(--tracking-tighter);
   font-weight: var(--weight-medium);
   color: var(--ink-900);
 }
 
-/* Konstrina Awards lista, mjereno iz izvora:
-     red        flex row, align center, padding 32px 0, width 1296
-     ivica      border-bottom 1px solid #D2CCBC
-     broj       width 42px, preset 1qcdpqr
-     razmak     gap 178px izmedju broja i naziva
-     naziv      preset 1qcdpqr = 32/40, weight 500, tracking -0.02em
-     godina     na desnom kraju reda
+.hist__lead {
+  margin: 0;
+  max-width: 34ch;
+  font-size: var(--text-lg);
+  line-height: var(--leading-lead);
+  text-align: right;
+  color: var(--brown-800);
+}
 
-   Prva verzija ove liste je imala 120px kolonu za godinu lijevo, naslov na
-   22px i nijedan broj. Zamijenjeno u cjelini. */
-.hrow {
+.hist__body {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  gap: var(--space-6);
+  align-items: flex-start;
+  gap: 64px;
   width: 100%;
-  padding: 32px 0;
+}
+
+.hist__steps {
+  flex: 1 1 0;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hstep {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--space-6);
+  padding-top: 32px;
+}
+
+.hstep__num {
+  flex: none;
+  width: 56px;
+  padding: 12px 16px;
+  border-radius: var(--radius-pill);
+  background-color: var(--cream-100);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  line-height: var(--leading-lead);
+  font-weight: var(--weight-medium);
+  text-align: center;
+  color: var(--ink-900);
+}
+
+.hstep__body {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 8px 0 32px;
   border-bottom: var(--border-width) solid rgba(10, 15, 31, 0.16);
 }
 
-.hrow:first-of-type { border-top: var(--border-width) solid rgba(10, 15, 31, 0.16); }
-
-.hrow__num {
-  flex: none;
-  width: 42px;
-  font-family: var(--font-display);
-  font-size: var(--text-3xl);
-  line-height: var(--leading-h4);
-  letter-spacing: var(--tracking-tighter);
-  font-weight: var(--weight-medium);
-  color: var(--brown-800);
+/* Godina je nas dodatak: Konstrin korak je nema, ali sekcija je vremenska
+   linija pa broj godine mora da se vidi. Stoji na desnom kraju naslova. */
+.hstep__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
 }
 
-/* Konstrin razmak izmedju broja i naziva je 178px. Ovdje je clamp, jer nas
-   naziv zna da bude duzi od njihovog pa bi na fiksnih 178 gurao godinu van. */
-.hrow__body { flex: 1 1 auto; min-width: 0; margin-left: clamp(24px, 9vw, 178px); }
-
-.hrow__tag {
-  display: block;
-  margin-bottom: 6px;
-  font-size: var(--text-sm);
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: var(--brown-800);
-}
-
-.hrow__title {
+.hstep__title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: var(--text-3xl);
-  line-height: var(--leading-h4);
-  letter-spacing: var(--tracking-tighter);
+  font-size: var(--text-2xl);
+  line-height: var(--leading-h5);
+  letter-spacing: -0.01em;
   font-weight: var(--weight-medium);
   color: var(--ink-900);
 }
 
-.hrow p { margin: 8px 0 0; max-width: 54ch; color: var(--brown-800); }
-
-.hrow__year {
+.hstep__year {
   flex: none;
-  margin-left: auto;
-  padding-left: var(--space-5);
   font-family: var(--font-display);
-  font-size: var(--text-3xl);
-  line-height: var(--leading-h4);
-  letter-spacing: var(--tracking-tighter);
+  font-size: var(--text-lg);
   font-weight: var(--weight-medium);
-  color: var(--ink-900);
+  color: var(--brown-800);
 }
 
-/* --- Ekipa: crna sekcija --- */
-.team {
-  display: flex;
-  flex-direction: column;
+.hstep__body p { margin: 0; max-width: 46ch; color: var(--brown-800); }
+
+.hist__media {
+  position: sticky;
+  top: 80px;
+  flex: 1 1 0;
+  max-width: 50%;
+  min-width: 0;
+}
+
+.hist__media img {
+  display: block;
   width: 100%;
-  padding: 78px var(--container-pad);
-  background-color: var(--pure-black);
+  aspect-ratio: 0.8556;
+  object-fit: cover;
+  border-radius: var(--radius-xl);
 }
-
-.team__inner { width: 100%; max-width: var(--container-content); margin-inline: auto; }
-
-.team__title {
-  margin: var(--space-4) 0 var(--space-9);
-  max-width: 16ch;
-  font-family: var(--font-display);
-  font-size: var(--text-3xl);
-  line-height: var(--leading-h4);
-  letter-spacing: var(--tracking-tighter);
-  font-weight: var(--weight-medium);
-  color: var(--color-dark-heading);
-}
-
-.team__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-5); }
-
-.tmember__media {
-  aspect-ratio: 3 / 4;
-  overflow: hidden;
-  border-radius: var(--radius-md);
-  background-color: var(--steel-600);
-  margin-bottom: var(--space-4);
-}
-
-.tmember__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
-
-.tmember__name {
-  margin: 0 0 4px;
-  font-family: var(--font-display);
-  font-size: var(--text-3xl);
-  line-height: var(--leading-h4);
-  letter-spacing: var(--tracking-tighter);
-  font-weight: var(--weight-medium);
-  color: var(--color-dark-heading);
-}
-
-.tmember__role { margin: 0; font-size: var(--text-sm); color: var(--color-dark-text); }
 
 /* --- Reference: forma Konstrine Awards liste, lokacija umjesto godine --- */
 .arefs {
@@ -1028,6 +1044,50 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
 
 .rrow:first-of-type { border-top: var(--border-width) solid var(--color-border); }
 
+/* Red sa fotografijom je link koji otvara lightbox. Redovi bez fotografije
+   (Paligoric i Ford salon, za koje jos nemamo snimak) ostaju <div> i ne
+   ponasaju se kao da se moze kliknuti. */
+a.rrow {
+  text-decoration: none;
+  color: inherit;
+  transition: background-color var(--dur-hover) var(--ease-hover),
+              padding-left var(--dur-hover) var(--ease-hover);
+}
+
+a.rrow:hover {
+  background-color: var(--cream-100);
+  padding-left: var(--space-4);
+}
+
+.rrow__see {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: var(--space-5);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--stone-600);
+  /* Vidi se i bez hovera, inace niko ne zna da red moze da se otvori.
+     Na hover se pojaca i primakne. */
+  opacity: 0.45;
+  transform: translateX(-6px);
+  transition: opacity var(--dur-hover) var(--ease-hover),
+              transform var(--dur-hover) var(--ease-hover);
+}
+
+.rrow__see svg { width: 14px; height: 14px; }
+
+a.rrow:hover .rrow__see,
+a.rrow:focus-visible .rrow__see { opacity: 1; transform: none; }
+
+/* Bez pokazivaca (telefon, tablet) hover ne postoji, pa oznaka stoji puna. */
+@media (hover: none) {
+  .rrow__see { opacity: 1; transform: none; }
+}
+
+
 .rrow__num {
   flex: none;
   width: 42px;
@@ -1060,6 +1120,72 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
   text-align: right;
 }
 
+/* --- Zavrsna traka: fotografija preko pune sirine, tekst preko nje ---
+   Po Konstrinoj CTA sekciji: slika u pozadini, taman veo odozdo, sadrzaj
+   lijevo dolje, jedno puno dugme. Visina je vezana za ekran, ne za sliku,
+   da traka radi i sa uspravnom i sa pejzaznom fotografijom. */
+.ocean {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  min-height: min(760px, 86vh);
+  padding: 112px var(--container-pad);
+  overflow: hidden;
+  background-color: var(--pure-black);
+  isolation: isolate;
+}
+
+.ocean__media { position: absolute; inset: 0; z-index: -2; }
+
+.ocean__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* Veo je jaci pri dnu, jer tekst sjedi tamo. Isti odnos kao na originalu. */
+.ocean::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg,
+    rgba(6, 10, 20, 0.25) 0%,
+    rgba(6, 10, 20, 0.55) 45%,
+    rgba(6, 10, 20, 0.88) 100%);
+}
+
+.ocean__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-5);
+  width: 100%;
+  max-width: var(--container-content);
+  margin-inline: auto;
+}
+
+.ocean__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-5xl);
+  line-height: var(--leading-h1);
+  letter-spacing: var(--tracking-normal);
+  font-weight: var(--weight-medium);
+  color: var(--cream-50);
+}
+
+.ocean__lead {
+  margin: 0;
+  max-width: 46ch;
+  font-size: var(--text-lg);
+  line-height: var(--leading-lead);
+  color: var(--stone-500);
+}
+
+.ocean__actions { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-top: var(--space-3); }
+
+/* Ivicno dugme na tamnom: natpis mora da pobijeli, ivicu vec crta
+   .btn--on-dark-outline. */
+.ocean__actions .btn--outline { color: var(--cream-50); }
+
 /* --- Oznaka sekcije, ista svuda --- */
 .slabel {
   display: flex;
@@ -1087,7 +1213,6 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
   .kontakt__inner { gap: var(--space-8); }
   .next, .cvals, .hist, .arefs { padding: 96px var(--container-pad); }
   .ahero { padding-top: 180px; }
-  .team__grid { gap: var(--space-4); }
 }
 
 @media (max-width: 1024px) {
@@ -1095,7 +1220,6 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
   .kontakt__form, .kontakt__intro { grid-column: 1; }
   .kontakt__details { max-width: none; flex-direction: row; flex-wrap: wrap; gap: var(--space-6); }
   .next__grid { grid-template-columns: 1fr; gap: var(--space-6); }
-  .team__grid { grid-template-columns: repeat(2, 1fr); }
 
   /* Cetiri kolone ne staju: idu dva po dva, lijepljenje i lenjiri se gase,
      lenjir ostaje na kratkoj mjeri. */
@@ -1111,6 +1235,11 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
   .msn__media { width: 100%; height: 243px; }
   .msn__rail { display: none; }
   .msn { padding-bottom: var(--space-9); }
+
+  /* Put: slika ide iznad koraka i prestaje da se lijepi. */
+  .hist__body { flex-direction: column; gap: var(--space-7); }
+  .hist__media { position: static; max-width: none; width: 100%; order: -1; }
+  .hist__media img { aspect-ratio: 16 / 10; }
 }
 
 @media (max-width: 809.98px) {
@@ -1145,12 +1274,19 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
   .cvals__row { grid-template-columns: 1fr; }
   .msn__card { padding: 20px; }
 
+  .ocean { min-height: 0; padding: 96px var(--container-pad); }
+  .ocean__actions .btn { width: 100%; justify-content: center; }
+
+  /* Naslov i podnaslov ne staju u jedan red. */
+  .hist__head { flex-direction: column; align-items: flex-start; gap: var(--space-5); }
+  .hist__lead { text-align: left; max-width: none; }
+  .hstep { gap: var(--space-4); padding-top: 24px; }
+  .hstep__head { flex-direction: column; gap: 4px; align-items: flex-start; }
+
   /* Na telefonu red ne staje u jedan red: broj i godina idu iznad naziva. */
-  .hrow, .rrow { flex-wrap: wrap; gap: var(--space-2); padding: 24px 0; }
-  .hrow__body { flex: 1 1 100%; margin-left: 0; order: 3; }
-  .hrow__year, .rrow__meta { margin-left: auto; padding-left: 0; }
+  .rrow { flex-wrap: wrap; gap: var(--space-2); padding: 24px 0; }
+  .rrow__meta { margin-left: auto; padding-left: 0; }
   .rrow__name { flex: 1 1 100%; margin-left: 0; order: 3; }
-  .team__grid { grid-template-columns: 1fr 1fr; gap: var(--space-4); }
 }
 
 

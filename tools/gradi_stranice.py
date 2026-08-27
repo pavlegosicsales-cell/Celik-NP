@@ -328,6 +328,17 @@ def gradi_kontakt():
     return len(html)
 
 
+LIGHTBOX = '''<!-- Pregled fotografije referenci. Isti markup i ista skripta kao na pocetnoj. -->
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Pregled fotografije">
+  <button class="lightbox__close" type="button" aria-label="Zatvorite pregled">
+    <svg aria-hidden="true" focusable="false"><use href="#i-close"></use></svg>
+  </button>
+  <img class="lightbox__img" alt="">
+</div>
+
+<script src="js/main.js" defer></script>'''
+
+
 # ====================================================================== O NAMA
 def gradi_o_nama():
     body = f'''
@@ -488,105 +499,120 @@ def gradi_o_nama():
     <div class="cvals__rail" aria-hidden="true"></div>
   </section>
 
+  <!-- ==========================================================================
+       Po Konstrinoj "Build Stages" sa pocetne. Mjere iz izvora:
+         Sekcija   padding 112px 72px, razmak 72
+         Zaglavlje red, naslov lijevo, podnaslov desno, poravnati po dnu
+         Sadrzaj   red, razmak 64, koraci lijevo, slika desno
+         Korak     red, razmak 24, padding 32px 0 0; broj 56px, radius 50px,
+                   padding 12px 16px; tijelo padding 8px 0 32px sa linijom
+         Slika     sticky top 80, max-width 50%, odnos 0.8556, radius 12
+       ========================================================================== -->
   <section class="hist" aria-labelledby="istorija-naslov">
     <div class="hist__inner">
-      <p class="slabel"><span class="dot" aria-hidden="true"></span>Put</p>
-      <h2 class="hist__title" id="istorija-naslov">Kako je radionica rasla</h2>
-
-      <article class="hrow" data-reveal>
-        <span class="hrow__num">01</span>
-        <div class="hrow__body">
-          <span class="hrow__tag">Početak</span>
-          <h3 class="hrow__title">Radionica na Avalskoj</h3>
-          <p>NP Čelik počinje sa radom u Kragujevcu. Bravarski radovi, kapije i ograde
-            za dvorišta i firme u gradu.</p>
+      <div class="hist__head">
+        <div class="hist__title-wrap">
+          <p class="slabel"><span class="dot" aria-hidden="true"></span>Put</p>
+          <h2 class="hist__title" id="istorija-naslov">Kako je radionica rasla</h2>
         </div>
-        <span class="hrow__year">2018</span>
-      </article>
+        <p class="hist__lead">Osam godina, preko dvadeset objekata i sopstvena radionica
+          na Avalskoj 11.</p>
+      </div>
 
-      <article class="hrow" data-reveal>
-        <span class="hrow__num">02</span>
-        <div class="hrow__body">
-          <span class="hrow__tag">Ugostiteljstvo</span>
-          <h3 class="hrow__title">Prve letnje bašte</h3>
-          <p>Rad na ugostiteljskim objektima u Kragujevcu i okolini. Kafana Paligorić,
-            „Stara Srbija", Caffe Porta.</p>
+      <div class="hist__body">
+        <ol class="hist__steps">
+          <li class="hstep">
+            <span class="hstep__num">01</span>
+            <div class="hstep__body">
+              <div class="hstep__head">
+                <h3 class="hstep__title">Radionica na Avalskoj</h3>
+                <span class="hstep__year">2018</span>
+              </div>
+              <p>NP Čelik počinje sa radom u Kragujevcu. Bravarski radovi, kapije i ograde
+              za dvorišta i firme u gradu.</p>
+            </div>
+          </li>
+          <li class="hstep">
+            <span class="hstep__num">02</span>
+            <div class="hstep__body">
+              <div class="hstep__head">
+                <h3 class="hstep__title">Prve letnje bašte</h3>
+                <span class="hstep__year">2021</span>
+              </div>
+              <p>Rad na ugostiteljskim objektima u Kragujevcu i okolini. Kafana Paligorić,
+              „Stara Srbija", Caffe Porta.</p>
+            </div>
+          </li>
+          <li class="hstep">
+            <span class="hstep__num">03</span>
+            <div class="hstep__body">
+              <div class="hstep__head">
+                <h3 class="hstep__title">Modularni kontejneri</h3>
+                <span class="hstep__year">2023</span>
+              </div>
+              <p>Serija NP Čelik kontejnera: stambeni, magacinski, građevinski i sanitarni.
+              Za razliku od svega ostalog što radimo po meri, ovo je proizvod sa poznatim rokom.</p>
+            </div>
+          </li>
+          <li class="hstep">
+            <span class="hstep__num">04</span>
+            <div class="hstep__body">
+              <div class="hstep__head">
+                <h3 class="hstep__title">Preko dvadeset objekata</h3>
+                <span class="hstep__year">2026</span>
+              </div>
+              <p>Sopstvena radionica i montaža. Protivpožarna stepeništa, zatvorene bašte
+              i konstrukcije po projektu.</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="hist__media">
+          <!-- [SLIKA: privremena] Spoljno metalno stepeniste. Zamijeniti kad
+               klijent posalje fotografiju koja bolje stoji uz "Put". -->
+          <img src="assets/img/rad-06-nadstresnica-garaza.jpg" alt="Spoljno metalno stepenište, NP Čelik" width="1169" height="1558" loading="lazy" decoding="async">
         </div>
-        <span class="hrow__year">2021</span>
-      </article>
-
-      <article class="hrow" data-reveal>
-        <span class="hrow__num">03</span>
-        <div class="hrow__body">
-          <span class="hrow__tag">Sopstveni proizvod</span>
-          <h3 class="hrow__title">Modularni kontejneri</h3>
-          <p>Serija NP Čelik kontejnera: stambeni, magacinski, građevinski i sanitarni.
-            Za razliku od svega ostalog što radimo po meri, ovo je proizvod sa poznatim rokom.</p>
-        </div>
-        <span class="hrow__year">2023</span>
-      </article>
-
-      <article class="hrow" data-reveal>
-        <span class="hrow__num">04</span>
-        <div class="hrow__body">
-          <span class="hrow__tag">Danas</span>
-          <h3 class="hrow__title">Preko dvadeset objekata</h3>
-          <p>Ekipa od četvoro ljudi, sopstvena radionica i montaža. Protivpožarna stepeništa,
-            zatvorene bašte i konstrukcije po projektu.</p>
-        </div>
-        <span class="hrow__year">2026</span>
-      </article>
-    </div>
-  </section>
-
-  <section class="team" aria-labelledby="ekipa-naslov">
-    <div class="team__inner">
-      <p class="slabel slabel--dark"><span class="dot" aria-hidden="true"></span>Ekipa</p>
-      <h2 class="team__title" id="ekipa-naslov">Četvoro ljudi iza svakog posla</h2>
-      <div class="team__grid">
-        <!-- [SLIKE: portreti ekipe] Klijent ih jos nije dostavio. Do tada stoje
-             fotografije sa terena, da mjesta ne budu prazna. Imena i uloge se
-             upisuju kad stignu. -->
-        <article class="tmember" data-reveal>
-          <div class="tmember__media"><img src="assets/img/rad-06-nadstresnica-garaza.jpg" alt="Montaža spoljnog metalnog stepeništa" width="600" height="800" loading="lazy" decoding="async"></div>
-          <h3 class="tmember__name">Bravarija</h3>
-          <p class="tmember__role">Sečenje, savijanje i zavarivanje u radionici</p>
-        </article>
-        <article class="tmember" data-reveal>
-          <div class="tmember__media"><img src="assets/img/proces-skelet-hale.jpg" alt="Izrada metalne konstrukcije platforme" width="600" height="800" loading="lazy" decoding="async"></div>
-          <h3 class="tmember__name">Konstrukcije</h3>
-          <p class="tmember__role">Rad po projektu, noseći elementi i platforme</p>
-        </article>
-        <article class="tmember" data-reveal>
-          <div class="tmember__media"><img src="assets/img/rad-nadstresnica-solarni-jesenice.jpg" alt="Pocinkovana i farbana ograda sa gelenderima" width="600" height="800" loading="lazy" decoding="async"></div>
-          <h3 class="tmember__name">Zaštita i obrada</h3>
-          <p class="tmember__role">Priprema površine, pocinkovanje i nanosi</p>
-        </article>
-        <article class="tmember" data-reveal>
-          <div class="tmember__media"><img src="assets/img/rad-01-celicna-hala.jpg" alt="Montaža kliznе kapije na terenu" width="600" height="800" loading="lazy" decoding="async"></div>
-          <h3 class="tmember__name">Montaža</h3>
-          <p class="tmember__role">Izlazak na teren, mera i ugradnja</p>
-        </article>
       </div>
     </div>
   </section>
+
 
   <section class="arefs" aria-labelledby="reference-naslov">
     <div class="arefs__inner">
       <p class="slabel"><span class="dot" aria-hidden="true"></span>Reference</p>
       <h2 class="arefs__title" id="reference-naslov">Radovi koje možete da obiđete</h2>
 
-      <div class="rrow"><span class="rrow__num">01</span><span class="rrow__name">Mileva Koncept</span><span class="rrow__meta">Zatvorena bašta · Grivac</span></div>
-      <div class="rrow"><span class="rrow__num">02</span><span class="rrow__name">Ženeva Lux</span><span class="rrow__meta">Protivpožarna stepeništa · Kragujevac</span></div>
-      <div class="rrow"><span class="rrow__num">03</span><span class="rrow__name">Caffe Porta</span><span class="rrow__meta">Krovna konstrukcija · Kragujevac</span></div>
+      <a class="rrow rrow--foto" href="assets/img/rad-05-montaza-na-terenu.jpg" data-lightbox><span class="rrow__num">01</span><span class="rrow__name">Mileva Koncept</span><span class="rrow__meta">Zatvorena bašta · Grivac</span><span class="rrow__see" aria-hidden="true">Fotografija<svg><use href="#i-arrow-right"></use></svg></span><span class="visually-hidden">Zatvorena bašta sa drvenom tavanicom, Mileva Koncept, Grivac</span></a>
+      <a class="rrow rrow--foto" href="assets/img/hero-radnici-zalazak.jpg" data-lightbox><span class="rrow__num">02</span><span class="rrow__name">Ženeva Lux</span><span class="rrow__meta">Protivpožarna stepeništa · Kragujevac</span><span class="rrow__see" aria-hidden="true">Fotografija<svg><use href="#i-arrow-right"></use></svg></span><span class="visually-hidden">Protivpožarno metalno stepenište, Ženeva Lux</span></a>
+      <a class="rrow rrow--foto" href="assets/img/rad-04-detalj-spoja.jpg" data-lightbox><span class="rrow__num">03</span><span class="rrow__name">Caffe Porta</span><span class="rrow__meta">Krovna konstrukcija · Kragujevac</span><span class="rrow__see" aria-hidden="true">Fotografija<svg><use href="#i-arrow-right"></use></svg></span><span class="visually-hidden">Krovne rešetke i noseća konstrukcija, Caffe Porta</span></a>
       <div class="rrow"><span class="rrow__num">04</span><span class="rrow__name">Kafana Paligorić</span><span class="rrow__meta">Letnja bašta · Kragujevac</span></div>
-      <div class="rrow"><span class="rrow__num">05</span><span class="rrow__name">Stara Srbija</span><span class="rrow__meta">Zastakljena bašta · Kragujevac</span></div>
-      <div class="rrow"><span class="rrow__num">06</span><span class="rrow__name">Lokal „Čudesa"</span><span class="rrow__meta">Enterijer i šank · Kragujevac</span></div>
-      <div class="rrow"><span class="rrow__num">07</span><span class="rrow__name">Blazeks MV</span><span class="rrow__meta">Ograda i gelenderi · Aerodrom</span></div>
-      <div class="rrow"><span class="rrow__num">08</span><span class="rrow__name">BLAŽEKS nameštaj</span><span class="rrow__meta">Stepenište · Sušica</span></div>
-      <div class="rrow"><span class="rrow__num">09</span><span class="rrow__name">MATIS New Point</span><span class="rrow__meta">Platforma · Kragujevac</span></div>
-      <div class="rrow"><span class="rrow__num">10</span><span class="rrow__name">Kapija „DOSTOJNA"</span><span class="rrow__meta">Sa Simetra d.o.o. · Kutlovo</span></div>
+      <a class="rrow rrow--foto" href="assets/img/rad-nadstresnica-terasa.jpg" data-lightbox><span class="rrow__num">05</span><span class="rrow__name">Stara Srbija</span><span class="rrow__meta">Zastakljena bašta · Kragujevac</span><span class="rrow__see" aria-hidden="true">Fotografija<svg><use href="#i-arrow-right"></use></svg></span><span class="visually-hidden">Zastakljena letnja bašta, kafana Stara Srbija</span></a>
+      <a class="rrow rrow--foto" href="assets/img/hero-celicna-konstrukcija.jpg" data-lightbox><span class="rrow__num">06</span><span class="rrow__name">Lokal „Čudesa"</span><span class="rrow__meta">Enterijer i šank · Kragujevac</span><span class="rrow__see" aria-hidden="true">Fotografija<svg><use href="#i-arrow-right"></use></svg></span><span class="visually-hidden">Metalni enterijer i šank, lokal Čudesa</span></a>
+      <a class="rrow rrow--foto" href="assets/img/rad-nadstresnica-solarni-jesenice.jpg" data-lightbox><span class="rrow__num">07</span><span class="rrow__name">Blazeks MV</span><span class="rrow__meta">Ograda i gelenderi · Aerodrom</span><span class="rrow__see" aria-hidden="true">Fotografija<svg><use href="#i-arrow-right"></use></svg></span><span class="visually-hidden">Ograda obložena kompaktom, Blazeks MV</span></a>
+      <a class="rrow rrow--foto" href="assets/img/rad-06-nadstresnica-garaza.jpg" data-lightbox><span class="rrow__num">08</span><span class="rrow__name">BLAŽEKS nameštaj</span><span class="rrow__meta">Stepenište · Sušica</span><span class="rrow__see" aria-hidden="true">Fotografija<svg><use href="#i-arrow-right"></use></svg></span><span class="visually-hidden">Spoljno metalno stepenište, BLAŽEKS nameštaj, Sušica</span></a>
+      <a class="rrow rrow--foto" href="assets/img/proces-skelet-hale.jpg" data-lightbox><span class="rrow__num">09</span><span class="rrow__name">MATIS New Point</span><span class="rrow__meta">Platforma · Kragujevac</span><span class="rrow__see" aria-hidden="true">Fotografija<svg><use href="#i-arrow-right"></use></svg></span><span class="visually-hidden">Metalna konstrukcija platforme, MATIS New Point</span></a>
+      <a class="rrow rrow--foto" href="assets/img/rad-01-celicna-hala.jpg" data-lightbox><span class="rrow__num">10</span><span class="rrow__name">Kapija „DOSTOJNA"</span><span class="rrow__meta">Sa Simetra d.o.o. · Kutlovo</span><span class="rrow__see" aria-hidden="true">Fotografija<svg><use href="#i-arrow-right"></use></svg></span><span class="visually-hidden">Dekorativna klizna kapija DOSTOJNA, Kutlovo</span></a>
       <div class="rrow"><span class="rrow__num">11</span><span class="rrow__name">Ford salon</span><span class="rrow__meta">Klizne kapije i 3D paneli</span></div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Zavrsna traka po Konstrinoj CTA sekciji: fotografija preko cijele
+       sirine, tamni veo, tekst lijevo dolje, jedno puno dugme.
+       [SLIKA: privremena] Klijent salje pravu fotografiju za ovu traku.
+       ========================================================================== -->
+  <section class="ocean" aria-labelledby="ocean-naslov">
+    <div class="ocean__media">
+      <img src="assets/img/hero-usluge.jpg" alt="" width="1620" height="1216" loading="lazy" decoding="async">
+    </div>
+    <div class="ocean__inner">
+      <h2 class="ocean__title" id="ocean-naslov">Recite šta vam treba,<br>izlazimo i merimo.</h2>
+      <p class="ocean__lead">Izlazak na teren i procena su besplatni. Posle mere dobijate
+        raspisanu ponudu, sa rokom koji stoji u njoj.</p>
+      <div class="ocean__actions">
+        <a class="btn btn--solid" href="kontakt.html"><span class="btn__label" data-roll>Zatražite ponudu</span><span class="btn__icons" aria-hidden="true"><svg class="btn__icon"><use href="#i-arrow-right"></use></svg><svg class="btn__icon"><use href="#i-arrow-right"></use></svg></span></a>
+        <a class="btn btn--outline btn--on-dark-outline" href="tel:0604145466"><span class="btn__label" data-roll>060 41 45 466</span><span class="btn__icons" aria-hidden="true"><svg class="btn__icon"><use href="#i-phone"></use></svg><svg class="btn__icon"><use href="#i-phone"></use></svg></span></a>
+      </div>
     </div>
   </section>
 '''
@@ -595,6 +621,8 @@ def gradi_o_nama():
                     desc='Bravarska radionica na Avalskoj 11 u Kragujevcu od 2018. Četvoro ljudi, '
                          'preko dvadeset objekata, mera i izrada i montaža sopstvenom ekipom.',
                     ogimg='assets/img/rad-05-montaza-na-terenu.jpg', body=body))
+    # Reference se otvaraju u lightboxu, pa stranici treba isti okvir kao pocetnoj.
+    html = html.replace('<script src="js/main.js" defer></script>', LIGHTBOX)
     (SITE / 'o-nama.html').write_text(html, encoding='utf-8')
     return len(html)
 
