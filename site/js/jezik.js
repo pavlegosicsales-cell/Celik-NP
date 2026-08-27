@@ -134,8 +134,17 @@
     });
   }
 
+  /* ?lang=en u adresi ima prednost nad svim ostalim i pamti se. Sluzi za
+     dijeljenje engleske verzije linkom i za provjeru na zivom sajtu. */
+  function izAdrese() {
+    var m = /[?&]lang=(sr|en)/.exec(window.location.search);
+    return m ? m[1] : null;
+  }
+
   function pokreni() {
-    var izbor = sacuvano();
+    var izbor = izAdrese();
+    if (izbor) { zapamti(izbor); }
+    if (!izbor) { izbor = sacuvano(); }
     if (izbor !== 'sr' && izbor !== 'en') { izbor = balkanski() ? 'sr' : 'en'; }
     postavi(izbor);
 

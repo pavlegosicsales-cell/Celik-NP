@@ -717,3 +717,8 @@ if __name__ == '__main__':
     print()
     import seo
     seo.main()
+
+    # Hash u adresi css i js fajlova, da pretrazivac ne vrti staru kopiju.
+    print()
+    import verzija
+    verzija.main()
