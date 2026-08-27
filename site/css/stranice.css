@@ -830,11 +830,44 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
 /* Cetiri odsjecka skrola, jedan po koloni. */
 .cvals__rail { height: 496px; }
 
+/* Strelice postoje samo u telefonskoj verziji, gdje red postaje slider. */
+.cvals__nav { display: none; }
+
+.cvals__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--color-heading);
+  transition: background-color var(--duration-fast) var(--ease-hover),
+              border-color var(--duration-fast) var(--ease-hover),
+              color var(--duration-fast) var(--ease-hover),
+              opacity var(--duration-fast) var(--ease-hover);
+}
+
+.cvals__arrow svg { width: 18px; height: 18px; }
+
+/* Strelice ulijevo nema u spriteu, pa se desna okrece. */
+.cvals__arrow[data-cvals-prev] svg { transform: rotate(180deg); }
+
+.cvals__arrow--on {
+  border-color: var(--ink-900);
+  background-color: var(--ink-900);
+  color: var(--cream-50);
+}
+
+.cvals__arrow[disabled] { opacity: 0.35; }
+
 /* Kad je animacija iskljucena, obje sekcije se ponasaju kao na uzem ekranu:
    nema lijepljenja, nema praznog skrola, obje kartice se vide odjednom.
    Skripta u tom slucaju i ne krece, pa niko ne prepisuje ove vrijednosti. */
 @media (prefers-reduced-motion: reduce) {
-  .msn__stage { position: static; height: auto; max-height: none; }
+  .msn__stage { position: static; height: auto; min-height: 0; max-height: none; }
   .msn__bg { position: relative; height: 66.75vw; }
   .msn__bg img { transform: none; }
   .msn__card {
@@ -1346,13 +1379,23 @@ a.rrow:focus-visible .rrow__see { opacity: 1; transform: none; }
   .cvals__rail { display: none; }
   .cval__rule { height: 133px; }
 
-  /* Kartica se slaze u kolonu i slika ide preko pune sirine. */
-  .msn__stage { height: auto; max-height: none; position: static; }
-  .msn__bg { position: relative; height: 66.75vw; }
-  .msn__card { position: static; flex-direction: column; align-items: flex-start; width: 100%; transform: none; opacity: 1 !important; margin-top: var(--space-6); box-shadow: none; }
+  /* Sekcija zadrzava lijepljenje i na uzem ekranu, kao na Konstri: pozadina
+     se zamucuje, kartice se smjenjuju preko nje. Mijenja se samo oblik
+     kartice, po Konstrinim mjerama za telefon: kolona, 320 sirine,
+     padding 20, slika preko pune sirine visine 243. */
+  .msn__stage { height: 78svh; min-height: 520px; max-height: none; }
+  .msn__card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-5);
+    width: min(320px, calc(100% - 32px));
+    padding: 20px;
+  }
   .msn__media { width: 100%; height: 243px; }
-  .msn__rail { display: none; }
-  .msn { padding-bottom: var(--space-9); }
+  .msn__title { font-size: var(--text-3xl); line-height: var(--leading-h4); }
+  .msn__body { gap: var(--space-4); }
+  .msn__body p { font-size: var(--text-lg); }
+  .msn__rail { height: 1100px; }
 
   /* Put: slika ide iznad koraka i prestaje da se lijepi. */
   .hist__body { flex-direction: column; gap: var(--space-7); }
@@ -1389,7 +1432,34 @@ a.rrow:focus-visible .rrow__see { opacity: 1; transform: none; }
   .ahero { padding-top: 132px; gap: var(--space-7); }
   .ahero__actions .btn { width: 100%; justify-content: center; }
 
-  .cvals__row { grid-template-columns: 1fr; }
+  /* Konstra na telefonu ne slaze cetiri pravila jedno ispod drugog nego ih
+     pusta kao slider sa dvije okrugle strelice. Isto ovdje: red postaje
+     traka sa scroll-snapom, jedna kolona po ekranu, lenjir ostaje na punoj
+     mjeri jer se na telefonu ne skuplja.
+     Negativne margine i padding vracaju traku na punu sirinu ekrana, pa
+     susjedna kartica moze da proviri sa strane. */
+  .cvals__row {
+    display: flex;
+    grid-template-columns: none;
+    gap: var(--space-6);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    margin-inline: calc(-1 * var(--container-pad));
+    padding-inline: var(--container-pad);
+    padding-bottom: var(--space-4);
+  }
+
+  .cvals__row::-webkit-scrollbar { display: none; }
+
+  .cval {
+    flex: 0 0 min(300px, calc(100vw - 2 * var(--container-pad) - 32px));
+    scroll-snap-align: start;
+  }
+
+  .cvals__nav { display: flex; gap: var(--space-3); align-self: center; }
+
   .msn__card { padding: 20px; }
 
   .ocean { min-height: 0; padding: 96px var(--container-pad); }

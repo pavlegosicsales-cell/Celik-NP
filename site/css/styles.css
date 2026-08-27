@@ -2525,7 +2525,10 @@ a.contact-item__value:hover { color: var(--orange-500); }
        slika u kartici sa 4/3 na 16/10, sto skida oko 45px
      Izmjereno na 375x812: kartica je visoka oko 700px, pa sa 16px odozgo
      staje u ekran i vidi se cijela dok stoji zalijepljena. */
-  .svc { position: sticky; top: 16px; flex-direction: column; gap: var(--space-6); padding: var(--space-4); }
+  /* Preklapanje kartica je ugaseno na telefonu 27.08.2026, na zahtjev:
+     na malom ekranu se lijepljenje cita kao zaglavljen skrol, a ne kao
+     efekat. Kartice idu obicno, jedna ispod druge. */
+  .svc { position: static; top: auto; flex-direction: column; gap: var(--space-6); padding: var(--space-4); }
   .svc__media { flex: none; width: 100%; min-height: 0; aspect-ratio: 16 / 10; align-self: auto; }
   .svc__content { flex: none; width: 100%; min-height: 0; gap: var(--space-8); padding: 0 var(--space-4) var(--space-4); }
   .svc__title { font-size: 34px; line-height: 40px; }

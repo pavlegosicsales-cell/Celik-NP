@@ -23,6 +23,17 @@ def css(html):
                         '<link rel="stylesheet" href="css/stranice.css">')
 
 
+def svijetlo(html):
+    """Stranice sa tamnim heroom nose bijelo zaglavlje.
+
+    Konstra bira izmedju "Desktop White" i "Desktop Black" po stranici.
+    Ovo je do sada bio rucni korak poslije gradnje, pa se gubio na svakoj
+    ponovnoj gradnji. Sada ide automatski.
+    """
+    return html.replace('<header class="header" id="header">',
+                        '<header class="header header--light" id="header">')
+
+
 def hero(title, lede, img, alt, crumbs):
     """Konstra Service Hero: 100vh, tamni overlay, mrvice iznad naslova."""
     kr = ''.join(
@@ -120,10 +131,10 @@ def gradi_usluge():
             + NL.join(kartice)
             + NL + '  </section>' + NL)
 
-    html = css(page(title='Usluge | NP Čelik Kragujevac',
+    html = svijetlo(css(page(title='Usluge | NP Čelik Kragujevac',
                     desc='Metalne konstrukcije, kapije i ograde, stepeništa i protivpožarna '
                          'stepeništa, letnje bašte, enterijer i modularni kontejneri u Kragujevcu.',
-                    ogimg='assets/img/hero-usluge.jpg', body=body))
+                    ogimg='assets/img/hero-usluge.jpg', body=body)))
     (SITE / 'usluge.html').write_text(html, encoding='utf-8')
     return len(html)
 
@@ -167,8 +178,8 @@ def gradi_detalj(u):
   </section>
 ''')
 
-    html = css(page(title=f'{u["naslov"]} | NP Čelik Kragujevac',
-                    desc=u['kratko'][:230], ogimg=u['slika_hero'], body=body))
+    html = svijetlo(css(page(title=f'{u["naslov"]} | NP Čelik Kragujevac',
+                    desc=u['kratko'][:230], ogimg=u['slika_hero'], body=body)))
     f = SITE / f'usluga-{u["slug"]}.html'
     f.write_text(html, encoding='utf-8')
     return f.name, len(html)
@@ -376,8 +387,8 @@ def gradi_galeriju():
     body = (hero('Galerija',
                  'Radovi NP Čelika u Kragujevcu i Šumadiji. Kliknite na fotografiju '
                  'da je vidite u punoj veličini.',
-                 'assets/img/rad-02-nadstresnica-odozdo.jpg',
-                 'Deking i metalna konstrukcija uz bazen, Kosmaj',
+                 'assets/img/deking-bazen-zalazak.jpg',
+                 'Deking uz bazen i metalna konstrukcija nadstrešnice, u zalazak sunca',
                  [('Početna', 'index.html'), ('Galerija', None)])
             + NL + '  <section class="gal" aria-label="Fotografije radova">'
             + NL + '    <div class="gal__grid">'
@@ -385,10 +396,10 @@ def gradi_galeriju():
             + NL + '    </div>'
             + NL + '  </section>' + NL)
 
-    html = css(page(title='Galerija radova | NP Čelik Kragujevac',
+    html = svijetlo(css(page(title='Galerija radova | NP Čelik Kragujevac',
                     desc='Fotografije radova NP Čelika u Kragujevcu i Šumadiji: bašte, '
                          'stepeništa, kapije, ograde, platforme i modularni kontejneri.',
-                    ogimg='assets/img/rad-05-montaza-na-terenu.jpg', body=body))
+                    ogimg='assets/img/rad-05-montaza-na-terenu.jpg', body=body)))
     html = html.replace('<script src="js/main.js" defer></script>', LIGHTBOX)
     (SITE / 'galerija.html').write_text(html, encoding='utf-8')
     return len(html)
@@ -544,6 +555,15 @@ def gradi_o_nama():
             </div>
           </div>
         </article>
+      </div>
+
+      <div class="cvals__nav" aria-hidden="true">
+        <button class="cvals__arrow" type="button" data-cvals-prev aria-label="Prethodno pravilo">
+          <svg aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg>
+        </button>
+        <button class="cvals__arrow cvals__arrow--on" type="button" data-cvals-next aria-label="Sledeće pravilo">
+          <svg aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg>
+        </button>
       </div>
     </div>
 

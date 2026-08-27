@@ -845,11 +845,11 @@
     var stackTop = citajTop();
 
     /* Skaliranje prekrivene kartice ide svuda gdje ide i lijepljenje.
-       Do 10.08.2026. je bilo ograniceno na 1440px navise, jer je ispod te
-       sirine lijepljenje bilo ugaseno. Sada radi i na telefonu, pa se i
-       prekrivanje ponasa isto kao na desktopu. Tacka lijepljenja se cita
-       iz CSS-a, a na uzim ekranima je 16px umjesto 120px. */
-    var wide = window.matchMedia('(min-width: 1px)');
+       Od 27.08.2026. je lijepljenje kartica na telefonu ugaseno u CSS-u,
+       pa se i skaliranje gasi ispod 810px: bez lijepljenja bi kartice samo
+       ostajale smanjene, bez razloga. Tacka lijepljenja se i dalje cita iz
+       CSS-a, jer nije ista na 1440 i ispod. */
+    var wide = window.matchMedia('(min-width: 810px)');
 
     var ticking = false;
     var applied = [];
@@ -1054,6 +1054,49 @@
 
     window.addEventListener('resize', function () { applied = []; paint(); });
     paint();
+  }
+
+  /* ------------------------------------------------------------------------
+     PRAVILA KAO SLIDER NA TELEFONU
+     ------------------------------------------------------------------------
+     Ispod 810px .cvals__row je traka sa scroll-snapom umjesto mreze. Dvije
+     okrugle strelice je pomjeraju za jednu kolonu, kao na Konstri.
+     Skripta ne dira izgled: ako traka nije prelivajuca (desktop), dugmad
+     su ionako sakrivena CSS-om i nista se ne desava.
+     ------------------------------------------------------------------------ */
+  function initCvalsSlider() {
+    var traka = document.querySelector('.cvals__row');
+    if (!traka) { return; }
+
+    var prev = document.querySelector('[data-cvals-prev]');
+    var next = document.querySelector('[data-cvals-next]');
+    if (!prev || !next) { return; }
+
+    function korak() {
+      var prva = traka.querySelector('.cval');
+      if (!prva) { return traka.clientWidth; }
+      var gap = parseFloat(getComputedStyle(traka).columnGap) || 0;
+      return prva.offsetWidth + gap;
+    }
+
+    function osvjezi() {
+      var kraj = traka.scrollWidth - traka.clientWidth - 1;
+      prev.disabled = traka.scrollLeft <= 0;
+      next.disabled = traka.scrollLeft >= kraj;
+    }
+
+    prev.addEventListener('click', function () { traka.scrollBy({ left: -korak(), behavior: 'smooth' }); });
+    next.addEventListener('click', function () { traka.scrollBy({ left: korak(), behavior: 'smooth' }); });
+
+    var ticking = false;
+    traka.addEventListener('scroll', function () {
+      if (ticking) { return; }
+      ticking = true;
+      requestAnimationFrame(function () { ticking = false; osvjezi(); });
+    }, { passive: true });
+
+    window.addEventListener('resize', osvjezi);
+    osvjezi();
   }
 
   /* ------------------------------------------------------------------------
@@ -1606,6 +1649,7 @@
   }
 
   initHeaderOnScroll();
+  initCvalsSlider();
   initLocMap();
   initWorksSlider();
   initCountUp();
