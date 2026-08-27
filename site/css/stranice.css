@@ -457,7 +457,7 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
 
 .wizard__done.is-shown { display: flex; }
 
-.wizard__done h3 {
+.wizard__done h2 {
   margin: 0;
   font-family: var(--font-display);
   font-size: var(--text-2xl);

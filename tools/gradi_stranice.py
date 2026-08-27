@@ -261,7 +261,7 @@ def gradi_kontakt():
         </form>
 
         <div class="wizard__done" role="status">
-          <h3>Upit je stigao</h3>
+          <h2>Upit je stigao</h2>
           <p>Javljamo se isti ili sledeći radni dan. Ako vam se žuri, pozovite 060 41 45 466.</p>
         </div>
       </div>
@@ -636,3 +636,9 @@ if __name__ == '__main__':
             print(f'{n:36} {s//1024:3} KB')
     print(f'{"kontakt.html":36} {gradi_kontakt()//1024:3} KB')
     print(f'{"o-nama.html":36} {gradi_o_nama()//1024:3} KB')
+
+    # Generisane strane nose samo osnovni <head>. Canonical, twitter kartice
+    # i JSON-LD upisuje seo.py, pa se pusta odmah poslije gradnje.
+    print()
+    import seo
+    seo.main()

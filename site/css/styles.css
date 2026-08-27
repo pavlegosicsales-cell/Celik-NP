@@ -5028,12 +5028,13 @@ a.contact__value:hover { color: var(--brown-800); }
   margin-top: var(--space-8);
   margin-inline: calc(-1 * var(--container-pad));
   font-family: var(--font-display);
-  /* Izmjereno u pretrazivacu 26.08.2026, ne procijenjeno: natpis "NP ČELIK"
-     u Geistu je sirok tacno 4.104em. Da bi stao preko pune sirine ekrana
-     treba mu 100vw / 4.104 = 24.37vw. Staro 27vw je ostalo od "B-STEEL",
-     koji ima jedno slovo manje, pa je "NP ČELIK" bio 11% siri od ekrana i
-     na telefonu mu je kraj ispadao iz kadra. */
-  font-size: 24.3vw;
+  /* Izmjereno u pretrazivacu 27.08.2026, ne procijenjeno: natpis je u
+     ucitanom Geistu sirok 4.51em. Prvo mjerenje je dalo 4.104em, ali je
+     tada jos stajao rezervni Arial, pa je vrijednost bila preuska i kraj
+     natpisa je i dalje ispadao iz kadra. Za punu sirinu treba mu
+     100 / 4.51 = 22.2vw; sa rezervom ide 21.4vw. Staro 27vw je ostalo od
+     "B-STEEL", koji ima jedno slovo manje. */
+  font-size: 21.4vw;
   font-weight: var(--weight-medium);
   /* line-height 0.78 je uzi od samog slova, pa kutija sjece i vrh i dno.
      Kod "B-STEEL" se to nije vidjelo, ali "NP ČELIK" ima kvacicu iznad C
