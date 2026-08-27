@@ -1277,6 +1277,61 @@ a.contact-item__value:hover { color: var(--orange-500); }
 
 .btn--bare::after { border-color: transparent; }
 
+/* --- Prekidac jezika --------------------------------------------------------
+   Dva mala dugmeta, aktivno je puno. Stoji uz dugme Pozovi u zaglavlju i
+   jos jednom u mobilnom meniju, jer se zaglavlje na telefonu skuplja. */
+.lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-pill);
+}
+
+.lang__btn {
+  min-width: 34px;
+  padding: 5px 8px;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-muted);
+  background: none;
+  border: 0;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-hover),
+              color var(--duration-fast) var(--ease-hover);
+}
+
+.lang__btn:hover { color: var(--color-heading); }
+
+.lang__btn.is-on {
+  color: var(--white);
+  background-color: var(--ink-900);
+}
+
+/* Na tamnom heroju i na skrolovanom zaglavlju sve pobijeli. */
+.header--light:not([data-scrolled="true"]) .lang { border-color: rgba(255, 255, 255, 0.28); }
+.header--light:not([data-scrolled="true"]) .lang__btn { color: var(--stone-500); }
+.header--light:not([data-scrolled="true"]) .lang__btn.is-on {
+  color: var(--ink-900);
+  background-color: var(--cream-50);
+}
+
+.header[data-scrolled="true"] .lang { border-color: rgba(255, 255, 255, 0.28); }
+.header[data-scrolled="true"] .lang__btn { color: var(--stone-500); }
+.header[data-scrolled="true"] .lang__btn.is-on {
+  color: var(--ink-900);
+  background-color: var(--cream-50);
+}
+
+/* U mobilnom meniju je podloga tamna, pa vazi ista logika. */
+.lang--menu { align-self: flex-start; margin-top: var(--space-5); border-color: rgba(255, 255, 255, 0.28); }
+.lang--menu .lang__btn { color: var(--stone-500); }
+.lang--menu .lang__btn.is-on { color: var(--ink-900); background-color: var(--cream-50); }
+
 .header__cta { display: none; }
 
 @media (min-width: 810px) { .header__cta { display: inline-flex; } }

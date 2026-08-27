@@ -139,6 +139,11 @@
     </nav>
 
     <div class="header__actions">
+      <div class="lang" role="group" aria-label="Jezik">
+        <button class="lang__btn" type="button" data-jezik-prekidac="sr" aria-pressed="true">SR</button>
+        <button class="lang__btn" type="button" data-jezik-prekidac="en" aria-pressed="false">EN</button>
+      </div>
+
       <!-- Broj telefona je uklonjen iz zaglavlja na zahtjev, kao i na
            Konstri. Klik-na-poziv ostaje u CTA traci, kontaktu i podnozju.
            Napomena: ICP kaze da je prvi kontakt poziv i da broj treba
@@ -184,6 +189,10 @@
         <li style="--i: 0"><a class="smenu__social-link" href="https://www.instagram.com/celiknp/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
         <li style="--i: 1"><a class="smenu__social-link" href="https://www.facebook.com/npcelikconstruction" target="_blank" rel="noopener noreferrer">Facebook</a></li>
       </ul>
+    </div>
+        <div class="lang lang--menu" role="group" aria-label="Jezik">
+      <button class="lang__btn" type="button" data-jezik-prekidac="sr" aria-pressed="true">SR</button>
+      <button class="lang__btn" type="button" data-jezik-prekidac="en" aria-pressed="false">EN</button>
     </div>
   </nav>
 </div>
@@ -534,6 +543,8 @@
        aria-hidden jer je ukras: ime firme vec stoji u zaglavlju. -->
   <div class="footer__wordmark" aria-hidden="true">NP ČELIK</div>
 </footer>
+<script src="js/prevod.js" defer></script>
+<script src="js/jezik.js" defer></script>
 <!-- Pregled fotografije referenci. Isti markup i ista skripta kao na pocetnoj. -->
 <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Pregled fotografije">
   <button class="lightbox__close" type="button" aria-label="Zatvorite pregled">

@@ -341,6 +341,37 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
 
 .wizard__bar { display: flex; gap: 6px; margin-bottom: var(--space-3); }
 
+/* Wizard na pocetnoj stoji u staklenoj kartici, koja je tamna. Umjesto da
+   se svako pravilo ponavlja u tamnoj varijanti, ovdje se prepisuju samo
+   tokeni koje .wizard vec koristi, pa ostatak fajla radi neizmijenjen. */
+.contact__card .wizard {
+  --color-bg: transparent;
+  --color-bg-alt: rgba(168, 190, 255, 0.14);
+  --color-surface: rgba(255, 255, 255, 0.05);
+  --color-border: rgba(255, 255, 255, 0.14);
+  --color-heading: var(--cream-50);
+  --color-text: var(--stone-500);
+  --brown-800: var(--stone-500);
+  --stone-600: var(--stone-500);
+  --stone-300: rgba(255, 255, 255, 0.16);
+  --color-focus: var(--sand-300);
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.contact__card .wopt:hover { border-color: rgba(255, 255, 255, 0.4); }
+.contact__card .wopt.is-picked { border-color: var(--sand-300); }
+.contact__card .wnav__back:hover { border-color: var(--cream-50); color: var(--cream-50); }
+
+.contact__card .wizard__done {
+  color: var(--stone-500);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.contact__card .wizard__done h2 { color: var(--cream-50); }
+
 .wizard__tick {
   flex: 1;
   height: 4px;

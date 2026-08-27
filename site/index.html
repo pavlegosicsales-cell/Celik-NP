@@ -145,6 +145,8 @@
   <!-- tokens.css sadrzi sve dizajn varijable. Restilovanje ide iskljucivo tamo. -->
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/styles.css">
+<!-- Od 27.08.2026. i pocetna nosi stranice.css, jer wizard forma zivi u njemu. Provjereno: jedini selektori koji se poklapaju sa markupom pocetne su wizard klase i .header--light, koji pocetna ne nosi. -->
+<link rel="stylesheet" href="css/stranice.css">
 </head>
 
 <body>
@@ -272,6 +274,11 @@
     </nav>
 
     <div class="header__actions">
+      <div class="lang" role="group" aria-label="Jezik">
+        <button class="lang__btn" type="button" data-jezik-prekidac="sr" aria-pressed="true">SR</button>
+        <button class="lang__btn" type="button" data-jezik-prekidac="en" aria-pressed="false">EN</button>
+      </div>
+
       <!-- Broj telefona je uklonjen iz zaglavlja na zahtjev, kao i na
            Konstri. Klik-na-poziv ostaje u CTA traci, kontaktu i podnozju.
            Napomena: ICP kaze da je prvi kontakt poziv i da broj treba
@@ -340,6 +347,10 @@
         <li style="--i: 0"><a class="smenu__social-link" href="https://www.instagram.com/celiknp/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
         <li style="--i: 1"><a class="smenu__social-link" href="https://www.facebook.com/npcelikconstruction" target="_blank" rel="noopener noreferrer">Facebook</a></li>
       </ul>
+    </div>
+        <div class="lang lang--menu" role="group" aria-label="Jezik">
+      <button class="lang__btn" type="button" data-jezik-prekidac="sr" aria-pressed="true">SR</button>
+      <button class="lang__btn" type="button" data-jezik-prekidac="en" aria-pressed="false">EN</button>
     </div>
   </nav>
 </div>
@@ -1702,78 +1713,149 @@
 
         <div class="glass__mesh" aria-hidden="true"></div>
 
-        <form class="contact__form" id="upit-forma" action="#" method="post">
-
-          <div class="field-row">
-            <p class="field">
-              <label class="field__label" for="ime">Ime</label>
-              <span class="field__wrap">
-                <svg class="field__icon" aria-hidden="true" focusable="false"><use href="#i-user"></use></svg>
-                <input class="field__input" id="ime" name="ime" type="text" autocomplete="given-name" placeholder="Unesite ime" required>
-              </span>
-            </p>
-            <p class="field">
-              <label class="field__label" for="prezime">Prezime</label>
-              <span class="field__wrap">
-                <svg class="field__icon" aria-hidden="true" focusable="false"><use href="#i-user"></use></svg>
-                <input class="field__input" id="prezime" name="prezime" type="text" autocomplete="family-name" placeholder="Unesite prezime">
-              </span>
-            </p>
+        <!-- Od 27.08.2026. je ovdje isti wizard kao na stranici Kontakt, na
+             zahtjev. Boje ostaju iz staklene kartice: .contact__card .wizard
+             prepisuje tokene u tamnu varijantu, pa se ne duplira nijedno
+             pravilo iz .wizard. -->
+        <form class="wizard" id="wizard" novalidate>
+          <div class="wizard__bar" aria-hidden="true">
+          <span class="wizard__tick"></span>
+          <span class="wizard__tick"></span>
+          <span class="wizard__tick"></span>
+          <span class="wizard__tick"></span>
+          <span class="wizard__tick"></span>
           </div>
+          <p class="wizard__count" role="status">Korak 1 od 5</p>
 
-          <div class="field-row">
-            <p class="field">
-              <label class="field__label" for="email">Email</label>
-              <span class="field__wrap">
-                <svg class="field__icon" aria-hidden="true" focusable="false"><use href="#i-mail"></use></svg>
-                <input class="field__input" id="email" name="email" type="email" autocomplete="email" placeholder="Unesite email">
-              </span>
-            </p>
-            <p class="field">
-              <label class="field__label" for="telefon">Telefon</label>
-              <span class="field__wrap">
-                <svg class="field__icon" aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg>
-                <input class="field__input" id="telefon" name="telefon" type="tel" autocomplete="tel" placeholder="Unesite broj telefona" required>
-              </span>
-            </p>
+        <fieldset class="wstep is-active">
+          <legend class="wstep__q">Šta vam treba?</legend>
+          <div class="wopts" data-name="posao">
+            <button class="wopt" type="button" data-value="Kapija ili ograda" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-warehouse"></use></svg>
+              <span>Kapija ili ograda</span>
+            </button>
+            <button class="wopt" type="button" data-value="Letnja ili zatvorena bašta" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-flame"></use></svg>
+              <span>Letnja ili zatvorena bašta</span>
+            </button>
+            <button class="wopt" type="button" data-value="Stepenište ili PP stepenište" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-hardhat"></use></svg>
+              <span>Stepenište ili PP stepenište</span>
+            </button>
+            <button class="wopt" type="button" data-value="Konstrukcija, hala, nadstrešnica" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-factory"></use></svg>
+              <span>Konstrukcija, hala, nadstrešnica</span>
+            </button>
+            <button class="wopt" type="button" data-value="Modularni kontejner" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-warehouse"></use></svg>
+              <span>Modularni kontejner</span>
+            </button>
+            <button class="wopt" type="button" data-value="Nešto drugo" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-cog"></use></svg>
+              <span>Nešto drugo</span>
+            </button>
           </div>
+        </fieldset>
+        <fieldset class="wstep">
+          <legend class="wstep__q">Kakav je objekat?</legend>
+          <div class="wopts" data-name="objekat">
+            <button class="wopt" type="button" data-value="Ugostiteljski lokal" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-flame"></use></svg>
+              <span>Ugostiteljski lokal</span>
+            </button>
+            <button class="wopt" type="button" data-value="Poslovni objekat ili firma" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-factory"></use></svg>
+              <span>Poslovni objekat ili firma</span>
+            </button>
+            <button class="wopt" type="button" data-value="Kuća ili dvorište" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-hardhat"></use></svg>
+              <span>Kuća ili dvorište</span>
+            </button>
+            <button class="wopt" type="button" data-value="Gradilište u toku" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-cog"></use></svg>
+              <span>Gradilište u toku</span>
+            </button>
+          </div>
+        </fieldset>
+        <fieldset class="wstep">
+          <legend class="wstep__q">Gde je posao?</legend>
+          <div class="wopts" data-name="gde">
+            <button class="wopt" type="button" data-value="Kragujevac" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg>
+              <span>Kragujevac</span>
+            </button>
+            <button class="wopt" type="button" data-value="Šumadija, van Kragujevca" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg>
+              <span>Šumadija, van Kragujevca</span>
+            </button>
+            <button class="wopt" type="button" data-value="Centralna Srbija" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg>
+              <span>Centralna Srbija</span>
+            </button>
+            <button class="wopt" type="button" data-value="Drugde" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg>
+              <span>Drugde</span>
+            </button>
+          </div>
+        </fieldset>
+        <fieldset class="wstep">
+          <legend class="wstep__q">Za kada vam treba?</legend>
+          <div class="wopts" data-name="kada">
+            <button class="wopt" type="button" data-value="Hitno" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg>
+              <span>Hitno</span>
+            </button>
+            <button class="wopt" type="button" data-value="U toku ovog meseca" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg>
+              <span>U toku ovog meseca</span>
+            </button>
+            <button class="wopt" type="button" data-value="Pre sezone" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-calendar-check"></use></svg>
+              <span>Pre sezone</span>
+            </button>
+            <button class="wopt" type="button" data-value="Još planiram" aria-pressed="false">
+              <svg aria-hidden="true" focusable="false"><use href="#i-calendar-check"></use></svg>
+              <span>Još planiram</span>
+            </button>
+          </div>
+        </fieldset>
 
-          <p class="field">
-            <label class="field__label" for="tip">Tip objekta</label>
-            <span class="field__wrap">
-              <svg class="field__icon" aria-hidden="true" focusable="false"><use href="#i-warehouse"></use></svg>
-              <select class="field__input field__input--select" id="tip" name="tip">
-                <option value="">Šta vam treba?</option>
-                <option>Kapija ili ograda</option>
-                <option>Letnja bašta</option>
-                <option>Stepenište</option>
-                <option>Konstrukcija, hala ili nadstrešnica</option>
-                <option>Drugo</option>
-              </select>
-            </span>
-          </p>
+          <fieldset class="wstep">
+            <legend class="wstep__q">Vaši podaci</legend>
+            <div class="wfields">
+              <div class="wfield">
+                <label for="w-ime">Ime i prezime</label>
+                <input id="w-ime" name="ime" type="text" autocomplete="name" required>
+              </div>
+              <div class="wfield">
+                <label for="w-tel">Telefon</label>
+                <input id="w-tel" name="telefon" type="tel" autocomplete="tel" required>
+              </div>
+              <div class="wfield wfield--full">
+                <label for="w-mejl">Mejl, ako želite ponudu pismeno</label>
+                <input id="w-mejl" name="mejl" type="email" autocomplete="email">
+              </div>
+              <div class="wfield wfield--full">
+                <label for="w-opis">Dimenzije, rok, sve što znate o poslu</label>
+                <textarea id="w-opis" name="opis" rows="4"></textarea>
+              </div>
+            </div>
+            <p class="wizard__note">Javljamo se isti ili sledeći radni dan. Ako vam se žuri, pozovite 060 41 45 466.</p>
+          </fieldset>
 
-          <p class="field">
-            <label class="field__label" for="poruka">Opis projekta</label>
-            <span class="field__wrap field__wrap--area">
-              <svg class="field__icon" aria-hidden="true" focusable="false"><use href="#i-message"></use></svg>
-              <textarea class="field__input field__input--area" id="poruka" name="poruka" rows="5" placeholder="Opišite objekat, dimenzije, rok, sve što znate."></textarea>
-            </span>
-          </p>
+          <p class="wizard__err" role="alert" hidden></p>
 
-          <button class="btn btn--sand contact__submit" type="submit">
-            <span class="btn__label" data-roll>Pošaljite upit</span>
-            <span class="btn__icons" aria-hidden="true">
-              <svg class="btn__icon"><use href="#i-arrow-right"></use></svg>
-              <svg class="btn__icon"><use href="#i-arrow-right"></use></svg>
-            </span>
-          </button>
-
-        <!-- Poruka o uspjehu ili gresci ide ovdje. role=status znaci da je
-             citac ekrana procita sam, bez pomjeranja fokusa. -->
-          <p class="field__hint" id="forma-status" role="status" aria-live="polite"></p>
-
+          <div class="wnav">
+            <button class="wnav__back" type="button" hidden>Nazad</button>
+            <button class="btn btn--solid wnav__next" type="button"><span class="btn__label">Dalje</span><span class="btn__icons" aria-hidden="true"><svg class="btn__icon"><use href="#i-arrow-right"></use></svg><svg class="btn__icon"><use href="#i-arrow-right"></use></svg></span></button>
+            <button class="btn btn--solid wnav__submit" type="submit" hidden><span class="btn__label">Pošaljite upit</span><span class="btn__icons" aria-hidden="true"><svg class="btn__icon"><use href="#i-arrow-right"></use></svg><svg class="btn__icon"><use href="#i-arrow-right"></use></svg></span></button>
+          </div>
         </form>
+
+        <div class="wizard__done" role="status">
+          <h2>Upit je stigao</h2>
+          <p>Javljamo se isti ili sledeći radni dan. Ako vam se žuri, pozovite 060 41 45 466.</p>
+        </div>
       </div>
       </div>
 
@@ -1870,7 +1952,10 @@
   <img class="lightbox__img" alt="">
 </div>
 
+<script src="js/prevod.js" defer></script>
+<script src="js/jezik.js" defer></script>
 <script src="js/main.js" defer></script>
+<script src="js/wizard.js" defer></script>
 
 </body>
 </html>

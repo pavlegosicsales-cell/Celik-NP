@@ -64,6 +64,8 @@ HEAD_TPL = '''<!DOCTYPE html>
 '''
 
 TAIL = '''
+<script src="js/prevod.js" defer></script>
+<script src="js/jezik.js" defer></script>
 <script src="js/main.js" defer></script>
 
 </body>
