@@ -844,12 +844,15 @@
     };
     var stackTop = citajTop();
 
-    /* Skaliranje prekrivene kartice ide svuda gdje ide i lijepljenje.
-       Od 27.08.2026. je lijepljenje kartica na telefonu ugaseno u CSS-u,
-       pa se i skaliranje gasi ispod 810px: bez lijepljenja bi kartice samo
-       ostajale smanjene, bez razloga. Tacka lijepljenja se i dalje cita iz
-       CSS-a, jer nije ista na 1440 i ispod. */
-    var wide = window.matchMedia('(min-width: 810px)');
+    /* Skaliranje ide tacno tamo gdje ide i lijepljenje. Umjesto medija
+       upita se cita stvarno stanje prve kartice: na stranici Usluge je
+       position: static ispod 810px, pa se skaliranje tamo samo iskljuci,
+       a na pocetnoj radi i na telefonu. */
+    var wide = {
+      get matches() {
+        return getComputedStyle(cards[0]).position === 'sticky';
+      }
+    };
 
     var ticking = false;
     var applied = [];

@@ -127,7 +127,7 @@ def gradi_usluge():
                  'assets/img/hero-usluge.jpg',
                  'Metalna konstrukcija u izradi, radovi NP Čelika',
                  [('Početna', 'index.html'), ('Usluge', None)])
-            + NL + '  <section class="svcs" aria-label="Spisak usluga">'
+            + NL + '  <section class="svcs svcs--lista" aria-label="Spisak usluga">'
             + NL.join(kartice)
             + NL + '  </section>' + NL)
 

@@ -355,10 +355,14 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
   --stone-600: var(--stone-500);
   --stone-300: rgba(255, 255, 255, 0.16);
   --color-focus: var(--sand-300);
-  padding: 0;
+  /* Okvir i radius dolaze od same staklene kartice, ali razmak mora ostati
+     isti kao na Kontaktu, inace traka napretka i koraci sjede na ivici. */
+  padding: var(--space-8);
   border: 0;
   background: none;
 }
+
+@media (max-width: 809.98px) { .contact__card .wizard { padding: var(--space-5); } }
 
 .contact__card .wopt:hover { border-color: rgba(255, 255, 255, 0.4); }
 .contact__card .wopt.is-picked { border-color: var(--sand-300); }
@@ -1411,21 +1415,28 @@ a.rrow:focus-visible .rrow__see { opacity: 1; transform: none; }
   .cval__rule { height: 133px; }
 
   /* Sekcija zadrzava lijepljenje i na uzem ekranu, kao na Konstri: pozadina
-     se zamucuje, kartice se smjenjuju preko nje. Mijenja se samo oblik
-     kartice, po Konstrinim mjerama za telefon: kolona, 320 sirine,
-     padding 20, slika preko pune sirine visine 243. */
-  .msn__stage { height: 78svh; min-height: 520px; max-height: none; }
+     se zamucuje, kartice se smjenjuju preko nje.
+
+     Scena ide na punu visinu ekrana, a kartica se skracuje toliko da oko
+     nje ostane vazduha. Prva verzija je imala scenu od 78svh i karticu od
+     657px, dakle tacno koliko i scena, pa je kartica dodirivala i gornju i
+     donju ivicu sekcije i djelovala kao da je odsjecena.
+
+     Konstra na telefonu drzi pozadinu na 784px, karticu oko 600 i ostavlja
+     razmak sa obje strane; ovdje je isti odnos, samo vezan za visinu
+     ekrana umjesto za fiksan broj. */
+  .msn__stage { height: 100svh; min-height: 540px; max-height: none; }
   .msn__card {
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--space-5);
-    width: min(320px, calc(100% - 32px));
+    gap: var(--space-4);
+    width: min(340px, calc(100% - 32px));
     padding: 20px;
   }
-  .msn__media { width: 100%; height: 243px; }
-  .msn__title { font-size: var(--text-3xl); line-height: var(--leading-h4); }
-  .msn__body { gap: var(--space-4); }
-  .msn__body p { font-size: var(--text-lg); }
+  .msn__media { width: 100%; height: 190px; }
+  .msn__title { font-size: var(--text-2xl); line-height: var(--leading-h5); }
+  .msn__body { gap: var(--space-3); }
+  .msn__body p { font-size: var(--text-base); line-height: 24px; }
   .msn__rail { height: 1100px; }
 
   /* Put: slika ide iznad koraka i prestaje da se lijepi. */
