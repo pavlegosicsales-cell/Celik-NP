@@ -95,6 +95,13 @@ STRANE = {
         usluga='Deking, enterijer i završna obrada',
         mrvica='Enterijer',
     ),
+    'galerija.html': dict(
+        slug='galerija.html',
+        title='Galerija radova | NP Čelik Kragujevac',
+        desc='Fotografije radova NP Čelika u Kragujevcu i Šumadiji: zatvorene bašte, '
+             'stepeništa, kapije i ograde, platforme i modularni kontejneri.',
+        ogimg='assets/img/rad-05-montaza-na-terenu.jpg',
+    ),
     'o-nama.html': dict(
         slug='o-nama.html',
         title='O nama | NP Čelik Kragujevac',

@@ -9,6 +9,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 from stranice import page, SITE
 from usluge_sadrzaj import USLUGE
+from galerija_sadrzaj import PROJEKTI
 
 CHECK = '<svg aria-hidden="true" focusable="false"><use href="#i-check"></use></svg>'
 ARROW = ('<span class="btn__icons" aria-hidden="true">'
@@ -339,6 +340,60 @@ LIGHTBOX = '''<!-- Pregled fotografije referenci. Isti markup i ista skripta kao
 <script src="js/main.js" defer></script>'''
 
 
+# ==================================================================== GALERIJA
+def gradi_galeriju():
+    """Po Konstrinoj /project: hero preko cijelog ekrana pa mreza kartica.
+
+    Mjere iz izvora (konstra-project-lista.html):
+      Hero      100vh, padding 216px 72px 64px, veo #00000080
+      Sekcija   #FFF7E5, padding 112px 72px, kontejner 1320
+      Kartica   632 sirine, padding 32, overflow hidden, slika preko cijele
+                povrsine, veo preko nje, podaci na dnu
+      Tacka     7px, razdvaja tip posla od mjesta
+
+    Kartica otvara fotografiju u lightboxu, isto kao Radovi na pocetnoj.
+    """
+    NL = chr(10)
+    kartice = []
+    for p in PROJEKTI:
+        kartice.append(f'''
+        <a class="gcard" href="assets/img/{p["slika"]}" data-lightbox data-reveal>
+          <span class="gcard__media">
+            <img src="assets/img/{p["slika"]}" alt="" width="{p["w"]}" height="{p["h"]}" loading="lazy" decoding="async">
+          </span>
+          <span class="gcard__veil" aria-hidden="true"></span>
+          <span class="gcard__body">
+            <span class="gcard__meta">
+              <span>{p["tip"]}</span>
+              <span class="gcard__dot" aria-hidden="true"></span>
+              <span>{p["mjesto"]}</span>
+            </span>
+            <span class="gcard__name">{p["naziv"]}</span>
+          </span>
+          <span class="visually-hidden">{p["alt"]}</span>
+        </a>''')
+
+    body = (hero('Galerija',
+                 'Radovi NP Čelika u Kragujevcu i Šumadiji. Kliknite na fotografiju '
+                 'da je vidite u punoj veličini.',
+                 'assets/img/rad-02-nadstresnica-odozdo.jpg',
+                 'Deking i metalna konstrukcija uz bazen, Kosmaj',
+                 [('Početna', 'index.html'), ('Galerija', None)])
+            + NL + '  <section class="gal" aria-label="Fotografije radova">'
+            + NL + '    <div class="gal__grid">'
+            + NL.join(kartice)
+            + NL + '    </div>'
+            + NL + '  </section>' + NL)
+
+    html = css(page(title='Galerija radova | NP Čelik Kragujevac',
+                    desc='Fotografije radova NP Čelika u Kragujevcu i Šumadiji: bašte, '
+                         'stepeništa, kapije, ograde, platforme i modularni kontejneri.',
+                    ogimg='assets/img/rad-05-montaza-na-terenu.jpg', body=body))
+    html = html.replace('<script src="js/main.js" defer></script>', LIGHTBOX)
+    (SITE / 'galerija.html').write_text(html, encoding='utf-8')
+    return len(html)
+
+
 # ====================================================================== O NAMA
 def gradi_o_nama():
     body = f'''
@@ -373,10 +428,9 @@ def gradi_o_nama():
     <section class="msn" aria-label="Šta radimo i za koga radimo">
       <div class="msn__stage">
         <div class="msn__bg">
-          <!-- [SLIKA] Lokal Čudesa, enterijer. Jedina pejzažna fotka u odnosu
-               3:2, koliko traži Konstrin rig. Do sada je stajala samo kao
-               og:image. -->
-          <img src="assets/img/hero-celicna-konstrukcija.jpg" alt="" width="1170" height="780" loading="lazy" decoding="async">
+          <!-- Bela pergola sa lamelama, Ženeva Lux. Fotografija je kvadratna,
+               a rig je 3:2, pa object-fit: cover sece gore i dole. -->
+          <img src="assets/img/pergola-zeneva-lux.jpg" alt="" width="1424" height="1424" loading="lazy" decoding="async">
         </div>
 
         <article class="msn__card" data-msn-card>
@@ -599,11 +653,11 @@ def gradi_o_nama():
   <!-- ==========================================================================
        Zavrsna traka po Konstrinoj CTA sekciji: fotografija preko cijele
        sirine, tamni veo, tekst lijevo dolje, jedno puno dugme.
-       [SLIKA: privremena] Klijent salje pravu fotografiju za ovu traku.
+       Fotografija: modularni kontejner NP Čelika, snimljen protiv sunca.
        ========================================================================== -->
   <section class="ocean" aria-labelledby="ocean-naslov">
     <div class="ocean__media">
-      <img src="assets/img/hero-usluge.jpg" alt="" width="1620" height="1216" loading="lazy" decoding="async">
+      <img src="assets/img/modularni-kontejner-zora.jpg" alt="" width="1456" height="1456" loading="lazy" decoding="async">
     </div>
     <div class="ocean__inner">
       <h2 class="ocean__title" id="ocean-naslov">Recite šta vam treba,<br>izlazimo i merimo.</h2>
@@ -636,6 +690,7 @@ if __name__ == '__main__':
             print(f'{n:36} {s//1024:3} KB')
     print(f'{"kontakt.html":36} {gradi_kontakt()//1024:3} KB')
     print(f'{"o-nama.html":36} {gradi_o_nama()//1024:3} KB')
+    print(f'{"galerija.html":36} {gradi_galeriju()//1024:3} KB')
 
     # Generisane strane nose samo osnovni <head>. Canonical, twitter kartice
     # i JSON-LD upisuje seo.py, pa se pusta odmah poslije gradnje.

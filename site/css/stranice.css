@@ -1047,17 +1047,30 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
 /* Red sa fotografijom je link koji otvara lightbox. Redovi bez fotografije
    (Paligoric i Ford salon, za koje jos nemamo snimak) ostaju <div> i ne
    ponasaju se kao da se moze kliknuti. */
+/* Pomak na hover ide kroz transform, ne kroz padding. Padding je layout
+   svojstvo: pretrazivac na svaki kadar iznova prelama cijeli red, pa prelaz
+   poskakuje umjesto da klizi. Ovako se pomjeraju samo broj i naziv, red
+   ostaje na mjestu, a bocni prostor za podlogu je stalan.
+   Uz to je prva verzija koristila token koji ne postoji u tokens.css, pa
+   tranzicije nije ni bilo i stanje se mijenjalo u jednom kadru. */
 a.rrow {
   text-decoration: none;
   color: inherit;
-  transition: background-color var(--dur-hover) var(--ease-hover),
-              padding-left var(--dur-hover) var(--ease-hover);
+  padding-inline: var(--space-4);
+  margin-inline: calc(-1 * var(--space-4));
+  transition: background-color var(--duration-fast) var(--ease-hover);
 }
 
-a.rrow:hover {
-  background-color: var(--cream-100);
-  padding-left: var(--space-4);
-}
+a.rrow:hover,
+a.rrow:focus-visible { background-color: var(--cream-100); }
+
+a.rrow .rrow__num,
+a.rrow .rrow__name { transition: transform var(--duration-fast) var(--ease-hover); }
+
+a.rrow:hover .rrow__num,
+a.rrow:hover .rrow__name,
+a.rrow:focus-visible .rrow__num,
+a.rrow:focus-visible .rrow__name { transform: translateX(8px); }
 
 .rrow__see {
   flex: none;
@@ -1073,8 +1086,8 @@ a.rrow:hover {
      Na hover se pojaca i primakne. */
   opacity: 0.45;
   transform: translateX(-6px);
-  transition: opacity var(--dur-hover) var(--ease-hover),
-              transform var(--dur-hover) var(--ease-hover);
+  transition: opacity var(--duration-fast) var(--ease-hover),
+              transform var(--duration-fast) var(--ease-hover);
 }
 
 .rrow__see svg { width: 14px; height: 14px; }
@@ -1136,7 +1149,10 @@ a.rrow:focus-visible .rrow__see { opacity: 1; transform: none; }
   isolation: isolate;
 }
 
-.ocean__media { position: absolute; inset: 0; z-index: -2; }
+/* Slojevi idu pozitivnim z-indeksom. Sa negativnim (-2 / -1) slika je
+   padala IZA sopstvene pozadine sekcije, jer isolation: isolate pravi
+   kontekst slaganja, pa se fotografija uopste nije vidjela. */
+.ocean__media { position: absolute; inset: 0; z-index: 0; }
 
 .ocean__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
@@ -1145,7 +1161,7 @@ a.rrow:focus-visible .rrow__see { opacity: 1; transform: none; }
   content: "";
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: 1;
   background: linear-gradient(180deg,
     rgba(6, 10, 20, 0.25) 0%,
     rgba(6, 10, 20, 0.55) 45%,
@@ -1153,6 +1169,8 @@ a.rrow:focus-visible .rrow__see { opacity: 1; transform: none; }
 }
 
 .ocean__inner {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -1185,6 +1203,106 @@ a.rrow:focus-visible .rrow__see { opacity: 1; transform: none; }
 /* Ivicno dugme na tamnom: natpis mora da pobijeli, ivicu vec crta
    .btn--on-dark-outline. */
 .ocean__actions .btn--outline { color: var(--cream-50); }
+
+/* --- Galerija: mreza kartica po Konstrinoj /project ---
+   Mjere iz njenog izvora:
+     Sekcija  #FFF7E5, padding 112px 72px, kontejner max-width 1320
+     Kartica  632 sirine, padding 32, overflow hidden, slika preko cijele
+              povrsine, veo preko nje, podaci na dnu
+     Tacka    7px izmedju tipa posla i mjesta
+   Slika se na hover uveca; uvecanje ide na slici, ne na kartici, pa se
+   ivice i tekst ne mrdaju. */
+.gal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 112px var(--container-pad);
+  background-color: var(--cream-50);
+}
+
+.gal__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6);
+  width: 100%;
+  max-width: var(--container-content);
+}
+
+.gcard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  aspect-ratio: 632 / 500;
+  padding: 32px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  text-decoration: none;
+  isolation: isolate;
+  background-color: var(--ink-900);
+}
+
+/* Isti razlog kao kod .ocean: slojevi na pozitivnom z-indeksu, inace slika
+   ide iza pozadine same kartice i kartica ostane prazan pravougaonik. */
+.gcard__media { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+
+.gcard__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform 600ms var(--ease-hover);
+}
+
+/* Veo je jaci pri dnu, jer podaci sjede tamo. */
+.gcard__veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg,
+    rgba(6, 10, 20, 0.15) 0%,
+    rgba(6, 10, 20, 0.45) 55%,
+    rgba(6, 10, 20, 0.85) 100%);
+  transition: opacity var(--duration-fast) var(--ease-hover);
+}
+
+.gcard:hover .gcard__media img,
+.gcard:focus-visible .gcard__media img { transform: scale(1.06); }
+
+.gcard:hover .gcard__veil,
+.gcard:focus-visible .gcard__veil { opacity: 0.85; }
+
+.gcard__body { position: relative; z-index: 2; display: flex; flex-direction: column; gap: var(--space-2); }
+
+.gcard__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--stone-500);
+}
+
+.gcard__dot {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-pill);
+  background-color: var(--sand-300);
+}
+
+.gcard__name {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  line-height: var(--leading-h4);
+  letter-spacing: var(--tracking-tighter);
+  font-weight: var(--weight-medium);
+  color: var(--cream-50);
+}
 
 /* --- Oznaka sekcije, ista svuda --- */
 .slabel {
@@ -1276,6 +1394,9 @@ a.rrow:focus-visible .rrow__see { opacity: 1; transform: none; }
 
   .ocean { min-height: 0; padding: 96px var(--container-pad); }
   .ocean__actions .btn { width: 100%; justify-content: center; }
+
+  .gal__grid { grid-template-columns: 1fr; }
+  .gcard { aspect-ratio: 4 / 3; padding: 20px; }
 
   /* Naslov i podnaslov ne staju u jedan red. */
   .hist__head { flex-direction: column; align-items: flex-start; gap: var(--space-5); }
