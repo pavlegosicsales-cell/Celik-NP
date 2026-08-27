@@ -126,6 +126,13 @@
     document.documentElement.setAttribute('lang', na_engleski ? 'en' : 'sr-Latn-RS');
     document.documentElement.setAttribute('data-jezik', na_engleski ? 'en' : 'sr');
 
+    /* Skripte koje same upisuju tekst u toku rada (wizard) ne mogu da prodju
+       kroz rjecnik, jer tog teksta u trenutku prevodjenja jos nema. Njima se
+       javlja da je jezik promijenjen, pa se same osvjeze. */
+    try {
+      document.dispatchEvent(new CustomEvent('np:jezik', { detail: na_engleski ? 'en' : 'sr' }));
+    } catch (e) { /* stari pretrazivac */ }
+
     Array.prototype.forEach.call(document.querySelectorAll('[data-jezik-prekidac]'), function (b) {
       var moj = b.getAttribute('data-jezik-prekidac');
       var aktivan = moj === (na_engleski ? 'en' : 'sr');

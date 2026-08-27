@@ -18,6 +18,42 @@
   /* Ovdje ide URL sa Apps Scripta poslije skilla 03 (Form Backend Setup).
      Dok je prazan, forma ne salje nista nego samo pokaze potvrdu, da se
      tok moze isprobati bez backenda. */
+  /* Tekstovi koje skripta upisuje u toku rada ne prolaze kroz prevodilac,
+     jer u trenutku prevodjenja jos ne postoje u stablu. Zato se ovdje bira
+     jezik iz atributa koji postavlja js/jezik.js. */
+  function jezik() {
+    return document.documentElement.getAttribute('data-jezik') === 'en' ? 'en' : 'sr';
+  }
+
+  var TEKST = {
+    sr: {
+      korak: function (i, n) { return 'Korak ' + i + ' od ' + n; },
+      salji: 'Šaljem...',
+      nedostaje: 'Treba nam ime i broj telefona da bismo mogli da se javimo.',
+      greska: 'Slanje nije uspelo. Pozovite 060 41 45 466 ili pišite na npcelik85@gmail.com.'
+    },
+    en: {
+      korak: function (i, n) { return 'Step ' + i + ' of ' + n; },
+      salji: 'Sending...',
+      nedostaje: 'We need your name and phone number so we can get back to you.',
+      greska: 'Sending failed. Call 060 41 45 466 or write to npcelik85@gmail.com.'
+    }
+  };
+
+  function t(kljuc) { return TEKST[jezik()][kljuc]; }
+
+  /* Kad se jezik promijeni usred popunjavanja, brojac koraka se prepisuje
+     odmah, ne tek na sljedecem koraku. */
+  document.addEventListener('np:jezik', function () {
+    var count = document.querySelector('.wizard__count');
+    var steps = document.querySelectorAll('.wstep');
+    var aktivan = 0;
+    Array.prototype.forEach.call(steps, function (s, n) {
+      if (s.classList.contains('is-active')) { aktivan = n; }
+    });
+    if (count && steps.length) { count.textContent = t('korak')(aktivan + 1, steps.length); }
+  });
+
   var ENDPOINT = '';
 
   var form = document.getElementById('wizard');
@@ -36,7 +72,7 @@
   function render() {
     steps.forEach(function (s, n) { s.classList.toggle('is-active', n === i); });
     ticks.forEach(function (t, n) { t.classList.toggle('is-done', n <= i); });
-    if (count) { count.textContent = 'Korak ' + (i + 1) + ' od ' + steps.length; }
+    if (count) { count.textContent = t('korak')(i + 1, steps.length); }
     back.hidden = i === 0;
 
     var last = i === steps.length - 1;
@@ -86,7 +122,7 @@
     });
 
     if (!data.ime || !data.telefon) {
-      err.textContent = 'Treba nam ime i broj telefona da bismo mogli da se javimo.';
+      err.textContent = t('nedostaje');
       err.hidden = false;
       return;
     }
@@ -94,7 +130,7 @@
     submit.disabled = true;
     var label = submit.querySelector('.btn__label');
     var old = label ? label.textContent : '';
-    if (label) { label.textContent = 'Šaljem...'; }
+    if (label) { label.textContent = t('salji'); }
 
     function ok() {
       form.hidden = true;
@@ -104,7 +140,7 @@
     function fail() {
       submit.disabled = false;
       if (label) { label.textContent = old; }
-      err.textContent = 'Slanje nije uspelo. Pozovite 060 41 45 466 ili pišite na npcelik85@gmail.com.';
+      err.textContent = t('greska');
       err.hidden = false;
     }
 
@@ -116,11 +152,23 @@
       return;
     }
 
-    window.fetch(ENDPOINT, {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-    }).then(function (r) { return r.ok ? ok() : fail(); }).catch(fail);
+    /* GET sa parametrima u adresi, ne POST. Apps Script svaki POST preusmjeri
+       na sesijsku adresu i usput ga pretvori u GET, cime se gubi telo
+       zahtjeva. Uz to ide no-cors, jer Apps Script ne salje CORS zaglavlja.
+
+       Posljedica no-cors: pretrazivac ne moze da procita odgovor, pa se
+       potvrda prikazuje bez obzira na to da li je slanje uspjelo. Greska se
+       vidi samo ako sam zahtjev pukne (nema mreze). To je poznata granica
+       ovog nacina i stoji u apps-script/README.md. */
+    data.strana = window.location.pathname;
+
+    var upit = Object.keys(data).map(function (k) {
+      return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]);
+    }).join('&');
+
+    window.fetch(ENDPOINT + '?' + upit, { method: 'GET', mode: 'no-cors' })
+      .then(ok)
+      .catch(fail);
   });
 
   render();
