@@ -4351,10 +4351,15 @@ a.contact__value:hover { color: var(--brown-800); }
 @media (max-width: 809.98px) { .glass > .contact__form { padding: var(--space-5); } }
 
 /* Mrezica: dvije dijagonale na 30px, kao u originalu. */
+/* pointer-events: none je OBAVEZAN, ne kozmetika. Mrezica je apsolutna
+   preko cijele kartice sa z-index 1, pa je hvatala svaki klik prije nego
+   sto stigne do obrasca ispod nje. Sa wizardom se to vidjelo odmah: kartice
+   izbora se nisu mogle kliknuti. */
 .glass__mesh {
   position: absolute;
   inset: 0;
   z-index: 1;
+  pointer-events: none;
   border-radius: inherit;
   opacity: 0.04;
   background-image:

@@ -33,11 +33,49 @@
 
   var ATRIBUTI = ['alt', 'placeholder', 'title', 'aria-label'];
 
+  /* Elementi cije sadrzaje main.js prepisuje: natpisi dugmadi na slova,
+     naslovi na rijeci, "pali se pri skrolu" na slova. Njihov izvorni tekst
+     mora da se pokupi PRIJE nego sto main.js krene, pa se skupljanje radi
+     odmah pri izvrsavanju ove skripte, ne na DOMContentLoaded.
+     Redosled u HTML-u je zato obavezan: prevod.js, jezik.js, pa main.js. */
+  var POSEBNI = [
+    ['[data-roll]', 'roll'],
+    ['[data-split-words]', 'words'],
+    ['[data-scroll-fill]', 'fill']
+  ];
+
   var PREVOD = window.NP_PREVOD || {};
   var originali = new Map();   // cvor ili [element, atribut] -> srpski tekst
   var atributi = [];           // [element, atribut, srpski]
   var tekstovi = [];           // [cvor, srpski]
+  var posebni = [];            // [element, tip, srpski]
   var pripremljeno = false;
+
+  /* Poziva se odmah, dok je tekst jos citav.
+     Za naslove se pamti innerHTML, jer u njima ima <br> i obojenih
+     span-ova koje rastavljac cuva; za ostalo je dovoljan obican tekst. */
+  function pokupiPosebne() {
+    POSEBNI.forEach(function (par) {
+      Array.prototype.forEach.call(document.querySelectorAll(par[0]), function (el) {
+        if (par[1] === 'words') {
+          if (el.innerHTML.trim()) { posebni.push([el, 'words', el.innerHTML]); }
+          return;
+        }
+        var sr = el.textContent.replace(/\s+/g, ' ').trim();
+        if (sr) { posebni.push([el, par[1], sr]); }
+      });
+    });
+  }
+
+  /* Prevodi tekstualne cvorove unutar jednog elementa, cuvajuci markup. */
+  function prevediUnutra(el, na_engleski) {
+    var hod = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+    var n;
+    while ((n = hod.nextNode())) {
+      var k = n.nodeValue.replace(/\s+/g, ' ').trim();
+      if (k && na_engleski && PREVOD[k]) { n.nodeValue = n.nodeValue.replace(k, PREVOD[k]); }
+    }
+  }
 
   function balkanski() {
     var jezici = navigator.languages || [navigator.language || ''];
@@ -110,6 +148,24 @@
       a[0].setAttribute(a[1], na_engleski ? PREVOD[a[3]] : a[2]);
     });
 
+    /* Rastavljeni elementi: novi tekst pa ponovo rastavljanje, da efekat
+       ostane i na engleskom. Ako main.js jos nije stigao da izlozi kuku,
+       upisuje se obican tekst. */
+    posebni.forEach(function (x) {
+      var el = x[0], tip = x[1], izvor = x[2];
+      var kuka = window.NP_RESPLIT && window.NP_RESPLIT[tip];
+
+      if (tip === 'words') {
+        el.innerHTML = izvor;              // vrati <br> i obojene span-ove
+        prevediUnutra(el, na_engleski);    // pa prevedi tekst u njima
+        if (kuka) { kuka(el); }
+        return;
+      }
+
+      var tekst = na_engleski && PREVOD[izvor] ? PREVOD[izvor] : izvor;
+      if (kuka) { kuka(el, tekst); } else { el.textContent = tekst; }
+    });
+
     // naslov strane i opis, zbog kartice u pretrazivacu
     var naslov = document.title.trim();
     if (!originali.has('title')) { originali.set('title', naslov); }
@@ -165,9 +221,13 @@
     });
   }
 
+  /* Skupljanje ide odmah (defer znaci da je telo strane vec sparsirano),
+     a primjena tek kad i main.js zavrsi svoje rastavljanje. */
+  pokupiPosebne();
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', pokreni);
   } else {
-    pokreni();
+    window.setTimeout(pokreni, 0);
   }
 })();

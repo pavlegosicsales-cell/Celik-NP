@@ -345,6 +345,10 @@ a.kdetail__value:hover { border-bottom-color: var(--color-heading); }
    se svako pravilo ponavlja u tamnoj varijanti, ovdje se prepisuju samo
    tokeni koje .wizard vec koristi, pa ostatak fajla radi neizmijenjen. */
 .contact__card .wizard {
+  /* Iznad ukrasnih slojeva staklene kartice (mrezica z-index 1, snopovi 3),
+     da klik sigurno stigne do dugmadi. */
+  position: relative;
+  z-index: 4;
   --color-bg: transparent;
   --color-bg-alt: rgba(168, 190, 255, 0.14);
   --color-surface: rgba(255, 255, 255, 0.05);

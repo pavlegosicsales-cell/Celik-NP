@@ -46,7 +46,10 @@ USLUGE = [
  'kratko': 'Ulaz koji radi svaki dan bez zapinjanja i granica placa koja izgleda završeno, a ne improvizovano. Klizne i krilne kapije, panelne, dvorišne i industrijske ograde.',
  'slika': 'assets/img/rad-01-celicna-hala.jpg',
  'alt': 'Dekorativna klizna kapija DOSTOJNA u Kutlovu, izrađena sa Simetra d.o.o.',
- 'slika_hero': 'assets/img/rad-06-nadstresnica-garaza.jpg',
+ # Ovdje je do 27.08.2026. stajalo rad-06-nadstresnica-garaza.jpg, a to je
+ # po mapi u README-u SPOLJNO STEPENISTE. Zamijenjeno ogradom Blazeks MV,
+ # da hero stranice o kapijama i ogradama zaista prikazuje ogradu.
+ 'slika_hero': 'assets/img/rad-nadstresnica-solarni-jesenice.jpg',
  'obim': ['Klizne i krilne kapije',
           '3D panelne ograde',
           'Dvorišne i industrijske ograde',

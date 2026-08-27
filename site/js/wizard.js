@@ -54,7 +54,7 @@
     if (count && steps.length) { count.textContent = t('korak')(aktivan + 1, steps.length); }
   });
 
-  var ENDPOINT = '';
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbzdlu__JeOGya0o1KXHWBOwCnipzfxzI31FiNmtTj0T-uexAZUi753U2PhgdK1IAW4t/exec';
 
   var form = document.getElementById('wizard');
   if (!form) { return; }

@@ -181,10 +181,7 @@
      Radi se iz skripte, ne u HTML-u, da natpis ostane obican citljiv tekst
      ako JavaScript ne ucita, i da citaci ekrana ne dobiju slovo po slovo.
      ------------------------------------------------------------------------ */
-  function buildRollingLabels() {
-    var labels = document.querySelectorAll('[data-roll]');
-
-    Array.prototype.forEach.call(labels, function (label) {
+  function rollJednu(label) {
       var text = label.textContent;
       if (!text) { return; }
 
@@ -224,7 +221,10 @@
 
       label.textContent = '';
       label.appendChild(frag);
-    });
+  }
+
+  function buildRollingLabels() {
+    Array.prototype.forEach.call(document.querySelectorAll('[data-roll]'), rollJednu);
   }
 
   /* ------------------------------------------------------------------------
@@ -452,6 +452,33 @@
     runHeroIntro();
     initSlideshow();
   }
+
+  /* ------------------------------------------------------------------------
+     KUKA ZA PREVODIOCA
+     ------------------------------------------------------------------------
+     Ovi efekti prepisuju sadrzaj elementa: natpisi dugmadi se razbijaju na
+     slova, naslovi na rijeci. Poslije toga tog teksta vise nema kao jednog
+     cvora, pa ga js/jezik.js ne moze naci ni zamijeniti.
+
+     Zato se ovdje izlazu po-elementne verzije: prevodilac upise novi tekst
+     i element se ponovo rastavi, pa efekat ostaje i na engleskom.
+     Svaki modul dodaje svoj kljuc, jer main.js nije jedan doseg.
+     ------------------------------------------------------------------------ */
+  window.NP_RESPLIT = window.NP_RESPLIT || {};
+
+  window.NP_RESPLIT.roll = function (el, text) {
+    el.textContent = text;
+    rollJednu(el);
+  };
+
+  /* words() NE dira sadrzaj: naslovi imaju <br> i obojene span-ove koje
+     splitTitleIntoWords cuva. Prevodilac prvo vrati izvorni innerHTML i
+     prevede tekstualne cvorove u njemu, pa pozove ovo da ih rastavi. */
+  window.NP_RESPLIT.words = function (el) {
+    var bio = el.classList.contains('is-in');
+    splitTitleIntoWords(el);
+    if (bio) { el.classList.add('is-in'); }
+  };
 
 })();
 
@@ -720,13 +747,11 @@
      i boju. Pise se samo kad se vrijednost stvarno promijeni, pa se kod
      mirovanja ne dira DOM.
      ------------------------------------------------------------------------ */
-  function initScrollFill() {
-    var blocks = document.querySelectorAll('[data-scroll-fill]');
-    if (!blocks.length) { return; }
+  /* Lista je u dosegu modula, ne u funkciji, da prevodilac moze da zamijeni
+     jedan blok novim tekstom i da ga paint odmah vidi. */
+  var fillItems = [];
 
-    var items = [];
-
-    Array.prototype.forEach.call(blocks, function (block) {
+  function fillJedan(block) {
       var text = block.textContent.trim();
       if (!text) { return; }
 
@@ -752,8 +777,19 @@
 
       block.textContent = '';
       block.appendChild(frag);
-      items.push({ el: block, chars: chars, last: [] });
-    });
+
+      var item = { el: block, chars: chars, last: [] };
+      for (var k = 0; k < fillItems.length; k++) {
+        if (fillItems[k].el === block) { fillItems[k] = item; return; }
+      }
+      fillItems.push(item);
+  }
+
+  function initScrollFill() {
+    var blocks = document.querySelectorAll('[data-scroll-fill]');
+    if (!blocks.length) { return; }
+
+    Array.prototype.forEach.call(blocks, fillJedan);
 
     document.documentElement.classList.add('js-scroll-fill');
 
@@ -763,7 +799,7 @@
       ticking = false;
       var vh = window.innerHeight;
 
-      items.forEach(function (item) {
+      fillItems.forEach(function (item) {
         var top = item.el.getBoundingClientRect().top;
 
         // 0 kad je vrh na 70% ekrana, 1 kad dodje na 30%.
@@ -1650,6 +1686,14 @@
       if (e.key === 'Escape' && !box.hasAttribute('hidden')) { close(); }
     });
   }
+
+  window.NP_RESPLIT = window.NP_RESPLIT || {};
+
+  window.NP_RESPLIT.fill = function (el, text) {
+    el.textContent = text;
+    // Ako efekat nije upaljen (smanjena animacija), ostaje obican tekst.
+    if (document.documentElement.classList.contains('js-scroll-fill')) { fillJedan(el); }
+  };
 
   initHeaderOnScroll();
   initCvalsSlider();
